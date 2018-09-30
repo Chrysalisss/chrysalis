@@ -1,5 +1,7 @@
-import { createElement } from './createElement'
+// Create element
 
-createElement()
+const createElement = (type, props, ...children) => {
+  if (props === null) props = {}
 
-console.log(kek);
+  return {type, props, children}
+}
