@@ -11,13 +11,13 @@ export default {
   dest: 'dist/chrysalis.min.js',
   format: 'umd',
   plugins: [
-    uglify(),
+    /*uglify()*/,
     commonjs(),
-    eslint({
+    /*eslint({
       include: [
         'src/**',
       ]
-    }),
+    }),*/
     babel({
       exclude: 'node_modules/**',
     }),
