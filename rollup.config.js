@@ -14,7 +14,7 @@ export default {
     uglify(),
     commonjs(),
     eslint({
-      exclude: [
+      include: [
         'src/**',
       ]
     }),
