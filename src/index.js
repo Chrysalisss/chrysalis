@@ -1,5 +1,5 @@
-import createElement from 'createElement'
+import { createElement } from './createElement'
 
-const kek_ = 10;
+createElement()
 
 console.log(kek);

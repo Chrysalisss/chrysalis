@@ -12,8 +12,7 @@ export default {
   dest: 'dist/chrysalis.min.js',
   format: 'umd',
   plugins: [
-    /*uglify()*/,
-    commonjs(),
+    /*uglify()*/
     /*eslint({
       include: [
         'src/**',
@@ -22,9 +21,9 @@ export default {
     resolve({
       module: true,
       jsnext: true, 
-      extensions: [ '.mjs', '.js', '.jsx', '.json' ],
-      preferBuiltins: false,
+      extensions: [ '.mjs', '.js', '.jsx', '.json' ]
     }),
+    commonjs(),
     babel({
       exclude: 'node_modules/**',
     }),
