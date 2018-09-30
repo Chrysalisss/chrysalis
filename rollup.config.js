@@ -21,6 +21,7 @@ export default {
     resolve({
       module: true,
       jsnext: true, 
+      browser: true,
       extensions: [ '.mjs', '.js', '.jsx', '.json' ]
     }),
     commonjs(),
