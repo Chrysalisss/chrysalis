@@ -18,6 +18,12 @@ export default {
         'src/**',
       ]
     }),*/
+    resolve({
+      module: true,
+      jsnext: true, 
+      extensions: [ '.mjs', '.js', '.jsx', '.json' ],
+      preferBuiltins: false,
+    }),
     babel({
       exclude: 'node_modules/**',
     }),
