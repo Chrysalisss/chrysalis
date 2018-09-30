@@ -4,6 +4,7 @@ import eslint from 'rollup-plugin-eslint';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
+import resolve from 'rollup-plugin-node-resolve';
 
 // config
 export default {
