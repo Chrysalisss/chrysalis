@@ -1,37 +1,28 @@
-// Rollup plugins
-import babel from 'rollup-plugin-babel';
-import eslint from 'rollup-plugin-eslint';
-import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
-import uglify from 'rollup-plugin-uglify';
+// Rollip plugins
 import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 
-// config
-export default {
-  entry: 'src/index.js',
-  dest: 'dist/chrysalis.min.js',
-  format: 'umd',
-  plugins: [
-    /*uglify()*/
-    /*eslint({
-      include: [
-        'src/**',
-      ]
-    }),*/
-    resolve({
-      module: true,
-      jsnext: true, 
-      browser: true,
-      extensions: [ '.mjs', '.js', '.jsx', '.json' ]
-    }),
-    commonjs(),
-    babel({
-      exclude: 'node_modules/**',
-    }),
-    replace({
-      exclude: 'node_modules/**',
-      ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-    }),
-    (process.env.NODE_ENV === 'production' && uglify()),
-  ],
-};
+//config
+export default [
+  // browser-friendly UMD build
+  {
+    input: 'src/index.js',
+    output: {
+      name: 'Chrysalis',
+      file: 'dist/chrysalis.umd.js',
+      format: 'umd'
+    },
+    moduleName: 'Chrysalis',
+    plugins: [
+      resolve(), 
+      commonjs() 
+    ]
+  },
+  {
+    input: 'src/index.js',
+    output: [
+      { file: 'dist/chrysalis.cjs.js', format: 'cjs', name: 'Chrysalis'},
+      { file: 'dist/chrysalis.esm.js', format: 'es', name: 'Chrysalis' }
+    ]
+  }
+];

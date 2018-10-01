@@ -1,12 +1,7 @@
-// Create element
+import createElement from './createElement'
 
-const createElement = (type, props, ...children) => {
-  if (props === null) props = {}
-
-  return {
-  	type, 
-  	props, 
-  	children
-  }
+var Chrysalis = {
+	createElement
 }
 
+export default chrysalis
