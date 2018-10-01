@@ -4,6 +4,20 @@
   (global.Chrysalis = factory());
 }(this, (function () { 'use strict';
 
-  return chrysalis;
+  function createElement(type, props, ...children) {
+    if (props === null) props = {};
+
+    return {
+    	type, 
+    	props, 
+    	children
+    }
+  }
+
+  var Chrysalis = {
+  	createElement
+  };
+
+  return Chrysalis;
 
 })));

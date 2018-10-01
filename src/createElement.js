@@ -1,4 +1,4 @@
-export default function createElement(type, props, ...children) {
+export function createElement(type, props, ...children) {
   if (props === null) props = {}
 
   return {

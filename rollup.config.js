@@ -6,7 +6,7 @@ import commonjs from 'rollup-plugin-commonjs';
 export default [
   // browser-friendly UMD build
   {
-    input: 'src/index.js',
+    input: 'src/Chrysalis.js',
     output: {
       name: 'Chrysalis',
       file: 'dist/chrysalis.umd.js',
@@ -19,7 +19,7 @@ export default [
     ]
   },
   {
-    input: 'src/index.js',
+    input: 'src/Chrysalis.js',
     output: [
       { file: 'dist/chrysalis.cjs.js', format: 'cjs', name: 'Chrysalis'},
       { file: 'dist/chrysalis.esm.js', format: 'es', name: 'Chrysalis' }

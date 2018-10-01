@@ -1,5 +1,17 @@
 'use strict';
 
+function createElement(type, props, ...children) {
+  if (props === null) props = {};
 
+  return {
+  	type, 
+  	props, 
+  	children
+  }
+}
 
-module.exports = chrysalis;
+var Chrysalis = {
+	createElement
+};
+
+module.exports = Chrysalis;
