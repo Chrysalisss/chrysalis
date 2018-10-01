@@ -28,6 +28,11 @@ export default [
     output: [
       { file: 'dist/chrysalis.cjs.js', format: 'cjs', name: 'Chrysalis'},
       { file: 'dist/chrysalis.esm.js', format: 'es', name: 'Chrysalis' }
+    ],
+    plugins: [
+      resolve(), 
+      commonjs(),
+      babel()
     ]
   }
 ];
