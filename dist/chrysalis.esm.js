@@ -25,6 +25,28 @@ function _typeof(obj) {
   return _typeof(obj);
 }
 
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
 }
@@ -134,7 +156,7 @@ var setAttribute$1 = function setAttribute(dom, key, value) {
   }
 };
 
-var patch = function patch(dom, node) {
+var patch$1 = function patch(dom, node) {
   var paren = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : dom.parentNode;
   var replace = parent ? function (el) {
     return parent.replaceChild(el, dom) && el;
@@ -214,11 +236,139 @@ var patch = function patch(dom, node) {
   }
 };
 
+var Component$1 =
+/*#__PURE__*/
+function () {
+  function Component(props) {
+    _classCallCheck(this, Component);
+
+    this.props = props || {};
+    this.state = null;
+  }
+
+  _createClass(Component, [{
+    key: "setState",
+    value: function setState(nextState) {
+      if (this.base && this.shouldComponentUpdate(this.props, nextState)) {
+        var prevState = this.state;
+        this.componentWillUpdate(this.props, nextState);
+        this.state = nextState;
+        patch(this.base, this.render());
+        this.componentDidUpdate(this.props, prevState);
+      } else {
+        this.state = nextState;
+      }
+    }
+  }, {
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return nextProps != this.props || nextState != this.state;
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      return undefined;
+    }
+  }, {
+    key: "componentWillUpdate",
+    value: function componentWillUpdate(nextProps, nextState) {
+      return undefined;
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      return undefined;
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      return undefined;
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      return undefined;
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      return undefined;
+    }
+  }], [{
+    key: "render",
+    value: function (_render) {
+      function render(_x) {
+        return _render.apply(this, arguments);
+      }
+
+      render.toString = function () {
+        return _render.toString();
+      };
+
+      return render;
+    }(function (node) {
+      var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var props = Object.assign({}, node.props, {
+        children: node.children
+      });
+
+      if (Component.isPrototypeOf(node.type)) {
+        var instance = new node.type(props);
+        instance.componentWillMount();
+        instance.base = render(instance.render(), parent);
+        instance.base.__gooactInstance = instance;
+        instance.base.__gooactKey = node.props.key;
+        instance.componentDidMount();
+        return instance.base;
+      } else {
+        return render(node.type(props), parent);
+      }
+    })
+  }, {
+    key: "patch",
+    value: function (_patch) {
+      function patch(_x2, _x3) {
+        return _patch.apply(this, arguments);
+      }
+
+      patch.toString = function () {
+        return _patch.toString();
+      };
+
+      return patch;
+    }(function (dom, node) {
+      var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : dom.parentNode;
+      var props = Object.assign({}, node.props, {
+        children: node.children
+      });
+
+      if (dom.__gooactInstance && dom.__gooactInstance.constructor == node.type) {
+        dom.__gooactInstance.componentWillReceiveProps(props);
+
+        dom.__gooactInstance.props = props;
+        return patch(dom, dom.__gooactInstance.render(), parent);
+      }
+
+      if (Component.isPrototypeOf(node.type)) {
+        var ndom = Component.render(node, parent);
+        return parent ? parent.replaceChild(ndom, dom) && ndom : ndom;
+      }
+
+      if (!Component.isPrototypeOf(node.type)) {
+        return patch(dom, node.type(props), parent);
+      }
+    })
+  }]);
+
+  return Component;
+}();
+
 var Chrysalis = {
   createElement: createElement,
   render: render$1,
   setAttribute: setAttribute$1,
-  patch: patch
+  patch: patch$1,
+  Component: Component$1
 };
 
 export default Chrysalis;

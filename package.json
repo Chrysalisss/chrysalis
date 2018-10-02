@@ -8,8 +8,6 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c --watch",
-    "reload": "livereload 'dist/'",
-    "watch": "npm-run-all --parallel reload dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
