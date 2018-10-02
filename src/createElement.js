@@ -1,4 +1,4 @@
-export function createElement(type, props, ...children) {
+const createElement = (type, props, ...children) => {
   if (props === null) props = {}
 
   return {
@@ -7,3 +7,5 @@ export function createElement(type, props, ...children) {
   	children
   }
 }
+
+export { createElement }
