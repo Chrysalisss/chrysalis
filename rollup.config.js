@@ -1,6 +1,7 @@
 // Rollup plugins
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import { uglify } from "rollup-plugin-uglify";
 
 import { rollup } from 'rollup';
 
@@ -20,7 +21,8 @@ export default [
     plugins: [
       resolve(), 
       commonjs(),
-      babel()
+      babel(),
+      uglifyjs()
     ]
   },
   {
@@ -32,7 +34,8 @@ export default [
     plugins: [
       resolve(), 
       commonjs(),
-      babel()
+      babel(), 
+      uglifyjs()
     ]
   }
 ];
