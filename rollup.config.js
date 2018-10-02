@@ -2,6 +2,7 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify-es';
+import license from 'rollup-plugin-license';
 
 import { rollup } from 'rollup';
 
@@ -22,7 +23,12 @@ export default [
       resolve(), 
       commonjs(),
       babel(),
-      uglify()
+      uglify(),
+      license({
+        banner: `Chrysalis v0.9.0
+                Casper Søkol, <%= moment().format('YYYY') %>
+                Distributed under the MIT license`
+      })
     ]
   },
   {
