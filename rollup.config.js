@@ -41,7 +41,12 @@ export default [
       resolve(), 
       commonjs(),
       babel(),
-      uglify()
+      uglify(),
+      license({
+        banner: `Chrysalis v0.9.0
+                Casper Søkol, <%= moment().format('YYYY') %>
+                Distributed under the MIT license`
+      })
     ]
   }
 ];
