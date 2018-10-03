@@ -5,5 +5,5 @@ A lightweight JS-library for building fast, modern &amp; scalable applications
 Installation via npm  
 
 ```bash
-npm install chrysalis-js
+npm install chrysalis.js
 ```
