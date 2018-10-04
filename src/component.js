@@ -4,7 +4,7 @@ export class Component {
         this.state = null;
     }
 
-    static render(node, parent=null) {
+    static render(node, parent = null) {
         let props = Object.assign({}, node.props, {children: node.children})
 
         if (Component.isPrototypeOf(node.type)) {
@@ -20,7 +20,7 @@ export class Component {
         }
     }
 
-    static patch(dom, node, parent=dom.parentNode) {
+    static patch(dom, node, parent = dom.parentNode) {
         let props = Object.assign({}, node.props, {children: node.children})
 
         if (dom.__gooactInstance && dom.__gooactInstance.constructor == node.type) {
