@@ -14,10 +14,12 @@ const render = (node = null, parent = null) => {
 
 	if (typeof node == 'object' && typeof node.type == 'string') {
 	  const dom = mount(document.createElement(node.type));
-		for (let child of [/* flatten */].concat(...node.children))
+		for (let child of [/* flatten */].concat(...node.children)) {
 			render(child, dom)
-		for (let prop in node.props)
+		}
+		for (let prop in node.props) {
 			setAttribute(dom, prop, node.props[prop])
+		}
 		return dom;
 	}
 
