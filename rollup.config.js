@@ -3,6 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify-es';
 import license from 'rollup-plugin-license';
+import { eslint } from "rollup-plugin-eslint";
 
 import { rollup } from 'rollup';
 
@@ -24,6 +25,7 @@ export default [
       commonjs(),
       babel(),
       uglify(),
+      eslint(),
       license({
         banner: `Chrysalis v0.9.0
                 Casper Søkol, <%= moment().format('YYYY') %>
@@ -42,6 +44,7 @@ export default [
       commonjs(),
       babel(),
       uglify(),
+      eslint(),
       license({
         banner: `Chrysalis v0.9.0
                 Casper Søkol, <%= moment().format('YYYY') %>
