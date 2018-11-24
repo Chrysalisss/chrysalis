@@ -9,47 +9,27 @@ import { rollup } from 'rollup';
 
 import babel from 'rollup-plugin-babel';
 
-//config
+const header = `Chrysalis v0.9.0-β
+Casper Søkol, <%= moment().format('YYYY') %>
+Distributed under the MIT license`
+
+// config
 export default [
-  // browser-friendly UMD build
   {
     input: 'src/Chrysalis.js',
-    output: {
-      name: 'Chrysalis',
-      file: 'dist/chrysalis.umd.js',
-      format: 'umd'
-    },
+    output: [
+      { name: 'Chrysalis', file: 'dist/chrysalis.umd.js', format: 'umd' },
+      { name: 'Chrysalis', file: 'dist/chrysalis.cjs.js', format: 'cjs'},
+      { name: 'Chrysalis', file: 'dist/chrysalis.esm.js', format: 'es' }
+    ],
     moduleName: 'Chrysalis',
     plugins: [
       resolve(), 
       commonjs(),
       babel(),
+      /*eslint(),*/
       uglify(),
-      eslint(),
-      license({
-        banner: `Chrysalis v0.9.0
-                Casper Søkol, <%= moment().format('YYYY') %>
-                Distributed under the MIT license`
-      })
-    ]
-  },
-  {
-    input: 'src/Chrysalis.js',
-    output: [
-      { file: 'dist/chrysalis.cjs.js', format: 'cjs', name: 'Chrysalis'},
-      { file: 'dist/chrysalis.esm.js', format: 'es', name: 'Chrysalis' }
-    ],
-    plugins: [
-      resolve(), 
-      commonjs(),
-      babel(),
-      uglify(),
-      eslint(),
-      license({
-        banner: `Chrysalis v0.9.0
-                Casper Søkol, <%= moment().format('YYYY') %>
-                Distributed under the MIT license`
-      })
+      license({ banner: header })
     ]
   }
 ];

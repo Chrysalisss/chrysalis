@@ -41,5 +41,8 @@
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-uglify": "^6.0.0",
     "rollup-plugin-uglify-es": "0.0.1"
+  },
+  "dependencies": {
+    "rollup-plugin-eslint": "^5.0.0"
   }
 }
