@@ -22,7 +22,7 @@ const config = [
       { name: 'Chrysalis', file: 'dist/chrysalis.esm.min.js', format: 'esm'}
     ],
     moduleName: 'Chrysalis',
-    plugins: [ resolve(), commonjs(), babel(), uglify(), license({ banner: header }) ]
+    plugins: [ resolve(), commonjs(), babel(), uglify(), eslint(), license({ banner: header }) ]
   },
   {
     input: 'src/Chrysalis.js', // es6 + min
@@ -31,7 +31,7 @@ const config = [
       { name: 'Chrysalis', file: 'dist/chrysalis.es6.esm.min.js', format: 'esm'}
     ],
     moduleName: 'Chrysalis',
-    plugins: [ resolve(), commonjs(), uglify(), license({ banner: header }) ]
+    plugins: [ resolve(), commonjs(), uglify(), eslint(), license({ banner: header }) ]
   },
   {
     input: 'src/Chrysalis.js', // es5
@@ -41,7 +41,7 @@ const config = [
       { name: 'Chrysalis', file: 'dist/chrysalis.esm.js', format: 'es' }
     ],
     moduleName: 'Chrysalis',
-    plugins: [ resolve(), commonjs(), babel(), license({ banner: header }) ]
+    plugins: [ resolve(), commonjs(), babel(), eslint(), license({ banner: header }) ]
   },
   {
     input: 'src/Chrysalis.js', // es6
@@ -51,7 +51,7 @@ const config = [
       { name: 'Chrysalis', file: 'dist/chrysalis.es6.esm.js', format: 'es' }
     ],
     moduleName: 'Chrysalis',
-    plugins: [ resolve(), commonjs(), license({ banner: header }) ]
+    plugins: [ resolve(), commonjs(), eslint(), license({ banner: header }) ]
   }
 ]
 
