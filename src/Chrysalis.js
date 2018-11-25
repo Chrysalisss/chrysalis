@@ -1,13 +1,9 @@
-import { createElement } from './createElement'
-import { render } from './render'
-import { setAttribute } from './setAttribute'
-import { patch } from './patch'
-import { Component } from './component'
+import createElement from './createElement'
+import render from './render'
+import updateElement from './updateElement'
 
 export default {
   createElement,
   render,
-  setAttribute,
-  patch,
-  Component
+  updateElement
 }

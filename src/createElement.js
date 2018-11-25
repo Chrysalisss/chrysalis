@@ -1,11 +1,11 @@
-const createElement = (type, props, ...children) => {
-  if (props === null) props = {}
+const createElement = (nodeName, attributes, ...children) => {
+  if (!attributes) attributes = {} // e.g. null -> {}
 
   return {
-    type,
-    props,
+    nodeName,
+    attributes,
     children
   }
 }
 
-export { createElement }
+export default createElement

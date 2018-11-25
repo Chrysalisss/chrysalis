@@ -20,7 +20,7 @@ const config = [
       { name: 'Chrysalis', file: 'dist/chrysalis.esm.min.js', format: 'esm'}
     ],
     moduleName: 'Chrysalis',
-    plugins: [ resolve(), commonjs(), babel(), uglify(), license({ banner: header }) ]
+    plugins: [ resolve(), babel(), uglify(), license({ banner: header }) ]
   },
   {
     input: 'src/Chrysalis.js', // es6 + min
@@ -29,7 +29,7 @@ const config = [
       { name: 'Chrysalis', file: 'dist/chrysalis.es6.esm.min.js', format: 'esm'}
     ],
     moduleName: 'Chrysalis',
-    plugins: [ resolve(), commonjs(), uglify(), license({ banner: header }) ]
+    plugins: [ resolve(), uglify(), license({ banner: header }) ]
   },
   {
     input: 'src/Chrysalis.js', // es5
