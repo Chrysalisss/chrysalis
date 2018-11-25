@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.9.0-β
+ * Chrysalis v0.9.2-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
@@ -24,19 +24,26 @@
     };
   };
 
-  var render = function render(nodeName, attributes, children) {
-    var $el = document.createElement(nodeName);
-    var $children = children || [];
+  var render = function render(vnode, parentNode) {
+    var $el;
+    var $children = vnode.children || [];
 
-    for (var key in attributes) {
-      $el.setAttribute(key, attributes[key]);
-    } // recursive function to render childs
+    if (typeof vnode === 'string') {
+      return document.createTextNode(vnode);
+    }
 
+    if (typeof vnode.nodeName === 'string') {
+      $el = document.createElement(vnode.nodeName);
+
+      for (var key in vnode.attributes) {
+        $el.setAttribute(key, vnode.attributes[key]);
+      }
+    }
 
     $children.forEach(function (child) {
-      el.appendChild(renderNode(child));
+      $el.appendChild(render(child, vnode.nodeName));
     });
-    return $el;
+    parentNode.appendChild($el);
   };
 
   function _typeof(obj) {
