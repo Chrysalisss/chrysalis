@@ -6,7 +6,7 @@
   "module": "dist/chrysalis.esm.min.js",
   "unpkg": "dist/chrysalis.umd.js",
   "scripts": {
-    "build": "rollup -c --fix",
+    "build": "rollup -c",
     "dev": "rollup -c --watch",
     "fix-code": "prettier-eslint --write 'src/*.js' ",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -36,6 +36,7 @@
     "babel-preset-minify": "^0.5.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-google": "^0.11.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
