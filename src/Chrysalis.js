@@ -5,9 +5,9 @@ import { patch } from './patch'
 import { Component } from './component'
 
 export default {
-	createElement,
-	render,
-	setAttribute,
-	patch,
-	Component
+  createElement,
+  render,
+  setAttribute,
+  patch,
+  Component
 }

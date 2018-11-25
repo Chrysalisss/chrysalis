@@ -84,19 +84,19 @@ var render$1 = function render() {
     return el;
   };
 
-  if (typeof node == 'string' || typeof node == 'number') {
+  if (typeof node === 'string' || typeof node === 'number') {
     return mount(document.createTextNode(node));
   }
 
-  if (typeof node == 'boolean' || node === null) {
+  if (typeof node === 'boolean' || node === null) {
     return mount(document.createTextNode(''));
   }
 
-  if (_typeof(node) == 'object' && typeof node.type == 'function') {
+  if (_typeof(node) === 'object' && typeof node.type === 'function') {
     return Component.render(node, parent);
   }
 
-  if (_typeof(node) == 'object' && typeof node.type == 'string') {
+  if (_typeof(node) === 'object' && typeof node.type === 'string') {
     var dom = mount(document.createElement(node.type));
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -135,7 +135,7 @@ var render$1 = function render() {
 };
 
 var setAttribute$1 = function setAttribute(dom, key, value) {
-  if (typeof value == 'function' && key.startsWith('on')) {
+  if (typeof value === 'function' && key.startsWith('on')) {
     var eventType = key.slice(2).toLowerCase();
     dom.__gooactHandlers = dom.__gooactHandlers || {};
     dom.removeEventListener(eventType, dom.__gooactHandlers[eventType]);
@@ -147,11 +147,11 @@ var setAttribute$1 = function setAttribute(dom, key, value) {
     dom[key] = value;
   }
 
-  if (key == 'style' && _typeof(value) == 'object') {
+  if (key == 'style' && _typeof(value) === 'object') {
     Object.assign(dom.style, value);
   }
 
-  if (key == 'ref' && typeof value == 'function') {
+  if (key == 'ref' && typeof value === 'function') {
     value(dom);
   }
 
@@ -159,7 +159,7 @@ var setAttribute$1 = function setAttribute(dom, key, value) {
     dom.__gooactKey = value;
   }
 
-  if (_typeof(value) != 'object' && typeof value != 'function') {
+  if (_typeof(value) !== 'object' && typeof value !== 'function') {
     dom.setAttribute(key, value);
   }
 };
@@ -172,23 +172,23 @@ var patch$1 = function patch(dom, node) {
     return el;
   };
 
-  if (_typeof(node) == 'object' && typeof node.type == 'function') {
+  if (_typeof(node) === 'object' && typeof node.type === 'function') {
     return Component.patch(dom, node, parent);
   }
 
-  if (_typeof(node) != 'object' && dom instanceof Text) {
+  if (_typeof(node) !== 'object' && dom instanceof Text) {
     return dom.textContent != node ? replace(render(node, parent)) : dom;
   }
 
-  if (_typeof(node) == 'object' && dom instanceof Text) {
+  if (_typeof(node) === 'object' && dom instanceof Text) {
     return replace(render(node, parent));
   }
 
-  if (_typeof(node) == 'object' && dom.nodeName != node.type.toUpperCase()) {
+  if (_typeof(node) === 'object' && dom.nodeName != node.type.toUpperCase()) {
     return replace(render(node, parent));
   }
 
-  if (_typeof(node) == 'object' && dom.nodeName == node.type.toUpperCase()) {
+  if (_typeof(node) === 'object' && dom.nodeName == node.type.toUpperCase()) {
     var _ref, _ref2;
 
     var pool = {};
@@ -328,9 +328,9 @@ function () {
         instance.base.__gooactKey = node.props.key;
         instance.componentDidMount();
         return instance.base;
-      } else {
-        return render(node.type(props), parent);
       }
+
+      return render(node.type(props), parent);
     })
   }, {
     key: "patch",
