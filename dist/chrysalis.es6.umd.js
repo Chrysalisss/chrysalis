@@ -5,20 +5,10 @@
  */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global.Chrysalis = factory());
-}(this, (function () { 'use strict';
-
-  const createElement$1 = (nodeName, attributes, ...children) => {
-    if (!attributes) attributes = {}; // e.g. null -> {}
-
-    return {
-      nodeName,
-      attributes,
-      children
-    }
-  };
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.Chrysalis = {})));
+}(this, (function (exports) { 'use strict';
 
   const render = (vnode, parentNode) => {
     let $el;
@@ -73,12 +63,10 @@
     }
   };
 
-  var Chrysalis = {
-    createElement: createElement$1,
-    render,
-    updateElement
-  };
+  exports.createElement = createElement;
+  exports.render = render;
+  exports.updateElement = updateElement;
 
-  return Chrysalis;
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

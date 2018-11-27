@@ -6,15 +6,7 @@
 
 'use strict';
 
-const createElement$1 = (nodeName, attributes, ...children) => {
-  if (!attributes) attributes = {}; // e.g. null -> {}
-
-  return {
-    nodeName,
-    attributes,
-    children
-  }
-};
+Object.defineProperty(exports, '__esModule', { value: true });
 
 const render = (vnode, parentNode) => {
   let $el;
@@ -69,10 +61,6 @@ const updateElement = ($parent, newNode, oldNode, index = 0) => {
   }
 };
 
-var Chrysalis = {
-  createElement: createElement$1,
-  render,
-  updateElement
-};
-
-module.exports = Chrysalis;
+exports.createElement = createElement;
+exports.render = render;
+exports.updateElement = updateElement;

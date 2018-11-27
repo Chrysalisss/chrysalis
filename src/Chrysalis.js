@@ -1,8 +1,8 @@
-import createElement from './createElement'
+import { createElement as h } from './createElement'
 import render from './render'
 import updateElement from './updateElement'
 
-export default {
+export {
   createElement,
   render,
   updateElement

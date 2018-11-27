@@ -4,16 +4,6 @@
  * Distributed under the MIT license
  */
 
-const createElement$1 = (nodeName, attributes, ...children) => {
-  if (!attributes) attributes = {}; // e.g. null -> {}
-
-  return {
-    nodeName,
-    attributes,
-    children
-  }
-};
-
 const render = (vnode, parentNode) => {
   let $el;
   const $children = vnode.children || [];
@@ -67,10 +57,4 @@ const updateElement = ($parent, newNode, oldNode, index = 0) => {
   }
 };
 
-var Chrysalis = {
-  createElement: createElement$1,
-  render,
-  updateElement
-};
-
-export default Chrysalis;
+export { createElement, render, updateElement };

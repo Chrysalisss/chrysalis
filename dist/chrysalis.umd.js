@@ -5,24 +5,10 @@
  */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global.Chrysalis = factory());
-}(this, (function () { 'use strict';
-
-  var createElement$1 = function createElement(nodeName, attributes) {
-    for (var _len = arguments.length, children = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      children[_key - 2] = arguments[_key];
-    }
-
-    if (!attributes) attributes = {}; // e.g. null -> {}
-
-    return {
-      nodeName: nodeName,
-      attributes: attributes,
-      children: children
-    };
-  };
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.Chrysalis = {})));
+}(this, (function (exports) { 'use strict';
 
   var render = function render(vnode, parentNode) {
     var $el;
@@ -93,12 +79,10 @@
     }
   };
 
-  var Chrysalis = {
-    createElement: createElement$1,
-    render: render,
-    updateElement: updateElement
-  };
+  exports.createElement = createElement;
+  exports.render = render;
+  exports.updateElement = updateElement;
 
-  return Chrysalis;
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

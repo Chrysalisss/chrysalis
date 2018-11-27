@@ -8,4 +8,4 @@ const createElement = (nodeName, attributes, ...children) => {
   }
 }
 
-export default createElement
+export { createElement }
