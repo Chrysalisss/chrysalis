@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.9.2-β
+ * Chrysalis v0.9.3-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
@@ -7,6 +7,16 @@
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
+
+const createElement$1 = (nodeName, attributes, ...children) => {
+  if (!attributes) attributes = {}; // e.g. null -> {}
+
+  return {
+    nodeName,
+    attributes,
+    children
+  }
+};
 
 const render = (vnode, parentNode) => {
   let $el;
@@ -61,6 +71,6 @@ const updateElement = ($parent, newNode, oldNode, index = 0) => {
   }
 };
 
-exports.createElement = createElement;
+exports.h = createElement$1;
 exports.render = render;
 exports.updateElement = updateElement;

@@ -1,8 +1,18 @@
 /**
- * Chrysalis v0.9.2-β
+ * Chrysalis v0.9.3-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
+
+const createElement$1 = (nodeName, attributes, ...children) => {
+  if (!attributes) attributes = {}; // e.g. null -> {}
+
+  return {
+    nodeName,
+    attributes,
+    children
+  }
+};
 
 const render = (vnode, parentNode) => {
   let $el;
@@ -57,4 +67,4 @@ const updateElement = ($parent, newNode, oldNode, index = 0) => {
   }
 };
 
-export { createElement, render, updateElement };
+export { createElement$1 as h, render, updateElement };

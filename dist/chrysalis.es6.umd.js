@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.9.2-β
+ * Chrysalis v0.9.3-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
@@ -9,6 +9,16 @@
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
   (factory((global.Chrysalis = {})));
 }(this, (function (exports) { 'use strict';
+
+  const createElement$1 = (nodeName, attributes, ...children) => {
+    if (!attributes) attributes = {}; // e.g. null -> {}
+
+    return {
+      nodeName,
+      attributes,
+      children
+    }
+  };
 
   const render = (vnode, parentNode) => {
     let $el;
@@ -63,7 +73,7 @@
     }
   };
 
-  exports.createElement = createElement;
+  exports.h = createElement$1;
   exports.render = render;
   exports.updateElement = updateElement;
 

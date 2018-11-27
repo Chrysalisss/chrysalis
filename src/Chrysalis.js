@@ -3,7 +3,7 @@ import render from './render'
 import updateElement from './updateElement'
 
 export {
-  createElement,
+  h,
   render,
   updateElement
 }
