@@ -8,8 +8,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
   (factory((global.Chrysalis = {})));
-}(this, (function (exports) { 'use strict';
-
+}(this, (function (exports) {
   var createElement$1 = function createElement(nodeName, attributes) {
     for (var _len = arguments.length, children = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
       children[_key - 2] = arguments[_key];

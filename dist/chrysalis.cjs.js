@@ -4,8 +4,6 @@
  * Distributed under the MIT license
  */
 
-'use strict';
-
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var createElement$1 = function createElement(nodeName, attributes) {

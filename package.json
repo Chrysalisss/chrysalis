@@ -6,8 +6,8 @@
   "module": "dist/chrysalis.esm.min.js",
   "unpkg": "dist/chrysalis.umd.js",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c --watch",
+    "build": "rollup -c --no-strict ",
+    "dev": "rollup -c --watch --no-strict ",
     "size": "bundlesize",
     "fix-code": "prettier-eslint --write 'src/*.js' ",
     "test": "echo \"Error: no test specified\" && exit 1"
