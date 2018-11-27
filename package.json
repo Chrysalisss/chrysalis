@@ -65,6 +65,7 @@
     "rollup-plugin-uglify-es": "0.0.1"
   },
   "dependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-remove-strict-mode": "0.0.2"
   }
 }
