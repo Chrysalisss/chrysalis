@@ -40,29 +40,16 @@ var render = function render(vnode, parentNode) {
   parentNode.appendChild($el);
 };
 
-function _typeof(obj) {
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
 var vdomChanged = function vdomChanged(newNode, oldNode) {
-  var typeChanges = _typeof(newNode) !== _typeof(oldNode);
-
+  var typeChanges = typeof newNode !== typeof oldNode;
   var nodetypeChanged = node1.type !== node2.type;
   return typeChanges || nodetypeChanged;
 };
 
-var updateElement = function updateElement($parent, newNode, oldNode) {
-  var index = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+var updateElement = function updateElement($parent, newNode, oldNode, index) {
+  if (index === void 0) {
+    index = 0;
+  }
 
   if (!oldNode) {
     $parent.appendChild(createElement(newNode));
