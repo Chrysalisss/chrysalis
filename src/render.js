@@ -1,11 +1,11 @@
 /**
- * 
- * VNode: 
+ *
+ * VNode:
  * @param {string | number | boolean | undefined | null} createTextNode()
  * @param {object} typical hyperScript like structure, createElement() -> appendChild()
  * @param {function} functional component, VNode()
  *
- * VNode.name: 
+ * VNode.name:
  * @param {string} createTextNode()
  *
  */
