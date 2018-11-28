@@ -39,6 +39,8 @@
     "@babel/preset-env": "^7.1.0",
     "babel-loader": "^8.0.4",
     "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-remove-strict-mode": "0.0.2",
     "babel-preset-minify": "^0.5.0",
     "bundlesize": "^0.17.0",
     "eslint": "^5.9.0",
@@ -63,9 +65,5 @@
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-uglify": "^6.0.0",
     "rollup-plugin-uglify-es": "0.0.1"
-  },
-  "dependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-remove-strict-mode": "0.0.2"
   }
 }
