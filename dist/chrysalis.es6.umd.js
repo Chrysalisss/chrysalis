@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.9.5-β
+ * Chrysalis v0.9.6-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
@@ -22,7 +22,7 @@
   /**
    *
    * VNode:
-   * @param {string | number | boolean | undefined | null} createTextNode()
+   * @param {string | number | boolean | undefined} createTextNode()
    * @param {object} typical hyperScript like structure, createElement() -> appendChild()
    * @param {function} functional component, VNode()
    *
@@ -35,8 +35,8 @@
     let $el;
     const $children = vnode.children || [];
 
-    if (typeof vnode === 'string' || 'number' || 'boolean' || 'undefined' || null) {
-      return document.createTextNode(vnode)
+    if (typeof vnode === 'string' || 'number' || 'boolean' || 'undefined') {
+      $el = document.createTextNode(vnode);
     }
 
     if (typeof vnode === 'function') {
