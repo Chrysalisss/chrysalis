@@ -14,7 +14,7 @@ const render = (vnode, parentNode) => {
   let $el
   const $children = vnode.children || []
 
-  if (typeof vnode === 'string' || 'number' || 'boolean' || 'undefined') {
+  if (typeof vnode === ('string' || 'number' || 'boolean' || 'undefined')) {
     $el = document.createTextNode(vnode)
   }
 
