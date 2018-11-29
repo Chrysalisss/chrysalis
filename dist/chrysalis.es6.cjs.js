@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.9.6-β
+ * Chrysalis v0.9.7-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
@@ -32,7 +32,7 @@ const render = (vnode, parentNode) => {
   let $el;
   const $children = vnode.children || [];
 
-  if (typeof vnode === 'string' || 'number' || 'boolean' || 'undefined') {
+  if (typeof vnode === ('string')) {
     $el = document.createTextNode(vnode);
   }
 

@@ -7,7 +7,7 @@ import babel from 'rollup-plugin-babel';
 
 import { rollup } from 'rollup';
 
-const header = `Chrysalis v0.9.6-β 
+const header = `Chrysalis v0.9.7-β 
 Casper Søkol, <%= moment().format('YYYY') %>
 Distributed under the MIT license`
 
