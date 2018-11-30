@@ -10,16 +10,12 @@
  *
  */
 
-const render = (vnode, parentNode) => {
+const renderNode = vnode => {
   let $el
   const $children = vnode.children || []
 
-  if (typeof vnode === ('string' || 'number' || 'boolean' || 'undefined')) {
+  if (typeof vnode === 'string' || 'number' || 'boolean') {
     $el = document.createTextNode(vnode)
-  }
-
-  if (typeof vnode === 'function') {
-    render(vnode(), parentNode)
   }
 
   if (typeof vnode.nodeName === 'string') {
@@ -31,10 +27,14 @@ const render = (vnode, parentNode) => {
   }
 
   $children.forEach(child => {
-    $el.appendChild(render(child, vnode.nodeName))
+    $el.appendChild(renderNode(child))
   })
 
-  parentNode.appendChild($el)
+  return $el
+}
+
+const render = (vnode, parentNode) => {
+  parentNode.appendChild(renderNode(vnode))
 }
 
 export default render
