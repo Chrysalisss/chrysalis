@@ -1,4 +1,5 @@
-const createElement = (nodeName, attributes, ...children) => {
+// Create element (hyperScript notation)
+const h = (nodeName, attributes, ...children) => {
   if (!attributes) attributes = {} // e.g. null -> {}
 
   return {
@@ -8,4 +9,4 @@ const createElement = (nodeName, attributes, ...children) => {
   }
 }
 
-export { createElement }
+export default h
