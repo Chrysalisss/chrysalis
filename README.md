@@ -2,6 +2,13 @@
 ![](/chrysalis.svg)
 A lightweight JS-library for building fast, modern &amp; scalable applications
 
+### Why use?
+
+- Lighweight (688b min & gzip)
+- Fast due to Virtual DOM inside 
+- Flexible
+- IE9 support
+
 # Install
 
 via [npm](https://www.npmjs.com/package/chrysalis.js)
@@ -83,7 +90,7 @@ render(element, docment.getElementById('app'))
 You can easily create functional stateless components
 
 ```javascript
-import { h, render } from 'chrysalis.js'
+import { h, render, updateElement } from 'chrysalis.js'
 
 const element = name => h('p', { style: 'color: red' }, `Hello, ${ name }!`)
 
