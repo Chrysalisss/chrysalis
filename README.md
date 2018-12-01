@@ -74,7 +74,6 @@ const element = h('p', { style: 'color: red' }, 'Hello, 世界!')
 render(element, docment.getElementById('app'))
 ```
 
-
 ### Updating the rendered element
 
 ```updateElement(parent, newNode, oldNode)```
@@ -85,12 +84,24 @@ render(element, docment.getElementById('app'))
 
 **oldNode** (optional) — object, old Virtual node
 
+```javascript
+import { h, render, updateElement } from 'chrysalis.js'
+
+const app = docment.getElementById('app')
+
+const element = h('p', { style: 'color: red' }, 'Hello, 世界!')
+const element2 = h('p', { style: 'color: red' }, 'Hello, World!')
+
+render(element, app)
+updateElemnent(app, element2, element)
+```
+
 ### Creating component 
 
 You can easily create functional stateless components
 
 ```javascript
-import { h, render, updateElement } from 'chrysalis.js'
+import { h, render } from 'chrysalis.js'
 
 const element = name => h('p', { style: 'color: red' }, `Hello, ${ name }!`)
 
