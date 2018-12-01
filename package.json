@@ -22,7 +22,10 @@
     "url": "git+https://github.com/Chrysalisss/chrysalis.git"
   },
   "keywords": [
-    "javascript",
+    "perfomance",
+    "virtual-dom",
+    "UI",
+    "library"
     "modern",
     "component-based",
     "fast",

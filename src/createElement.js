@@ -1,4 +1,4 @@
-// Create element (hyperScrip)
+// Create element (hyperScript notation)
 const h = (nodeName, attributes, children) => {
 	let children = []
 	let len = arguments.length - 2;
