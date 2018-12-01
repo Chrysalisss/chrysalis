@@ -17,6 +17,16 @@
       "path": "./dist/chrysalis.esm.min.js"
     }
   ],
+  "keywords": [
+    "perfomance",
+    "virtual-dom",
+    "UI",
+    "library",
+    "modern",
+    "component-based",
+    "fast",
+    "scalable"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Chrysalisss/chrysalis.git"
