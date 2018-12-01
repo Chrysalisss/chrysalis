@@ -51,7 +51,7 @@ You can also create elements with [JSX](https://jsx.github.io/)
 {
   "plugins": [
     ["transform-react-jsx", {
-      "pragma": "dom" // default pragma is React.createElement
+      "pragma": "h" 
     }]
   ]
 }
