@@ -10,7 +10,7 @@
  *
  */
 
-const renderNode = vnode => {
+const createVNode = vnode => {
   let $el
   const $children = vnode.children || []
 
@@ -27,14 +27,14 @@ const renderNode = vnode => {
   }
 
   $children.forEach(child => {
-    $el.appendChild(renderNode(child))
+    $el.appendChild(createVNode(child))
   })
 
   return $el
 }
 
 const render = (vnode, parentNode) => {
-  parentNode.appendChild(renderNode(vnode))
+  parentNode.appendChild(createVNode(vnode))
 }
 
 export default render

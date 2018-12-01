@@ -1,10 +1,9 @@
-// Create element (hyperScript notation)
+// Create element (hyperScrip)
 const h = (nodeName, attributes, ...children) => {
-  if (!attributes) attributes = {} // e.g. null -> {}
 
   return {
     nodeName,
-    attributes,
+    attributes: attributes || {},
     children
   }
 }
