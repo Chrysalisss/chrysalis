@@ -1,6 +1,6 @@
 {
   "name": "chrysalis.js",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "A lightweight JavaScript library for building fast, modern & scalable applications",
   "main": "dis/chrysalis.umd.min.js",
   "module": "dist/chrysalis.esm.min.js",
@@ -21,16 +21,6 @@
     "type": "git",
     "url": "git+https://github.com/Chrysalisss/chrysalis.git"
   },
-  "keywords": [
-    "perfomance",
-    "virtual-dom",
-    "UI",
-    "library"
-    "modern",
-    "component-based",
-    "fast",
-    "scalable"
-  ],
   "author": "Casper Søkol",
   "license": "MIT",
   "bugs": {

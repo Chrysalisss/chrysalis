@@ -58,7 +58,7 @@ function removeAttribute($target, name, value) {
   }
 }
 
-function setAttribute($target, attrs) {
+function setAttributes($target, attrs) {
   Object.keys(attrs).forEach(name => {
     setAttrs($target, name, attrs[name]);
   });

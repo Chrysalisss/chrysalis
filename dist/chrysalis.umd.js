@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.9.8-β
+ * Chrysalis v0.9.9-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
@@ -9,62 +9,44 @@
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
   (factory((global.Chrysalis = {})));
 }(this, (function (exports) {
-  var createElement$1 = function createElement(nodeName, attributes) {
-    for (var _len = arguments.length, children = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      children[_key - 2] = arguments[_key];
-    }
+  var _arguments = arguments;
 
-    if (!attributes) attributes = {}; // e.g. null -> {}
+  // Create element (hyperScript notation)
+  var h$1 = function h(nodeName, attributes) {
+    var children = [];
+    var len = _arguments.length - 2;
+
+    while (len-- > 0) {
+      children[len] = _arguments[len + 2];
+    }
 
     return {
       nodeName: nodeName,
-      attributes: attributes,
+      attributes: attributes || {},
       children: children
     };
   };
 
-  /**
-   *
-   * VNode:
-   * @param {string | number | boolean | undefined} createTextNode()
-   * @param {object} typical hyperScript like structure, createElement() -> appendChild()
-   * @param {function} functional component, VNode()
-   *
-   * VNode.name:
-   * @param {string} createTextNode()
-   *
-   */
-  var renderNode = function renderNode(vnode) {
-    var $el;
-    var $children = vnode.children || [];
-
-    if (typeof vnode === 'string' || 'number' || 'boolean') {
-      $el = document.createTextNode(vnode);
+  var createVNode = function createVNode(vnode) {
+    if (typeof vnode !== 'object') {
+      return document.createTextNode(vnode);
     }
 
-    if (typeof vnode.nodeName === 'string') {
-      $el = document.createElement(vnode.nodeName);
+    var $el = document.createElement(vnode.nodeName);
 
-      for (var key in vnode.attributes) {
-        $el.setAttribute(key, vnode.attributes[key]);
-      }
+    for (var key in vnode.attributes) {
+      $el.setAttribute(key, vnode.attributes[key]);
     }
 
-    $children.forEach(function (child) {
-      $el.appendChild(renderNode(child));
-    });
+    vnode.children.map(createVNode).forEach($el.appendChild.bind($el));
     return $el;
   };
 
   var render = function render(vnode, parentNode) {
-    parentNode.appendChild(renderNode(vnode));
+    parentNode.appendChild(createVNode(vnode));
   };
 
-  var vdomChanged = function vdomChanged(newNode, oldNode) {
-    var typeChanges = typeof newNode !== typeof oldNode;
-    var nodetypeChanged = node1.type !== node2.type;
-    return typeChanges || nodetypeChanged;
-  };
+  // based on deathmood`s code
 
   var updateElement = function updateElement($parent, newNode, oldNode, index) {
     if (index === void 0) {
@@ -72,19 +54,13 @@
     }
 
     if (!oldNode) {
-      $parent.appendChild(createElement(newNode));
-    }
-
-    if (!newNode) {
+      $parent.appendChild(h(newNode));
+    } else if (!newNode) {
       $parent.removeChild($parent.childNodes[index]);
-    }
-
-    if (vdomChanged(newNode, oldNode)) {
-      // oldNode != newNode -> replace childs
-      $parent.replaceChild(createElement(newNode), $parent.childNodes[index]);
-    }
-
-    if (newNode.type) {
+    } else if (changed(newNode, oldNode)) {
+      $parent.replaceChild(h(newNode), $parent.childNodes[index]);
+    } else if (newNode.type) {
+      updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes);
       var newLength = newNode.children.length;
       var oldLength = oldNode.children.length;
 
@@ -94,7 +70,41 @@
     }
   };
 
-  exports.h = createElement$1;
+  var updateAttributes = function updateAttributes($target, name, value) {
+    var attributes = Object.assign({}, newAttrs, oldAttrs);
+    Object.keys(attributes).forEach(function (name) {
+      updateAttribute($target, name, newAttrs[name], oldAttrs[name]);
+    });
+  };
+
+  var updateAttribute = function updateAttribute($target, name, newVal, oldVal) {
+    if (!newVal) {
+      removeAttributes($target, name, oldVal);
+    } else if (!oldVal || newVal !== oldVal) {
+      setAttribute($target, name, newVal);
+    }
+  };
+
+  function setAttribute($target, name, value) {
+    if (name === 'className') {
+      $target.setAttribute('class', value);
+    } else if (typeof value === 'boolean') {
+      setBooleanAttribute($target, name, value);
+    } else {
+      $target.setAttribute(name, value);
+    }
+  }
+
+  var setBooleanAttribute = function setBooleanAttribute($target, name, value) {
+    if (value) {
+      $target.setAttribute(name, value);
+      $target[name] = true;
+    } else {
+      $target[name] = false;
+    }
+  };
+
+  exports.h = h$1;
   exports.render = render;
   exports.updateElement = updateElement;
 
