@@ -4,7 +4,7 @@ A lightweight JS-library for building fast, modern &amp; scalable applications
 
 ### Why use?
 
-- Lighweight (688b min & gzip)
+- Lighweight (575b min & gzip)
 - Fast due to Virtual DOM inside 
 - Flexible
 - IE9 support
