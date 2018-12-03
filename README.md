@@ -24,14 +24,14 @@ To create an virtual node you need to use hyperScript like function
 
 **nodeName** — string, node tag name 
 
-**attributes** (optional) — object with node attributes
+**attributes** — object with node attributes. If there are no attributes you must specify null
 
-**children** (optional) — array|string with node children 
+**children** (optional) — array|string with node children or with text node 
 
 ```javascript
 import { h } from 'chrysalis.js'
 
-h('p', { style: 'color: red' }, 'Hello, 世界!')
+h1('p', { style: 'color: red' }, 'Hello, 世界!')
 
 // {
 //   nodeName: 'p',
@@ -69,7 +69,7 @@ You can also create elements with [JSX](https://jsx.github.io/)
 ```javascript
 import { h, render } from 'chrysalis.js'
 
-const element = h('p', { style: 'color: red' }, 'Hello, 世界!')
+const element = <h1>Hello, 世界!</h1>
 
 render(element, docment.getElementById('app'))
 ```
@@ -89,8 +89,8 @@ import { h, render, updateElement } from 'chrysalis.js'
 
 const app = docment.getElementById('app')
 
-const element = h('p', { style: 'color: red' }, 'Hello, 世界!')
-const element2 = h('p', { style: 'color: red' }, 'Hello, World!')
+const element = <h1 style="color: green">Hello, 世界!</h1>
+const element2 = <h1>Hello, World!</h1>
 
 render(element, app)
 updateElemnent(app, element2, element)
@@ -103,7 +103,7 @@ You can easily create functional stateless components
 ```javascript
 import { h, render } from 'chrysalis.js'
 
-const element = name => h('p', { style: 'color: red' }, `Hello, ${ name }!`)
+const element = name => <h1 style="color: green">Hello, { name }!</h1>
 
 render(element('世界'), docment.getElementById('app'))
 ```
