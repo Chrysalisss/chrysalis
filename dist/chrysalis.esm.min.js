@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.9.9-β
+ * Chrysalis v0.9.11-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */

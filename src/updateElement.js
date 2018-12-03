@@ -1,81 +1,40 @@
 // based on deathmood`s code
-const vdomChanged = (newNode, oldNode) => {
-  const typeChanges = typeof newNode !== typeof oldNode
-  const nodetypeChanged = node1.type !== node2.type
+const changed = (node1, node2) => {
+  const typeChanged = typeof node1 !== typeof node2
+  const notEqual = typeof node1 === 'string' && node1 !== node2
+  const attributesChanged = node1.type !== node2.type || (node1.attributes && node1.attributes.forceUpdate)
 
-  return typeChanges || nodetypeChanged
+  return typeChanged || notEqual || attributesChanged
 }
 
 const updateElement = ($parent, newNode, oldNode, index = 0) => {
   if (!oldNode) {
-    $parent.appendChild(h(newNode));
+    $parent.appendChild(createElement(newNode))
   } else if (!newNode) {
-    $parent.removeChild($parent.childNodes[index]);
+    $parent.removeChild($parent.childNodes[index])
   } else if (changed(newNode, oldNode)) {
-    $parent.replaceChild(h(newNode), $parent.childNodes[index]);
+    $parent.replaceChild(createElement(newNode), $parent.childNodes[index])
   } else if (newNode.type) {
-    updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes);
-    const newLength = newNode.children.length;
-    const oldLength = oldNode.children.length;
+    updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes)
+    const newLength = newNode.children.length
+    const oldLength = oldNode.children.length
     for (let i = 0; i < newLength || i < oldLength; i++) {
-      updateElement($parent.childNodes[index], newNode.children[i], oldNode.children[i], i);
+      updateElement($parent.childNodes[index], newNode.children[i], oldNode.children[i], i)
     }
   }
 }
 
-const updateAttributes = ($target, name, value) => {
-  const attributes = Object.assign({}, newAttrs, oldAttrs);
-  Object.keys(attributes).forEach(name => {
-    updateAttribute($target, name, newAttrs[name], oldAttrs[name]);
-  });
-}
-
-const updateAttribute = ($target, name, newVal, oldVal) => {
-  if (!newVal) {
-    removeAttributes($target, name, oldVal);
-  } else if (!oldVal || newVal !== oldVal) {
-    setAttribute($target, name, newVal);
+const updateAttribute = ($target, name, newValue, oldValue) => {
+  if (!newValue) {
+    $target.removeAttribute(name)
+  } else if (!oldValue || newValue !== oldValue) {
+    $target.setAttribute(name, newValue)
   }
 }
 
-function setAttribute($target, name, value) {
-  if (name === 'className') {
-    $target.setAttribute('class', value);
-  } else if (typeof value === 'boolean') {
-    setBooleanAttribute($target, name, value);
-  } else {
-    $target.setAttribute(name, value);
+const updateAttributes = ($target, newAttributes, oldAttributes = {}) => {
+  const attributes = Object.assign({}, newAttributes, oldAttributes)
+  for (name in attributes) {
+    updateAttribute($target, name, newAttributes[name], oldAttributes[name])
   }
 }
-
-function removeAttribute($target, name, value) {
-  if (name === 'className') {
-    $target.removeAttribute('class');
-  } else if (typeof value === 'boolean') {
-    removeBooleanAttribute($target, name);
-  } else {
-    $target.removeAttribute(name);
-  }
-}
-
-function setAttributes($target, attrs) {
-  Object.keys(attrs).forEach(name => {
-    setAttrs($target, name, attrs[name]);
-  });
-}
-
-const setBooleanAttribute = ($target, name, value) => {
-  if (value) {
-    $target.setAttribute(name, value);
-    $target[name] = true;
-  } else {
-    $target[name] = false;
-  }
-}
-
-const removeBooleanAttribute = ($target, name) => {
-  $target.removeAttribute(name);
-  $target[name] = false;
-}
-
-export default updateElement
