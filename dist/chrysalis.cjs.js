@@ -1,20 +1,15 @@
 /**
- * Chrysalis v0.9.11-β
+ * Chrysalis v0.10.1-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var _arguments = arguments;
-
 // Create element (hyperScript notation)
-var h$1 = function h(nodeName, attributes) {
-  var children = [];
-  var len = _arguments.length - 2;
-
-  while (len-- > 0) {
-    children[len] = _arguments[len + 2];
+var h = function h(nodeName, attributes) {
+  for (var _len = arguments.length, children = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    children[_key - 2] = arguments[_key];
   }
 
   return {
@@ -44,6 +39,12 @@ var render = function render(vnode, parentNode) {
 };
 
 // based on deathmood`s code
+var changed = function changed(node1, node2) {
+  var typeChanged = typeof node1 !== typeof node2;
+  var notEqual = typeof node1 === 'string' && node1 !== node2;
+  var attributesChanged = node1.type !== node2.type || node1.attributes && node1.attributes.forceUpdate;
+  return typeChanged || notEqual || attributesChanged;
+};
 
 var updateElement = function updateElement($parent, newNode, oldNode, index) {
   if (index === void 0) {
@@ -51,11 +52,11 @@ var updateElement = function updateElement($parent, newNode, oldNode, index) {
   }
 
   if (!oldNode) {
-    $parent.appendChild(h(newNode));
+    $parent.appendChild(createElement(newNode));
   } else if (!newNode) {
     $parent.removeChild($parent.childNodes[index]);
   } else if (changed(newNode, oldNode)) {
-    $parent.replaceChild(h(newNode), $parent.childNodes[index]);
+    $parent.replaceChild(createElement(newNode), $parent.childNodes[index]);
   } else if (newNode.type) {
     updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes);
     var newLength = newNode.children.length;
@@ -67,40 +68,26 @@ var updateElement = function updateElement($parent, newNode, oldNode, index) {
   }
 };
 
-var updateAttributes = function updateAttributes($target, name, value) {
-  var attributes = Object.assign({}, newAttrs, oldAttrs);
-  Object.keys(attributes).forEach(function (name) {
-    updateAttribute($target, name, newAttrs[name], oldAttrs[name]);
-  });
-};
-
-var updateAttribute = function updateAttribute($target, name, newVal, oldVal) {
-  if (!newVal) {
-    removeAttributes($target, name, oldVal);
-  } else if (!oldVal || newVal !== oldVal) {
-    setAttribute($target, name, newVal);
+var updateAttribute = function updateAttribute($target, name, newValue, oldValue) {
+  if (!newValue) {
+    $target.removeAttribute(name);
+  } else if (!oldValue || newValue !== oldValue) {
+    $target.setAttribute(name, newValue);
   }
 };
 
-function setAttribute($target, name, value) {
-  if (name === 'className') {
-    $target.setAttribute('class', value);
-  } else if (typeof value === 'boolean') {
-    setBooleanAttribute($target, name, value);
-  } else {
-    $target.setAttribute(name, value);
+var updateAttributes = function updateAttributes($target, newAttributes, oldAttributes) {
+  if (oldAttributes === void 0) {
+    oldAttributes = {};
   }
-}
 
-var setBooleanAttribute = function setBooleanAttribute($target, name, value) {
-  if (value) {
-    $target.setAttribute(name, value);
-    $target[name] = true;
-  } else {
-    $target[name] = false;
+  var attributes = Object.assign({}, newAttributes, oldAttributes);
+
+  for (name in attributes) {
+    updateAttribute($target, name, newAttributes[name], oldAttributes[name]);
   }
 };
 
-exports.h = h$1;
+exports.h = h;
 exports.render = render;
 exports.updateElement = updateElement;

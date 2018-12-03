@@ -38,3 +38,5 @@ const updateAttributes = ($target, newAttributes, oldAttributes = {}) => {
     updateAttribute($target, name, newAttributes[name], oldAttributes[name])
   }
 }
+
+export default updateElement
