@@ -25,7 +25,10 @@
     "modern",
     "component-based",
     "fast",
-    "scalable"
+    "scalable",
+    "tiny",
+    "lightweight",
+    "framework"
   ],
   "repository": {
     "type": "git",
