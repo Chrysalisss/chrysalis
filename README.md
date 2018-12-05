@@ -80,9 +80,9 @@ render(element, docment.getElementById('app'))
 
 **parent** — object, parent node for newNode/oldNode
 
-**newNode** (optional) — object, new Virtual node
+**newNode** — object, new Virtual node
 
-**oldNode** (optional) — object, old Virtual node
+**oldNode** — object, old Virtual node
 
 ```javascript
 import { h, render, updateElement } from 'chrysalis.js'
