@@ -1,11 +1,11 @@
 /**
- * Chrysalis v0.10.1-β
+ * Chrysalis v0.10.2-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
 
 // Create element (hyperScript notation)
-var h = function h(nodeName, attributes) {
+var h$1 = function h(nodeName, attributes) {
   for (var _len = arguments.length, children = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
     children[_key - 2] = arguments[_key];
   }
@@ -50,11 +50,11 @@ var updateElement = function updateElement($parent, newNode, oldNode, index) {
   }
 
   if (!oldNode) {
-    $parent.appendChild(createElement(newNode));
+    $parent.appendChild(h(newNode));
   } else if (!newNode) {
     $parent.removeChild($parent.childNodes[index]);
   } else if (changed(newNode, oldNode)) {
-    $parent.replaceChild(createElement(newNode), $parent.childNodes[index]);
+    $parent.replaceChild(h(newNode), $parent.childNodes[index]);
   } else if (newNode.type) {
     updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes);
     var newLength = newNode.children.length;
@@ -86,4 +86,4 @@ var updateAttributes = function updateAttributes($target, newAttributes, oldAttr
   }
 };
 
-export { h, render, updateElement };
+export { h$1 as h, render, updateElement };

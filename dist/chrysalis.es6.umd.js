@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.10.1-β
+ * Chrysalis v0.10.2-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
@@ -10,7 +10,7 @@
   (factory((global.Chrysalis = {})));
 }(this, (function (exports) {
   // Create element (hyperScript notation)
-  const h = (nodeName, attributes, ...children) => {
+  const h$1 = (nodeName, attributes, ...children) => {
     return {
       nodeName,
       attributes: attributes || {},
@@ -49,11 +49,11 @@
 
   const updateElement = ($parent, newNode, oldNode, index = 0) => {
     if (!oldNode) {
-      $parent.appendChild(createElement(newNode));
+      $parent.appendChild(h(newNode));
     } else if (!newNode) {
       $parent.removeChild($parent.childNodes[index]);
     } else if (changed(newNode, oldNode)) {
-      $parent.replaceChild(createElement(newNode), $parent.childNodes[index]);
+      $parent.replaceChild(h(newNode), $parent.childNodes[index]);
     } else if (newNode.type) {
       updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes);
       const newLength = newNode.children.length;
@@ -79,7 +79,7 @@
     }
   };
 
-  exports.h = h;
+  exports.h = h$1;
   exports.render = render;
   exports.updateElement = updateElement;
 
