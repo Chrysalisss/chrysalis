@@ -9,11 +9,11 @@ const changed = (node1, node2) => {
 
 const updateElement = ($parent, newNode, oldNode, index = 0) => {
   if (!oldNode) {
-    $parent.appendChild(createElement(newNode))
+    $parent.appendChild(h(newNode))
   } else if (!newNode) {
     $parent.removeChild($parent.childNodes[index])
   } else if (changed(newNode, oldNode)) {
-    $parent.replaceChild(createElement(newNode), $parent.childNodes[index])
+    $parent.replaceChild(h(newNode), $parent.childNodes[index])
   } else if (newNode.type) {
     updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes)
     const newLength = newNode.children.length
