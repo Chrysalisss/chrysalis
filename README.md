@@ -82,7 +82,7 @@ render(element, docment.getElementById('app'))
 
 **newNode** — object, new Virtual node
 
-**oldNode** — object, old Virtual node
+**oldNode** (optional) — object, old Virtual node
 
 ```javascript
 import { h, render, updateElement } from 'chrysalis.js'
