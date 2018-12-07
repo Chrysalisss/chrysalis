@@ -1,27 +1,37 @@
 // based on deathmood`s code
-const changed = (node1, node2) => {
-  const typeChanged = typeof node1 !== typeof node2
-  const notEqual = typeof node1 === 'string' && node1 !== node2
-  const attributesChanged = node1.type !== node2.type || (node1.attributes && node1.attributes.forceUpdate)
+const changed = (oldNode, newNode) => {
+  const typeChanged = typeof oldNode !== typeof newNode
+  const nodeNameChanged = oldNode.nodeName !== newNode.nodeName
+  const notEqual = typeof oldNode === 'string' && oldNode !== newNode
+  const attributesChanged = oldNode.type !== newNode.type || (oldNode.attributes && oldNode.attributes.forceUpdate)
 
-  return typeChanged || notEqual || attributesChanged
+  return typeChanged || notEqual || attributesChanged || nodeNameChanged
 }
 
-const updateElement = ($parent, newNode, oldNode, index = 0) => {
+const updateElement = (parentNode, newNode, oldNode, index = 0) => {
   if (!oldNode) {
-    $parent.appendChild(h(newNode))
+    parentNode.appendChild(createVnode(newNode))
   } else if (!newNode) {
-    $parent.removeChild($parent.childNodes[index])
+    parentNode.removeChild(parentNode.childNodes[index])
   } else if (changed(newNode, oldNode)) {
-    $parent.replaceChild(h(newNode), $parent.childNodes[index])
-  } else if (newNode.type) {
-    updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes)
+    parentNode.replaceChild(createVnode(newNode), parentNode.childNodes[index])
+  } else if (newNode.nodeName) {
+    updateAttributes(parentNode.childNodes[index], newNode.attributes, oldNode.attributes)
+
     const newLength = newNode.children.length
     const oldLength = oldNode.children.length
+
     for (let i = 0; i < newLength || i < oldLength; i++) {
-      updateElement($parent.childNodes[index], newNode.children[i], oldNode.children[i], i)
+      updateElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i)
     }
   }
+}
+
+const updateAttributes = ($target, newAttrs, oldAttrs = {}) => {
+  const attrs = Object.assign({}, newAttrs, oldAttrs)
+  Object.keys(attrs).forEach(name => {
+    updateAttribute($target, name, newAttrs[name], oldAttrs[name])
+  })
 }
 
 const updateAttribute = ($target, name, newValue, oldValue) => {
@@ -29,13 +39,6 @@ const updateAttribute = ($target, name, newValue, oldValue) => {
     $target.removeAttribute(name)
   } else if (!oldValue || newValue !== oldValue) {
     $target.setAttribute(name, newValue)
-  }
-}
-
-const updateAttributes = ($target, newAttributes, oldAttributes = {}) => {
-  const attributes = Object.assign({}, newAttributes, oldAttributes)
-  for (name in attributes) {
-    updateAttribute($target, name, newAttributes[name], oldAttributes[name])
   }
 }
 

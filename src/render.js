@@ -1,21 +1,21 @@
-const createVNode = vnode => {
-  if (typeof vnode !== 'object') {
+const createVnode = vnode => {
+  if (typeof vnode != 'object') {
     return document.createTextNode(vnode)
   }
 
   const $el = document.createElement(vnode.nodeName)
 
-  for (let key in vnode.attributes) {
-    $el.setAttribute(key, vnode.attributes[key])
+  for (let attr in vnode.attributes) {
+    $el.setAttribute(attr, vnode.attributes[attr])
   }
 
-  vnode.children.map(createVNode).forEach($el.appendChild.bind($el))
+  vnode.children.forEach(child => $el.appendChild(createVnode(child)))
 
   return $el
 }
 
 const render = (vnode, parentNode) => {
-  parentNode.appendChild(createVNode(vnode))
+  parentNode.appendChild(createVnode(vnode))
 }
 
 export default render
