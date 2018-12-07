@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.10.2-β
+ * Chrysalis v0.10.3-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
@@ -10,7 +10,7 @@
   (factory((global.Chrysalis = {})));
 }(this, (function (exports) {
   // Create element (hyperScript notation)
-  const h$1 = (nodeName, attributes, ...children) => {
+  const h = (nodeName, attributes, ...children) => {
     return {
       nodeName,
       attributes: attributes || {},
@@ -18,50 +18,60 @@
     }
   };
 
-  const createVNode = vnode => {
-    if (typeof vnode !== 'object') {
+  const createVnode$1 = vnode => {
+    if (typeof vnode != 'object') {
       return document.createTextNode(vnode)
     }
 
     const $el = document.createElement(vnode.nodeName);
 
-    for (let key in vnode.attributes) {
-      $el.setAttribute(key, vnode.attributes[key]);
+    for (let attr in vnode.attributes) {
+      $el.setAttribute(attr, vnode.attributes[attr]);
     }
 
-    vnode.children.map(createVNode).forEach($el.appendChild.bind($el));
+    vnode.children.forEach(child => $el.appendChild(createVnode$1(child)));
 
     return $el
   };
 
   const render = (vnode, parentNode) => {
-    parentNode.appendChild(createVNode(vnode));
+    parentNode.appendChild(createVnode$1(vnode));
   };
 
   // based on deathmood`s code
-  const changed = (node1, node2) => {
-    const typeChanged = typeof node1 !== typeof node2;
-    const notEqual = typeof node1 === 'string' && node1 !== node2;
-    const attributesChanged = node1.type !== node2.type || (node1.attributes && node1.attributes.forceUpdate);
+  const changed = (oldNode, newNode) => {
+    const typeChanged = typeof oldNode !== typeof newNode;
+    const nodeNameChanged = oldNode.nodeName !== newNode.nodeName;
+    const notEqual = typeof oldNode === 'string' && oldNode !== newNode;
+    const attributesChanged = oldNode.type !== newNode.type || (oldNode.attributes && oldNode.attributes.forceUpdate);
 
-    return typeChanged || notEqual || attributesChanged
+    return typeChanged || notEqual || attributesChanged || nodeNameChanged
   };
 
-  const updateElement = ($parent, newNode, oldNode, index = 0) => {
+  const updateElement = (parentNode, newNode, oldNode, index = 0) => {
     if (!oldNode) {
-      $parent.appendChild(h(newNode));
+      parentNode.appendChild(createVnode(newNode));
     } else if (!newNode) {
-      $parent.removeChild($parent.childNodes[index]);
+      parentNode.removeChild(parentNode.childNodes[index]);
     } else if (changed(newNode, oldNode)) {
-      $parent.replaceChild(h(newNode), $parent.childNodes[index]);
-    } else if (newNode.type) {
-      updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes);
+      parentNode.replaceChild(createVnode(newNode), parentNode.childNodes[index]);
+    } else if (newNode.nodeName) {
+      updateAttributes(parentNode.childNodes[index], newNode.attributes, oldNode.attributes);
+
       const newLength = newNode.children.length;
       const oldLength = oldNode.children.length;
+
       for (let i = 0; i < newLength || i < oldLength; i++) {
-        updateElement($parent.childNodes[index], newNode.children[i], oldNode.children[i], i);
+        updateElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i);
       }
     }
+  };
+
+  const updateAttributes = ($target, newAttrs, oldAttrs = {}) => {
+    const attrs = Object.assign({}, newAttrs, oldAttrs);
+    Object.keys(attrs).forEach(name => {
+      updateAttribute($target, name, newAttrs[name], oldAttrs[name]);
+    });
   };
 
   const updateAttribute = ($target, name, newValue, oldValue) => {
@@ -72,14 +82,7 @@
     }
   };
 
-  const updateAttributes = ($target, newAttributes, oldAttributes = {}) => {
-    const attributes = Object.assign({}, newAttributes, oldAttributes);
-    for (name in attributes) {
-      updateAttribute($target, name, newAttributes[name], oldAttributes[name]);
-    }
-  };
-
-  exports.h = h$1;
+  exports.h = h;
   exports.render = render;
   exports.updateElement = updateElement;
 

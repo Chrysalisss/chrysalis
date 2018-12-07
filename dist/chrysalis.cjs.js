@@ -1,5 +1,5 @@
 /**
- * Chrysalis v0.10.2-β
+ * Chrysalis v0.10.3-β
  * Casper Søkol, 2018
  * Distributed under the MIT license
  */
@@ -7,7 +7,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 // Create element (hyperScript notation)
-var h$1 = function h(nodeName, attributes) {
+var h = function h(nodeName, attributes) {
   for (var _len = arguments.length, children = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
     children[_key - 2] = arguments[_key];
   }
@@ -19,53 +19,67 @@ var h$1 = function h(nodeName, attributes) {
   };
 };
 
-var createVNode = function createVNode(vnode) {
-  if (typeof vnode !== 'object') {
+var createVnode$1 = function createVnode(vnode) {
+  if (typeof vnode != 'object') {
     return document.createTextNode(vnode);
   }
 
   var $el = document.createElement(vnode.nodeName);
 
-  for (var key in vnode.attributes) {
-    $el.setAttribute(key, vnode.attributes[key]);
+  for (var attr in vnode.attributes) {
+    $el.setAttribute(attr, vnode.attributes[attr]);
   }
 
-  vnode.children.map(createVNode).forEach($el.appendChild.bind($el));
+  vnode.children.forEach(function (child) {
+    return $el.appendChild(createVnode(child));
+  });
   return $el;
 };
 
 var render = function render(vnode, parentNode) {
-  parentNode.appendChild(createVNode(vnode));
+  parentNode.appendChild(createVnode$1(vnode));
 };
 
 // based on deathmood`s code
-var changed = function changed(node1, node2) {
-  var typeChanged = typeof node1 !== typeof node2;
-  var notEqual = typeof node1 === 'string' && node1 !== node2;
-  var attributesChanged = node1.type !== node2.type || node1.attributes && node1.attributes.forceUpdate;
-  return typeChanged || notEqual || attributesChanged;
+var changed = function changed(oldNode, newNode) {
+  var typeChanged = typeof oldNode !== typeof newNode;
+  var nodeNameChanged = oldNode.nodeName !== newNode.nodeName;
+  var notEqual = typeof oldNode === 'string' && oldNode !== newNode;
+  var attributesChanged = oldNode.type !== newNode.type || oldNode.attributes && oldNode.attributes.forceUpdate;
+  return typeChanged || notEqual || attributesChanged || nodeNameChanged;
 };
 
-var updateElement = function updateElement($parent, newNode, oldNode, index) {
+var updateElement = function updateElement(parentNode, newNode, oldNode, index) {
   if (index === void 0) {
     index = 0;
   }
 
   if (!oldNode) {
-    $parent.appendChild(h(newNode));
+    parentNode.appendChild(createVnode(newNode));
   } else if (!newNode) {
-    $parent.removeChild($parent.childNodes[index]);
+    parentNode.removeChild(parentNode.childNodes[index]);
   } else if (changed(newNode, oldNode)) {
-    $parent.replaceChild(h(newNode), $parent.childNodes[index]);
-  } else if (newNode.type) {
-    updateAttributes($parent.childNodes[index], newNode.attributes, oldNode.attributes);
+    parentNode.replaceChild(createVnode(newNode), parentNode.childNodes[index]);
+  } else if (newNode.nodeName) {
+    updateAttributes(parentNode.childNodes[index], newNode.attributes, oldNode.attributes);
     var newLength = newNode.children.length;
     var oldLength = oldNode.children.length;
 
     for (var i = 0; i < newLength || i < oldLength; i++) {
-      updateElement($parent.childNodes[index], newNode.children[i], oldNode.children[i], i);
+      updateElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i);
     }
   }
+};
+
+var updateAttributes = function updateAttributes($target, newAttrs, oldAttrs) {
+  if (oldAttrs === void 0) {
+    oldAttrs = {};
+  }
+
+  var attrs = Object.assign({}, newAttrs, oldAttrs);
+  Object.keys(attrs).forEach(function (name) {
+    updateAttribute($target, name, newAttrs[name], oldAttrs[name]);
+  });
 };
 
 var updateAttribute = function updateAttribute($target, name, newValue, oldValue) {
@@ -76,18 +90,6 @@ var updateAttribute = function updateAttribute($target, name, newValue, oldValue
   }
 };
 
-var updateAttributes = function updateAttributes($target, newAttributes, oldAttributes) {
-  if (oldAttributes === void 0) {
-    oldAttributes = {};
-  }
-
-  var attributes = Object.assign({}, newAttributes, oldAttributes);
-
-  for (name in attributes) {
-    updateAttribute($target, name, newAttributes[name], oldAttributes[name]);
-  }
-};
-
-exports.h = h$1;
+exports.h = h;
 exports.render = render;
 exports.updateElement = updateElement;

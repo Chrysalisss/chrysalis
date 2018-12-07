@@ -6,7 +6,7 @@ import uglify from 'rollup-plugin-uglify-es';
 import license from 'rollup-plugin-license';
 import babel from 'rollup-plugin-babel';
 
-const header = `Chrysalis v0.10.2-β 
+const header = `Chrysalis v0.10.3-β 
 Casper Søkol, <%= moment().format('YYYY') %>
 Distributed under the MIT license`
 
