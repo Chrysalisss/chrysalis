@@ -76,7 +76,7 @@ render(element, docment.getElementById('app'))
 
 ### Updating the rendered element
 
-```updateElement(parent, newNode, oldNode)```
+```updateElement(parentNode, newNode, oldNode)```
 
 **parent** — object, parent node for newNode/oldNode
 
