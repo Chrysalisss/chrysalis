@@ -5,9 +5,9 @@ const createVnode = vnode => {
 
   const $el = document.createElement(vnode.nodeName)
 
-  for (let attr in vnode.attributes) {
-    $el.setAttribute(attr, vnode.attributes[attr])
-  }
+  Object.keys(vnode.attributes).map(attr => {
+    $el.setAttribute(attr, vnode.attributes[attr]);
+  });
 
   vnode.children.forEach(child => $el.appendChild(createVnode(child)))
 
