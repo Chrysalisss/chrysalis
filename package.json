@@ -12,6 +12,9 @@
     "fix-code": "prettier --write 'src/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist"
+  ],
   "bundlesize": [
     {
       "path": "./dist/chrysalis.esm.min.js"
