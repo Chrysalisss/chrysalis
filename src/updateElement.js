@@ -1,11 +1,6 @@
 // based on deathmood`s code
 const changed = (oldNode, newNode) => {
-  const typeChanged = typeof oldNode !== typeof newNode
-  const nodeNameChanged = oldNode.nodeName !== newNode.nodeName
-  const notEqual = typeof oldNode === 'string' && oldNode !== newNode
-  const attributesChanged = oldNode.type !== newNode.type || (oldNode.attributes && oldNode.attributes.forceUpdate)
-
-  return typeChanged || notEqual || attributesChanged || nodeNameChanged
+  return (typeof oldNode !== typeof newNode) || (oldNode.nodeName !== newNode.nodeName) || (oldNode !== newNode)
 }
 
 const updateElement = (parentNode, newNode, oldNode, index = 0) => {
