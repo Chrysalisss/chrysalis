@@ -1,6 +1,7 @@
 // based on deathmood`s code
 const changed = (oldNode, newNode) => {
-  return (typeof oldNode !== typeof newNode) || (oldNode.nodeName !== newNode.nodeName) || (oldNode !== newNode)
+  const notObject = typeof oldNode !== 'object'
+  return (typeof oldNode !== typeof newNode) || (oldNode.nodeName !== newNode.nodeName) || (notObject && (oldNode !== newNode))
 }
 
 const updateElement = (parentNode, newNode, oldNode, index = 0) => {
