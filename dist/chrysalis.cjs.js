@@ -25,11 +25,9 @@ var createVnode$1 = function createVnode(vnode) {
   }
 
   var $el = document.createElement(vnode.nodeName);
-
-  for (var attr in vnode.attributes) {
+  Object.keys(vnode.attributes).map(function (attr) {
     $el.setAttribute(attr, vnode.attributes[attr]);
-  }
-
+  });
   vnode.children.forEach(function (child) {
     return $el.appendChild(createVnode(child));
   });
