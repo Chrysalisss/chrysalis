@@ -59,5 +59,9 @@
     "rollup-plugin-license": "^0.7.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify-es": "0.0.1"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }
