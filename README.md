@@ -1,6 +1,5 @@
 ![](/chrysalis.svg)
 
-
 <p align="center">A lightweight JS-library for building fast, modern &amp; scalable applications</p>
 
 <p align="center">
