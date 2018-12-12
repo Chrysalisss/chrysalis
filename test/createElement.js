@@ -128,6 +128,6 @@ describe("h()", () =>  {
         children: ['Hello, wold!']
       }]
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 })
