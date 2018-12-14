@@ -17,7 +17,7 @@
   ],
   "bundlesize": [
     {
-      "path": "./dist/chrysalis.esm.min.js"
+      "path": "./dist/chrysalis.esm.js"
     }
   ],
   "keywords": [
