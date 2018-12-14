@@ -11,6 +11,12 @@ global.window = window
 describe('render()', () => {
   const body = document.querySelector('body')
 
+  const deleteNodes = () => {
+    while (body.firstChild) {
+      body.removeChild(body.firstChild)
+    }
+  }
+
   it('<div>Hello, world!</div>', () => {
     const element = h('div', null, 'Hello, world!')
     render(element, body)
@@ -19,7 +25,7 @@ describe('render()', () => {
 
     assert.equal(global.document.body.innerHTML, result)
 
-    global.document.body.innerHTML = ''
+    deleteNodes()
   })
 
   it('<div class="greeting">Hello, world!</div>', () => {
@@ -30,7 +36,7 @@ describe('render()', () => {
 
     assert.equal(global.document.body.innerHTML, result)
 
-    global.document.body.innerHTML = ''
+    deleteNodes()
   })
 
   it('<div class="greeting" style="color: red">Hello, world!</div>', () => {
@@ -41,7 +47,7 @@ describe('render()', () => {
 
     assert.equal(global.document.body.innerHTML, result)
 
-    global.document.body.innerHTML = ''
+    deleteNodes()
   })
 
   it('<div><h1>Hello, world!</h1></div>', () => {
@@ -52,7 +58,7 @@ describe('render()', () => {
 
     assert.equal(global.document.body.innerHTML, result)
 
-    global.document.body.innerHTML = ''
+    deleteNodes()
   })
 
   it('<div><h1 class="greeting" style="color: red">Hello, world!</h1></div>', () => {
@@ -63,6 +69,6 @@ describe('render()', () => {
 
     assert.equal(global.document.body.innerHTML, result)
 
-    global.document.body.innerHTML = ''
+    deleteNodes()
   })
 })
