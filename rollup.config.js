@@ -24,8 +24,9 @@ const config = {
     replace({
       createVnode$1: 'x0',
       createVnode: 'x0',
-      removeAttribute: 'x1',
-      removeAttributes: 'x2'
+      updateAttribute: 'x1',
+      updateAttributes: 'x2',
+      changed: 'x3'
     }),
     license({ banner: header })
   ]
