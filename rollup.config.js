@@ -23,7 +23,9 @@ const config = {
     uglify(),
     replace({
       createVnode$1: 'x0',
-      createVnode: 'x0'
+      createVnode: 'x0',
+      removeAttribute: 'x1',
+      removeAttributes: 'x2'
     }),
     license({ banner: header })
   ]
