@@ -1,26 +1,25 @@
-const assert = require('assert');
+const assert = require('assert')
 const { h } = require('../dist/chrysalis.umd')
 
-describe("h()", () =>  {
-
+describe('h()', () => {
   it("h('div', null)", () => {
-        const element = h('div', null)
-        const result = {
-          nodeName: 'div',
-          attributes: {},
-          children: []
-        }
-        assert.deepEqual(element, result);
-    })
+    const element = h('div', null)
+    const result = {
+      nodeName: 'div',
+      attributes: {},
+      children: []
+    }
+    assert.deepEqual(element, result)
+  })
 
   it("h('div', {})", () => {
-      const element = h('div', {})
-      const result = {
-        nodeName: 'div',
-        attributes: {},
-        children: []
-      }
-      assert.deepEqual(element, result);
+    const element = h('div', {})
+    const result = {
+      nodeName: 'div',
+      attributes: {},
+      children: []
+    }
+    assert.deepEqual(element, result)
   })
 
   it("h('div', null, 'Hello, world!')", () => {
@@ -30,7 +29,7 @@ describe("h()", () =>  {
       attributes: {},
       children: ['Hello, world!']
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 
   it("h('div', {}, 'Hello, world!')", () => {
@@ -40,7 +39,7 @@ describe("h()", () =>  {
       attributes: {},
       children: ['Hello, world!']
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 
   it("h('span', null, 23)", () => {
@@ -50,7 +49,7 @@ describe("h()", () =>  {
       attributes: {},
       children: [23]
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 
   it("h('span', null, 1 + 17)", () => {
@@ -60,7 +59,7 @@ describe("h()", () =>  {
       attributes: {},
       children: [18]
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 
   it("h('span', null, null)", () => {
@@ -70,7 +69,7 @@ describe("h()", () =>  {
       attributes: {},
       children: [null]
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 
   it("h('span', null, undefined)", () => {
@@ -80,53 +79,57 @@ describe("h()", () =>  {
       attributes: {},
       children: [undefined]
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 
   it("h('span', { style: 'color: red' }, 'Hello, wold!')", () => {
     const element = h('span', { style: 'color: red' }, 'Hello, wold!')
     const result = {
       nodeName: 'span',
-      attributes: { style: "color: red" },
+      attributes: { style: 'color: red' },
       children: ['Hello, wold!']
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 
   it("h('h1', { style: 'color: red', title: 'greeting' }, 'Hello, wold!')", () => {
     const element = h('h1', { style: 'color: red', title: 'greeting' }, 'Hello, wold!')
     const result = {
       nodeName: 'h1',
-      attributes: { style: "color: red", title: 'greeting' },
+      attributes: { style: 'color: red', title: 'greeting' },
       children: ['Hello, wold!']
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 
   it("h('div', { style: 'color: red' }, h('span', { style: 'color: red' }, 'Hello, wold!'))", () => {
     const element = h('span', { style: 'color: red' }, h('span', { style: 'color: red' }, 'Hello, wold!'))
     const result = {
       nodeName: 'span',
-      attributes: { style: "color: red" },
-      children: [{
-        nodeName: 'span',
-        attributes: { style: "color: red" },
-        children: ['Hello, wold!']
-      }]
+      attributes: { style: 'color: red' },
+      children: [
+        {
+          nodeName: 'span',
+          attributes: { style: 'color: red' },
+          children: ['Hello, wold!']
+        }
+      ]
     }
-    assert.deepEqual(element, result);
+    assert.deepEqual(element, result)
   })
 
   it("h('div', { style: 'color: red' }, h('span', null, 'Hello, wold!'))", () => {
     const element = h('span', { style: 'color: red' }, h('span', null, 'Hello, wold!'))
     const result = {
       nodeName: 'span',
-      attributes: { style: "color: red" },
-      children: [{
-        nodeName: 'span',
-        attributes: {},
-        children: ['Hello, wold!']
-      }]
+      attributes: { style: 'color: red' },
+      children: [
+        {
+          nodeName: 'span',
+          attributes: {},
+          children: ['Hello, wold!']
+        }
+      ]
     }
     assert.deepEqual(element, result)
   })

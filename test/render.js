@@ -10,7 +10,7 @@ global.window = window
 
 describe('render()', () => {
   const body = document.querySelector('body')
-  
+
   it('<div>Hello, world!</div>', () => {
     const element = h('div', null, 'Hello, world!')
     render(element, body)
@@ -23,7 +23,7 @@ describe('render()', () => {
   })
 
   it('<div class="greeting">Hello, world!</div>', () => {
-    const element = h('div', { class: "greeting" }, 'Hello, world!')
+    const element = h('div', { class: 'greeting' }, 'Hello, world!')
     render(element, body)
 
     const result = '<div class="greeting">Hello, world!</div>'
@@ -34,7 +34,7 @@ describe('render()', () => {
   })
 
   it('<div class="greeting" style="color: red">Hello, world!</div>', () => {
-    const element = h('div', { class: "greeting", style: "color: red" }, 'Hello, world!')
+    const element = h('div', { class: 'greeting', style: 'color: red' }, 'Hello, world!')
     render(element, body)
 
     const result = '<div class="greeting" style="color: red">Hello, world!</div>'
@@ -53,10 +53,10 @@ describe('render()', () => {
     assert.equal(global.document.body.innerHTML, result)
 
     global.document.body.innerHTML = ''
-  }) 
+  })
 
   it('<div><h1 class="greeting" style="color: red">Hello, world!</h1></div>', () => {
-    const element = h('div', null, h('h1', { class: "greeting", style: "color: red" }, 'Hello, world!'))
+    const element = h('div', null, h('h1', { class: 'greeting', style: 'color: red' }, 'Hello, world!'))
     render(element, body)
 
     const result = '<div><h1 class="greeting" style="color: red">Hello, world!</h1></div>'
@@ -64,5 +64,5 @@ describe('render()', () => {
     assert.equal(global.document.body.innerHTML, result)
 
     global.document.body.innerHTML = ''
-  }) 
+  })
 })
