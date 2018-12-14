@@ -25,18 +25,18 @@ const updateElement = (parentNode, newNode, oldNode, index = 0) => {
   }
 }
 
-const updateAttributes = ($target, newAttrs, oldAttrs = {}) => {
+const updateAttributes = ($element, newAttrs, oldAttrs = {}) => {
   const attrs = Object.assign({}, newAttrs, oldAttrs)
   Object.keys(attrs).forEach(name => {
-    updateAttribute($target, name, newAttrs[name], oldAttrs[name])
+    updateAttribute($element, name, newAttrs[name], oldAttrs[name])
   })
 }
 
-const updateAttribute = ($target, name, newValue, oldValue) => {
+const updateAttribute = ($element, name, newValue, oldValue) => {
   if (!newValue) {
-    $target.removeAttribute(name)
+    $element.removeAttribute(name)
   } else if (!oldValue || newValue !== oldValue) {
-    $target.setAttribute(name, newValue)
+    $element.setAttribute(name, newValue)
   }
 }
 

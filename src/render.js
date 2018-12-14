@@ -3,15 +3,15 @@ const createVnode = vnode => {
     return document.createTextNode(vnode)
   }
 
-  const $el = document.createElement(vnode.nodeName)
+  const $element = document.createElement(vnode.nodeName)
 
   Object.keys(vnode.attributes).map(attr => {
     $el.setAttribute(attr, vnode.attributes[attr])
   })
 
-  vnode.children.forEach(child => $el.appendChild(createVnode(child)))
+  vnode.children.forEach(child => $element.appendChild(createVnode(child)))
 
-  return $el
+  return $element
 }
 
 const render = (vnode, parentNode) => {
