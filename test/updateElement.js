@@ -29,7 +29,7 @@ describe('updateElement()', () => {
 
     const result = '<div>Hello, world!</div>'
 
-    assert.equal(global.document.body.innerHTML, result)
+    assert.strictEqual(body.innerHTML, result)
 
     deleteNodes()
   })
