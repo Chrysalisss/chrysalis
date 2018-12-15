@@ -1,5 +1,5 @@
 import h from './createElement'
-import render from './render'
+import { render } from './render'
 import updateElement from './updateElement'
 
 export {

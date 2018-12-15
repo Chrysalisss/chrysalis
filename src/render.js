@@ -18,4 +18,4 @@ const render = (vnode, parentNode) => {
   parentNode.appendChild(createVnode(vnode))
 }
 
-export default render
+export { render, createVnode }

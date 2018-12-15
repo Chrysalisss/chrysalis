@@ -1,3 +1,5 @@
+import { createVnode } from './render'
+
 // based on deathmood`s code
 const changed = (oldNode, newNode) => {
   const notObject = typeof oldNode !== 'object'
