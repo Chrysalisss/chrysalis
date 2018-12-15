@@ -18,6 +18,17 @@ describe('render()', () => {
     }
   }
 
+  it('<div></div>', () => {
+    const element = h('div', null)
+    render(element, body)
+
+    const result = '<div></div>'
+
+    assert.equal(global.document.body.innerHTML, result)
+
+    deleteNodes()
+  })
+
   it('<div>Hello, world!</div>', () => {
     const element = h('div', null, 'Hello, world!')
     render(element, body)
