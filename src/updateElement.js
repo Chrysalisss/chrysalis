@@ -16,10 +16,9 @@ const updateElement = (parentNode, newNode, oldNode, index = 0) => {
   } else if (newNode.nodeName) {
     updateAttributes(parentNode.childNodes[index], newNode.attributes, oldNode.attributes)
 
-    const newLength = newNode.children.length
-    const oldLength = oldNode.children.length
+    const length = Math.max(newNode.children.length, oldNode.children.length)
 
-    for (let i = 0; i < newLength || i < oldLength; i++) {
+    for (let i = 0; i < length; i++) {
       updateElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i)
     }
   }
