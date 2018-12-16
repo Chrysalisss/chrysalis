@@ -29,7 +29,7 @@ describe('render()', () => {
     deleteNodes()
   })
 
-   it('<div>Hello, world!</div>', () => {
+  it('<div>Hello, world!</div>', () => {
     const element = h('div', null, 'Hello, world!')
     render(element, app)
 
