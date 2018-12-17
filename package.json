@@ -10,7 +10,7 @@
     "dev": "rollup -c --watch --no-strict ",
     "size": "bundlesize",
     "fix-code": "prettier --write '{src,test}/**/*.js' 'rollup.config.js'",
-    "test": "mocha"
+    "test": "mocha --require @babel/register"
   },
   "files": [
     "dist"
