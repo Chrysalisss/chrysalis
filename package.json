@@ -9,7 +9,7 @@
     "build": "rollup -c --no-strict ",
     "dev": "rollup -c --watch --no-strict ",
     "size": "bundlesize",
-    "fix-code": "prettier --write 'src/*.js' 'test/*.js' 'rollup.config.js'",
+    "fix-code": "prettier --write '{src,test}/**/*.js' 'rollup.config.js'",
     "test": "mocha"
   },
   "files": [
