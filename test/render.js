@@ -83,4 +83,26 @@ describe('render()', () => {
 
     deleteNodes()
   })
+
+  it('<div><h1 class="greeting" style="color: red">6</h1></div>', () => {
+    const element = h('div', null, h('h1', { class: 'greeting', style: 'color: red' }, 6))
+    render(element, app)
+
+    const result = '<div><h1 class="greeting" style="color: red">6</h1></div>'
+
+    assert.equal(app.innerHTML, result)
+
+    deleteNodes()
+  })
+
+  it('<div><h1 style="color: red">undefined</h1></div>', () => {
+    const element = h('div', null, h('h1', { style: 'color: red' }, undefined))
+    render(element, app)
+
+    const result = '<div><h1 style="color: red">undefined</h1></div>'
+
+    assert.equal(app.innerHTML, result)
+
+    deleteNodes()
+  })
 })
