@@ -20,14 +20,56 @@ describe('updateElement()', () => {
     }
   }
 
-  it('<div>Hello, world!</div>', () => {
-    const element1 = <div>Hello</div>
-    const element2 = <div>Hello, world!</div>
+  it('<h1>Hello, world!</h1>', () => {
+    const element1 = <h1>Hello</h1>
+    const element2 = <h1>Hello, world!</h1>
 
     render(element1, app)
     updateElement(app, element2, element1)
 
-    const result = '<div>Hello, world!</div>'
+    const result = '<h1>Hello, world!</h1>'
+
+    assert.strictEqual(app.innerHTML, result)
+
+    deleteNodes()
+  })
+
+  it('<h1 style="color: purple">Hello, world!</h1>', () => {
+    const element1 = <h1>Hello</h1>
+    const element2 = <h1 style="color: purple">Hello, world!</h1>
+
+    render(element1, app)
+    updateElement(app, element2, element1)
+
+    const result = '<h1 style="color: purple">Hello, world!</h1>'
+
+    assert.strictEqual(app.innerHTML, result)
+
+    deleteNodes()
+  })
+
+  it('<div style="color: purple">Hello, world!</div>', () => {
+    const element1 = <h1>Hello</h1>
+    const element2 = <div style="color: purple">Hello, world!</div>
+
+    render(element1, app)
+    updateElement(app, element2, element1)
+
+    const result = '<div style="color: purple">Hello, world!</div>'
+
+    assert.strictEqual(app.innerHTML, result)
+
+    deleteNodes()
+  })
+
+  it('<div><h1>Hey!</h1></div>', () => {
+    const element1 = <div></div>
+    const element2 = <div><h1>Hey!</h1></div>
+
+    render(element1, app)
+    updateElement(app, element2, element1)
+
+    const result = '<div><h1>Hey!</h1></div>'
 
     assert.strictEqual(app.innerHTML, result)
 
