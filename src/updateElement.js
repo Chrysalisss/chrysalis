@@ -1,6 +1,8 @@
 import { createVnode } from './render'
 
-const updateElement = (parentNode, newNode, oldNode, index = 0) => {
+const updateElement = (parentNode, newNode, oldNode) => {
+  const index = 0
+
   if (!oldNode) {
     parentNode.appendChild(createVnode(newNode))
   }
