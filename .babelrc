@@ -16,7 +16,7 @@
   "plugins": [
     "transform-object-rest-spread",
     "transform-remove-strict-mode",
-    ["@babel/plugin-transform-react-jsx", {
+    ["babel-plugin-transform-react-jsx", {
       "pragma": "h"
     }]
   ]
