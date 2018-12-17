@@ -21,8 +21,8 @@ describe('updateElement()', () => {
   }
 
   it('<div>Hello, world!</div>', () => {
-    const element1 = h('div', null, 'kek')
-    const element2 = h('div', null, 'Hello, world!')
+    const element1 = <div>Hello</div>
+    const element2 = <div>Hello, world!</div>
 
     render(element1, app)
     updateElement(app, element2, element1)

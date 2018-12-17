@@ -19,7 +19,7 @@ describe('render()', () => {
   }
 
   it('<div></div>', () => {
-    const element = h('div', null)
+    const element = <div></div>
     render(element, app)
 
     const result = '<div></div>'
@@ -30,7 +30,7 @@ describe('render()', () => {
   })
 
   it('<div>Hello, world!</div>', () => {
-    const element = h('div', null, 'Hello, world!')
+    const element = <div>Hello, world!</div>
     render(element, app)
 
     const result = '<div>Hello, world!</div>'
@@ -41,7 +41,7 @@ describe('render()', () => {
   })
 
   it('<div class="greeting">Hello, world!</div>', () => {
-    const element = h('div', { class: 'greeting' }, 'Hello, world!')
+    const element = <div class="greeting">Hello, world!</div>
     render(element, app)
 
     const result = '<div class="greeting">Hello, world!</div>'
@@ -52,7 +52,7 @@ describe('render()', () => {
   })
 
   it('<div class="greeting" style="color: red">Hello, world!</div>', () => {
-    const element = h('div', { class: 'greeting', style: 'color: red' }, 'Hello, world!')
+    const element = <div class="greeting" style="color: red">Hello, world!</div>
     render(element, app)
 
     const result = '<div class="greeting" style="color: red">Hello, world!</div>'
@@ -63,7 +63,7 @@ describe('render()', () => {
   })
 
   it('<div><h1>Hello, world!</h1></div>', () => {
-    const element = h('div', null, h('h1', null, 'Hello, world!'))
+    const element = <div><h1>Hello, world!</h1></div>
     render(element, app)
 
     const result = '<div><h1>Hello, world!</h1></div>'
@@ -74,7 +74,7 @@ describe('render()', () => {
   })
 
   it('<div><h1 class="greeting" style="color: red">Hello, world!</h1></div>', () => {
-    const element = h('div', null, h('h1', { class: 'greeting', style: 'color: red' }, 'Hello, world!'))
+    const element = <div><h1 class="greeting" style="color: red">Hello, world!</h1></div>
     render(element, app)
 
     const result = '<div><h1 class="greeting" style="color: red">Hello, world!</h1></div>'
@@ -85,7 +85,7 @@ describe('render()', () => {
   })
 
   it('<div><h1 class="greeting" style="color: red">6</h1></div>', () => {
-    const element = h('div', null, h('h1', { class: 'greeting', style: 'color: red' }, 6))
+    const element = <div><h1 class="greeting" style="color: red">6</h1></div>
     render(element, app)
 
     const result = '<div><h1 class="greeting" style="color: red">6</h1></div>'
@@ -96,7 +96,7 @@ describe('render()', () => {
   })
 
   it('<div><h1 style="color: red">undefined</h1></div>', () => {
-    const element = h('div', null, h('h1', { style: 'color: red' }, undefined))
+    const element = <div><h1 style="color: red">undefined</h1></div>
     render(element, app)
 
     const result = '<div><h1 style="color: red">undefined</h1></div>'
