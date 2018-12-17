@@ -15,11 +15,6 @@
   "files": [
     "dist"
   ],
-  "bundlesize": [
-    {
-      "path": "./dist/chrysalis.esm.js"
-    }
-  ],
   "keywords": [
     "perfomance",
     "virtual-dom",
