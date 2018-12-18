@@ -19,7 +19,7 @@ describe('render()', () => {
   }
 
   it('<div></div>', () => {
-    const element = <div></div>
+    const element = <div />
     render(element, app)
 
     const result = '<div></div>'
@@ -52,7 +52,11 @@ describe('render()', () => {
   })
 
   it('<div class="greeting" style="color: red">Hello, world!</div>', () => {
-    const element = <div class="greeting" style="color: red">Hello, world!</div>
+    const element = (
+      <div class="greeting" style="color: red">
+        Hello, world!
+      </div>
+    )
     render(element, app)
 
     const result = '<div class="greeting" style="color: red">Hello, world!</div>'
@@ -63,7 +67,11 @@ describe('render()', () => {
   })
 
   it('<div><h1>Hello, world!</h1></div>', () => {
-    const element = <div><h1>Hello, world!</h1></div>
+    const element = (
+      <div>
+        <h1>Hello, world!</h1>
+      </div>
+    )
     render(element, app)
 
     const result = '<div><h1>Hello, world!</h1></div>'
@@ -74,7 +82,13 @@ describe('render()', () => {
   })
 
   it('<div><h1 class="greeting" style="color: red">Hello, world!</h1></div>', () => {
-    const element = <div><h1 class="greeting" style="color: red">Hello, world!</h1></div>
+    const element = (
+      <div>
+        <h1 class="greeting" style="color: red">
+          Hello, world!
+        </h1>
+      </div>
+    )
     render(element, app)
 
     const result = '<div><h1 class="greeting" style="color: red">Hello, world!</h1></div>'
@@ -85,7 +99,13 @@ describe('render()', () => {
   })
 
   it('<div><h1 class="greeting" style="color: red">6</h1></div>', () => {
-    const element = <div><h1 class="greeting" style="color: red">6</h1></div>
+    const element = (
+      <div>
+        <h1 class="greeting" style="color: red">
+          6
+        </h1>
+      </div>
+    )
     render(element, app)
 
     const result = '<div><h1 class="greeting" style="color: red">6</h1></div>'
@@ -96,7 +116,11 @@ describe('render()', () => {
   })
 
   it('<div><h1 style="color: red">undefined</h1></div>', () => {
-    const element = <div><h1 style="color: red">undefined</h1></div>
+    const element = (
+      <div>
+        <h1 style="color: red">undefined</h1>
+      </div>
+    )
     render(element, app)
 
     const result = '<div><h1 style="color: red">undefined</h1></div>'

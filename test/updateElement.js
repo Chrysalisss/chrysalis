@@ -63,8 +63,12 @@ describe('updateElement()', () => {
   })
 
   it('<div><h1>Hey!</h1></div>', () => {
-    const element1 = <div></div>
-    const element2 = <div><h1>Hey!</h1></div>
+    const element1 = <div />
+    const element2 = (
+      <div>
+        <h1>Hey!</h1>
+      </div>
+    )
 
     render(element1, app)
     updateElement(app, element2, element1)
