@@ -9,7 +9,7 @@ const createVnode = vnode => {
     $element.setAttribute(attr, vnode.attributes[attr])
   })
 
-  vnode.children.forEach(child => $element.appendChild(createVnode(child)))
+  vnode.children.map(child => $element.appendChild(createVnode(child)))
 
   return $element
 }
