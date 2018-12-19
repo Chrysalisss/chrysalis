@@ -48,7 +48,7 @@ h1('p', { style: 'color: red' }, 'Hello, 世界!')
 // }
 ```
 
-You can also create elements with [JSX](https://jsx.github.io/)
+You can also create elements with [JSX](https://facebook.github.io/jsx/)
 
 - Install [babel-plugin-transform-react-jsx
 ](https://www.npmjs.com/package/babel-plugin-transform-react-jsx)
