@@ -6,7 +6,7 @@ describe('h()', () => {
     const element = h('div', null)
     const result = {
       nodeName: 'div',
-      attributes: {},
+      props: {},
       children: []
     }
     assert.deepEqual(element, result)
@@ -16,7 +16,7 @@ describe('h()', () => {
     const element = h('div', {})
     const result = {
       nodeName: 'div',
-      attributes: {},
+      props: {},
       children: []
     }
     assert.deepEqual(element, result)
@@ -26,7 +26,7 @@ describe('h()', () => {
     const element = h('div', null, 'Hello, world!')
     const result = {
       nodeName: 'div',
-      attributes: {},
+      props: {},
       children: ['Hello, world!']
     }
     assert.deepEqual(element, result)
@@ -36,7 +36,7 @@ describe('h()', () => {
     const element = h('div', {}, 'Hello, world!')
     const result = {
       nodeName: 'div',
-      attributes: {},
+      props: {},
       children: ['Hello, world!']
     }
     assert.deepEqual(element, result)
@@ -46,7 +46,7 @@ describe('h()', () => {
     const element = h('span', null, 23)
     const result = {
       nodeName: 'span',
-      attributes: {},
+      props: {},
       children: [23]
     }
     assert.deepEqual(element, result)
@@ -56,7 +56,7 @@ describe('h()', () => {
     const element = h('span', null, 1 + 17)
     const result = {
       nodeName: 'span',
-      attributes: {},
+      props: {},
       children: [18]
     }
     assert.deepEqual(element, result)
@@ -66,7 +66,7 @@ describe('h()', () => {
     const element = h('span', null, null)
     const result = {
       nodeName: 'span',
-      attributes: {},
+      props: {},
       children: [null]
     }
     assert.deepEqual(element, result)
@@ -76,7 +76,7 @@ describe('h()', () => {
     const element = h('span', null, undefined)
     const result = {
       nodeName: 'span',
-      attributes: {},
+      props: {},
       children: [undefined]
     }
     assert.deepEqual(element, result)
@@ -86,7 +86,7 @@ describe('h()', () => {
     const element = h('span', { style: 'color: red' }, 'Hello, wold!')
     const result = {
       nodeName: 'span',
-      attributes: { style: 'color: red' },
+      props: { style: 'color: red' },
       children: ['Hello, wold!']
     }
     assert.deepEqual(element, result)
@@ -96,7 +96,7 @@ describe('h()', () => {
     const element = h('h1', { style: 'color: red', title: 'greeting' }, 'Hello, wold!')
     const result = {
       nodeName: 'h1',
-      attributes: { style: 'color: red', title: 'greeting' },
+      props: { style: 'color: red', title: 'greeting' },
       children: ['Hello, wold!']
     }
     assert.deepEqual(element, result)
@@ -106,11 +106,11 @@ describe('h()', () => {
     const element = h('span', { style: 'color: red' }, h('span', { style: 'color: red' }, 'Hello, wold!'))
     const result = {
       nodeName: 'span',
-      attributes: { style: 'color: red' },
+      props: { style: 'color: red' },
       children: [
         {
           nodeName: 'span',
-          attributes: { style: 'color: red' },
+          props: { style: 'color: red' },
           children: ['Hello, wold!']
         }
       ]
@@ -122,11 +122,11 @@ describe('h()', () => {
     const element = h('span', { style: 'color: red' }, h('span', null, 'Hello, wold!'))
     const result = {
       nodeName: 'span',
-      attributes: { style: 'color: red' },
+      props: { style: 'color: red' },
       children: [
         {
           nodeName: 'span',
-          attributes: {},
+          props: {},
           children: ['Hello, wold!']
         }
       ]

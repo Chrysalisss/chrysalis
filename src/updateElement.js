@@ -14,7 +14,7 @@ const updateElement = (parentNode, newNode, oldNode) => {
   if (changed(newNode, oldNode)) {
     parentNode.replaceChild(createVnode(newNode), parentNode.childNodes[index])
   } else if (newNode.nodeName) {
-    updateAttributes(parentNode.childNodes[index], newNode.attributes, oldNode.attributes)
+    updateAttributes(parentNode.childNodes[index], newNode.props, oldNode.props)
 
     const length = Math.max(newNode.children.length, oldNode.children.length)
     let i = -1
@@ -24,11 +24,10 @@ const updateElement = (parentNode, newNode, oldNode) => {
   }
 }
 
-const changed = (newNode, oldNode) => {
-  const notObject = typeof oldNode !== 'object'
-  return (
-    typeof oldNode !== typeof newNode || oldNode.nodeName !== newNode.nodeName || (notObject && oldNode !== newNode)
-  )
+// node change detection based on snabbdom algorithm
+const changed = (a, b) => {
+  const notObject = typeof b !== 'object'
+  return typeof a !== typeof b || a.nodeName !== b.nodeName || (notObject && b !== a)
 }
 
 const updateAttributes = ($element, newAttrs, oldAttrs = {}) => {
