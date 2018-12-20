@@ -7,8 +7,8 @@
   "scripts": {
     "build": "rollup -c scripts/build.config.js --no-strict",
     "size": "rollup -c scripts/size.config.js --no-strict && bundlesize",
-    "fix-code": "prettier --write '{src,test}/**/*.js'",
-    "test": "rollup -c scripts/test.config.js && prettier --write 'dist/chrysalis.umd.js' && mocha --require @babel/register"
+    "fix-code": "prettier --write '{src,test,scripts}/**/*.js'",
+    "test": "rollup -c scripts/dev.config.js && prettier --write 'dist/chrysalis.umd.js' && mocha --require @babel/register"
   },
   "files": [
     "dist"
