@@ -24,11 +24,14 @@ const config = {
     babel(),
     uglify(),
     replace({
-      createVnode$1: 'x0',
-      createVnode: 'x0',
-      updateAttribute: 'x1',
-      updateAttributes: 'x2',
-      changed: 'x3'
+      createVnode$1: 'A',
+      createVnode: 'B',
+      updateAttribute: 'C',
+      updateAttributes: 'D',
+      changed: 'E',
+      nodeName: 'F',
+      props: 'G',
+      children: 'H'
     }),
     license({ banner: header })
   ]
