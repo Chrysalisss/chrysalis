@@ -1,5 +1,5 @@
 const createVnode = (vnode, isSVG) => {
-  if (typeof vnode != 'object') {
+  if (typeof vnode !== 'object') {
     return document.createTextNode(vnode)
   }
 
@@ -7,7 +7,7 @@ const createVnode = (vnode, isSVG) => {
     ? document.createElementNS('http://www.w3.org/2000/svg', node.nodeName)
     : document.createElement(vnode.nodeName)
 
-  // props by this time are already applied to the vnode
+  // props (not attributes) by this time are already applied to the vnode
   Object.keys(vnode.props).map(attr => {
     $element.setAttribute(attr, vnode.props[attr])
   })

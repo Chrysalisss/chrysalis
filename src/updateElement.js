@@ -3,6 +3,8 @@ import { createVnode } from './render'
 const updateElement = (parentNode, newNode, oldNode, isSVG) => {
   const index = 0
 
+  if (newNode === oldNode) return
+
   if (isSVG === undefined) {
     const isSVG = newNode.nodeName === 'svg' ? true : false
 
@@ -10,7 +12,7 @@ const updateElement = (parentNode, newNode, oldNode, isSVG) => {
   }
 
   if (!oldNode) {
-    parentNode.appendChild(createVnode(newNode))
+    parentNode.appendChild(createVnode(newNode, isSVG))
   }
 
   if (!newNode) {
