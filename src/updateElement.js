@@ -1,7 +1,13 @@
 import { createVnode } from './render'
 
-const updateElement = (parentNode, newNode, oldNode) => {
+const updateElement = (parentNode, newNode, oldNode, isSVG) => {
   const index = 0
+
+  if (isSVG === undefined) {
+    const isSVG = newNode.nodeName === 'svg' ? true : false
+
+    updateElement(parentNode, newNode, oldNode, isSVG)
+  }
 
   if (!oldNode) {
     parentNode.appendChild(createVnode(newNode))
@@ -9,8 +15,8 @@ const updateElement = (parentNode, newNode, oldNode) => {
 
   if (!newNode) {
     parentNode.removeChild(parentNode.childNodes[index])
-  }
-
+  } 
+  
   if (changed(newNode, oldNode)) {
     parentNode.replaceChild(createVnode(newNode), parentNode.childNodes[index])
   } else if (newNode.nodeName) {
@@ -19,12 +25,12 @@ const updateElement = (parentNode, newNode, oldNode) => {
     const length = Math.max(newNode.children.length, oldNode.children.length)
     let i = -1
     while (++i < length) {
-      updateElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i)
+      updateElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i, isSVG)
     }
   }
 }
 
-// node change detection based on snabbdom algorithm
+// node change detection based on Snabbdom algorithm
 const changed = (a, b) => {
   const notObject = typeof b !== 'object'
   return typeof a !== typeof b || a.nodeName !== b.nodeName || (notObject && b !== a)
