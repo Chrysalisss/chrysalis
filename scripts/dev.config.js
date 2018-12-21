@@ -4,16 +4,13 @@ import babel from 'rollup-plugin-babel'
 
 const config = {
   input: 'src/Chrysalis.js',
-  output: { 
-    name: 'Chrysalis', 
-    file: 'dist/chrysalis.umd.js', 
-    format: 'umd' 
+  output: {
+    name: 'Chrysalis',
+    file: 'dist/chrysalis.umd.js',
+    format: 'umd'
   },
   moduleName: 'Chrysalis',
-  plugins: [
-    resolve(),
-    babel()
-  ]
+  plugins: [resolve(), babel()]
 }
 
 export default config

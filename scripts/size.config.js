@@ -6,10 +6,10 @@ import replace from 'rollup-plugin-replace'
 
 const config = {
   input: 'src/Chrysalis.js',
-  output: { 
-    name: 'Chrysalis', 
-    file: 'dist/chrysalis.esm.js', 
-    format: 'es' 
+  output: {
+    name: 'Chrysalis',
+    file: 'dist/chrysalis.esm.js',
+    format: 'es'
   },
   moduleName: 'Chrysalis',
   plugins: [

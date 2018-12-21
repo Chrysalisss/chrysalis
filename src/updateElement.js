@@ -1,55 +1,45 @@
-import { createVnode } from './render'
+import { createVnode, applyAttributes } from './render'
 
 const updateElement = (parentNode, newNode, oldNode, isSVG) => {
+  const a = newNode
+  const b = oldNode
+
+  const notObject = typeof b !== 'object'
+
   const index = 0
 
-  if (newNode === oldNode) return
+  if (a === b) return
 
   if (isSVG === undefined) {
-    const isSVG = newNode.nodeName === 'svg' ? true : false
+    const isSVG = a.nodeName === 'svg' ? true : false
 
-    updateElement(parentNode, newNode, oldNode, isSVG)
+    updateElement(parentNode, a, b, isSVG)
   }
 
-  if (!oldNode) {
-    parentNode.appendChild(createVnode(newNode, isSVG))
+  if (!b) {
+    parentNode.appendChild(createVnode(a, isSVG))
   }
 
-  if (!newNode) {
+  if (!a) {
     parentNode.removeChild(parentNode.childNodes[index])
-  } 
-  
-  if (changed(newNode, oldNode)) {
-    parentNode.replaceChild(createVnode(newNode), parentNode.childNodes[index])
-  } else if (newNode.nodeName) {
-    updateAttributes(parentNode.childNodes[index], newNode.props, oldNode.props)
+  }
 
-    const length = Math.max(newNode.children.length, oldNode.children.length)
+  /**
+   * Detect dom change
+   *
+   * Based on Snabbdom algorithm
+   */
+
+  if (typeof a !== typeof b || a.nodeName !== b.nodeName || (notObject && b !== a)) {
+    parentNode.replaceChild(createVnode(a), parentNode.childNodes[index])
+  } else {
+    applyAttributes(parentNode.childNodes[index], a.props, b.props)
+
+    const length = Math.max(a.children.length, b.children.length)
     let i = -1
     while (++i < length) {
-      updateElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i, isSVG)
+      updateElement(parentNode.childNodes[index], a.children[i], b.children[i], i, isSVG)
     }
-  }
-}
-
-// node change detection based on Snabbdom algorithm
-const changed = (a, b) => {
-  const notObject = typeof b !== 'object'
-  return typeof a !== typeof b || a.nodeName !== b.nodeName || (notObject && b !== a)
-}
-
-const updateAttributes = ($element, newAttrs, oldAttrs = {}) => {
-  const attrs = Object.assign({}, newAttrs, oldAttrs)
-  Object.keys(attrs).forEach(name => {
-    updateAttribute($element, name, newAttrs[name], oldAttrs[name])
-  })
-}
-
-const updateAttribute = ($element, name, newValue, oldValue) => {
-  if (!newValue) {
-    $element.removeAttribute(name)
-  } else if (!oldValue || newValue !== oldValue) {
-    $element.setAttribute(name, newValue)
   }
 }
 

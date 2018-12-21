@@ -1,3 +1,15 @@
+const applyAttributes = ($element, newAttrs, oldAttrs = {}) => {
+  const attrs = Object.assign({}, newAttrs, oldAttrs)
+
+  Object.keys(attrs).forEach(name => {
+    if (!newAttrs[name]) {
+      $element.removeAttribute(name)
+    } else if (!oldAttrs[name] || newAttrs[name] !== oldAttrs[name]) {
+      $element.setAttribute(name, newAttrs[name])
+    }
+  })
+}
+
 const createVnode = (vnode, isSVG) => {
   if (typeof vnode !== 'object') {
     return document.createTextNode(vnode)
@@ -8,9 +20,7 @@ const createVnode = (vnode, isSVG) => {
     : document.createElement(vnode.nodeName)
 
   // props (not attributes) by this time are already applied to the vnode
-  Object.keys(vnode.props).map(attr => {
-    $element.setAttribute(attr, vnode.props[attr])
-  })
+  applyAttributes($element, vnode.props)
 
   vnode.children.map(child => $element.appendChild(createVnode(child, isSVG)))
 
@@ -21,4 +31,4 @@ const render = (vnode, parentNode) => {
   parentNode.appendChild(createVnode(vnode))
 }
 
-export { render, createVnode }
+export { render, createVnode, applyAttributes }
