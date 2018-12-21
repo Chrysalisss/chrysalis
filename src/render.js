@@ -1,7 +1,7 @@
 const applyAttributes = ($element, newAttrs, oldAttrs = {}) => {
-  const attrs = Object.assign({}, newAttrs, oldAttrs)
-
-  Object.keys(attrs).forEach(name => {
+  
+  // putting attributes together and iterating 
+  Object.keys(Object.assign({}, newAttrs, oldAttrs)).forEach(name => {
     if (!newAttrs[name]) {
       $element.removeAttribute(name)
     } else if (!oldAttrs[name] || newAttrs[name] !== oldAttrs[name]) {

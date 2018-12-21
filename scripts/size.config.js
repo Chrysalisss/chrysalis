@@ -1,3 +1,5 @@
+import toReplace from './replace'
+
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import uglify from 'rollup-plugin-uglify-es'
@@ -16,16 +18,7 @@ const config = {
     resolve(),
     babel(),
     uglify(),
-    replace({
-      createVnode$1: 'A',
-      createVnode: 'B',
-      updateAttribute: 'C',
-      updateAttributes: 'D',
-      changed: 'E',
-      nodeName: 'F',
-      props: 'G',
-      children: 'H'
-    })
+    replace(toReplace)
   ]
 }
 
