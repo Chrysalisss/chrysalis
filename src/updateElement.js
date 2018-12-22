@@ -7,9 +7,7 @@ const updateElement = (parentNode, newNode, oldNode, isSVG) => {
   const notObject = typeof b !== 'object'
 
   const index = 0
-
-  if (a === b) return
-
+  
   if (isSVG === undefined) {
     const isSVG = a.nodeName === 'svg' ? true : false
 
@@ -38,7 +36,7 @@ const updateElement = (parentNode, newNode, oldNode, isSVG) => {
     const length = Math.max(a.children.length, b.children.length)
     let i = -1
     while (++i < length) {
-      updateElement(parentNode.childNodes[index], a.children[i], b.children[i], i, isSVG)
+      nElement(parentNode.childNodes[index], a.children[i], b.children[i], i, isSVG)
     }
   }
 }
