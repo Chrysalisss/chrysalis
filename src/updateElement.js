@@ -1,24 +1,19 @@
 import { createVnode, applyAttributes } from './render'
 
 const updateElement = (parentNode, newNode, oldNode, isSVG) => {
-  const a = newNode
-  const b = oldNode
-
-  const notObject = typeof b !== 'object'
-
   const index = 0
-  
+
   if (isSVG === undefined) {
-    const isSVG = a.nodeName === 'svg' ? true : false
+    const isSVG = newNode.nodeName === 'svg' ? true : false
 
-    updateElement(parentNode, a, b, isSVG)
+    updateElement(parentNode, newNode, oldNode, isSVG)
   }
 
-  if (!b) {
-    parentNode.appendChild(createVnode(a, isSVG))
+  if (!oldNode) {
+    parentNode.appendChild(createVnode(newNode, isSVG))
   }
 
-  if (!a) {
+  if (!newNode) {
     parentNode.removeChild(parentNode.childNodes[index])
   }
 
@@ -28,15 +23,19 @@ const updateElement = (parentNode, newNode, oldNode, isSVG) => {
    * Based on Snabbdom algorithm
    */
 
-  if (typeof a !== typeof b || a.nodeName !== b.nodeName || (notObject && b !== a)) {
-    parentNode.replaceChild(createVnode(a), parentNode.childNodes[index])
+  if (
+    typeof newNode !== typeof oldNode ||
+    newNode.nodeName !== oldNode.nodeName ||
+    (typeof oldNode !== 'object' && oldNode !== newNode)
+  ) {
+    parentNode.replaceChild(createVnode(newNode), parentNode.childNodes[index])
   } else {
-    applyAttributes(parentNode.childNodes[index], a.props, b.props)
+    applyAttributes(parentNode.childNodes[index], newNode.props, oldNode.props)
 
-    const length = Math.max(a.children.length, b.children.length)
+    const length = Math.max(newNode.children.length, oldNode.children.length)
     let i = -1
     while (++i < length) {
-      nElement(parentNode.childNodes[index], a.children[i], b.children[i], i, isSVG)
+      nElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i, isSVG)
     }
   }
 }
