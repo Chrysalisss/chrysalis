@@ -23,7 +23,7 @@ const updateElement = (parentNode, newNode, oldNode, isSVG) => {
   }
 
   /**
-   * Detect dom change
+   * Detect DOM change
    *
    * Based on Snabbdom algorithm
    */
