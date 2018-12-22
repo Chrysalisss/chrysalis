@@ -35,7 +35,7 @@ const updateElement = (parentNode, newNode, oldNode, isSVG) => {
     const length = Math.max(newNode.children.length, oldNode.children.length)
     let i = -1
     while (++i < length) {
-      nElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i, isSVG)
+      updateElement(parentNode.childNodes[index], newNode.children[i], oldNode.children[i], i, isSVG)
     }
   }
 }
