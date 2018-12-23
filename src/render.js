@@ -1,6 +1,6 @@
 const applyAttributes = ($element, newAttrs, oldAttrs = {}) => {
   // putting attributes together and iterating
-  Object.keys(Object.assign({}, newAttrs, oldAttrs)).forEach(name => {
+  Object.keys(Object.assign({}, newAttrs, oldAttrs)).map(name => {
     if (!newAttrs[name]) {
       $element.removeAttribute(name)
     } else if (!oldAttrs[name] || newAttrs[name] !== oldAttrs[name]) {
@@ -14,9 +14,10 @@ const createVnode = (vnode, isSVG) => {
     return document.createTextNode(vnode)
   }
 
-  const $element = isSVG
-    ? document.createElementNS('http://www.w3.org/2000/svg', node.nodeName)
-    : document.createElement(vnode.nodeName)
+  const $element =
+    isSVG || vnode.nodeName == 'svg'
+      ? document.createElementNS('http://www.w3.org/2000/svg', node.nodeName)
+      : document.createElement(vnode.nodeName)
 
   // props (not attributes) by this time are already applied to the vnode
   applyAttributes($element, vnode.props)
