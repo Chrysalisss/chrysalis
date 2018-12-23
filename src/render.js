@@ -14,15 +14,16 @@ const createVnode = (vnode, isSVG) => {
     return document.createTextNode(vnode)
   }
 
-  const $element =
-    isSVG || vnode.nodeName == 'svg'
-      ? document.createElementNS('http://www.w3.org/2000/svg', node.nodeName)
+  const _isSVG = vnode.nodeName === 'svg' || isSVG ? true : false
+
+  const $element = _isSVG
+      ? document.createElementNS('http://www.w3.org/2000/svg', vnode.nodeName)
       : document.createElement(vnode.nodeName)
 
   // props (not attributes) by this time are already applied to the vnode
   applyAttributes($element, vnode.props)
 
-  vnode.children.map(child => $element.appendChild(createVnode(child, isSVG)))
+  vnode.children.map(child => $element.appendChild(createVnode(child, _isSVG)))
 
   return $element
 }
