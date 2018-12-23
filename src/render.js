@@ -14,9 +14,9 @@ const createVnode = (vnode, isSVG) => {
     return document.createTextNode(vnode)
   }
 
-  const $element = (isSVG = isSVG || vnode.nodeName == 'svg') 
-      ? document.createElementNS('http://www.w3.org/2000/svg', vnode.nodeName)
-      : document.createElement(vnode.nodeName)
+  const $element = (isSVG = isSVG || vnode.nodeName == 'svg')
+    ? document.createElementNS('http://www.w3.org/2000/svg', vnode.nodeName)
+    : document.createElement(vnode.nodeName)
 
   // props (not attributes) by this time are already applied to the vnode
   applyAttributes($element, vnode.props)
