@@ -1,23 +1,22 @@
+/**
+ * Comparison algorithm DOM and Virtual DOM
+ * Lead time ~O(n^3)
+ */
+
 import { createVnode, applyAttributes } from './render'
 
-const updateElement = (parentNode, newNode, oldNode, isSVG) => {
-  const index = 0
-
+const updateElement = (parentNode, newNode, oldNode, index = 0, isSVG) => {
   if (!oldNode) {
     parentNode.appendChild(createVnode(newNode, isSVG))
   }
-
   if (!newNode) {
     parentNode.removeChild(parentNode.childNodes[index])
-  }
-
-  /**
-   * Detect DOM change
-   *
-   * Based on Snabbdom algorithm
-   */
-
-  if (
+  } else if (
+    /**
+     * Detect DOM change
+     *
+     * Based on Snabbdom algorithm
+     */
     typeof newNode !== typeof oldNode ||
     newNode.nodeName !== oldNode.nodeName ||
     (typeof oldNode !== 'object' && oldNode !== newNode)
@@ -34,7 +33,7 @@ const updateElement = (parentNode, newNode, oldNode, isSVG) => {
         newNode.children[i],
         oldNode.children[i],
         i,
-        isSVG = isSVG || newNode.nodeName == 'svg'
+        (isSVG = isSVG || newNode.nodeName == 'svg')
       )
     }
   }
