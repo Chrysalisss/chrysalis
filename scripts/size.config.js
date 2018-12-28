@@ -14,12 +14,7 @@ const config = {
     format: 'es'
   },
   moduleName: 'Chrysalis',
-  plugins: [
-    resolve(),
-    babel(),
-    uglify(),
-    replace(toReplace)
-  ]
+  plugins: [resolve(), babel(), uglify(), replace(toReplace)]
 }
 
 export default config

@@ -1,5 +1,7 @@
 import pkg from '../package.json'
 
+import toReplace from './replace'
+
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import uglify from 'rollup-plugin-uglify-es'
@@ -19,22 +21,7 @@ const config = {
     { name: 'Chrysalis', file: 'dist/chrysalis.esm.js', format: 'es' }
   ],
   moduleName: 'Chrysalis',
-  plugins: [
-    resolve(),
-    babel(),
-    uglify(),
-    replace({
-      createVnode$1: 'A',
-      createVnode: 'B',
-      updateAttribute: 'C',
-      updateAttributes: 'D',
-      changed: 'E',
-      nodeName: 'F',
-      props: 'G',
-      children: 'H'
-    }),
-    license({ banner: header })
-  ]
+  plugins: [resolve(), babel(), uglify(), replace(toReplace), license({ banner: header })]
 }
 
 export default config
