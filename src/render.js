@@ -1,4 +1,4 @@
-const applyAttributes = ($element, newAttrs, oldAttrs = {}) => {
+function applyAttributes($element, newAttrs, oldAttrs = {}) {
   // putting attributes together and iterating
   Object.keys(Object.assign(newAttrs, oldAttrs)).map(name => {
     if (!newAttrs[name]) {
@@ -9,7 +9,7 @@ const applyAttributes = ($element, newAttrs, oldAttrs = {}) => {
   })
 }
 
-const createVnode = (vnode, isSVG) => {
+function createVnode(vnode, isSVG) {
   if (typeof vnode !== 'object') {
     return document.createTextNode(vnode)
   }
@@ -26,7 +26,7 @@ const createVnode = (vnode, isSVG) => {
   return $element
 }
 
-const render = (vnode, parentNode) => {
+function render(vnode, parentNode) {
   parentNode.appendChild(createVnode(vnode))
 }
 

@@ -5,12 +5,12 @@
 
 import { createVnode, applyAttributes } from './render'
 
-const updateElement = (parentNode, newNode, oldNode, index = 0, isSVG) => {
+function updateElement(parentNode, newNode, oldNode, index, isSVG) {
   if (!oldNode) {
     parentNode.appendChild(createVnode(newNode, isSVG))
   }
   if (!newNode) {
-    parentNode.removeChild(parentNode.childNodes[index])
+    parentNode.removeChild(parentNode.childNodes[index || 0])
   } else if (
     /**
      * Detect DOM change
@@ -21,15 +21,15 @@ const updateElement = (parentNode, newNode, oldNode, index = 0, isSVG) => {
     newNode.nodeName !== oldNode.nodeName ||
     (typeof oldNode !== 'object' && oldNode !== newNode)
   ) {
-    parentNode.replaceChild(createVnode(newNode, isSVG), parentNode.childNodes[index])
+    parentNode.replaceChild(createVnode(newNode, isSVG), parentNode.childNodes[index || 0])
   } else {
-    applyAttributes(parentNode.childNodes[index], newNode.props, oldNode.props)
+    applyAttributes(parentNode.childNodes[index || 0], newNode.props, oldNode.props)
 
     const length = Math.max(newNode.children.length, oldNode.children.length)
     let i = -1
     while (++i < length) {
       updateElement(
-        parentNode.childNodes[index],
+        parentNode.childNodes[index || 0],
         newNode.children[i],
         oldNode.children[i],
         i,
