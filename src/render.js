@@ -1,6 +1,6 @@
 const applyAttributes = ($element, newAttrs, oldAttrs = {}) => {
   // putting attributes together and iterating
-  Object.keys(Object.assign({}, newAttrs, oldAttrs)).map(name => {
+  Object.keys(Object.assign(newAttrs, oldAttrs)).map(name => {
     if (!newAttrs[name]) {
       $element.removeAttribute(name)
     } else if (!oldAttrs[name] || newAttrs[name] !== oldAttrs[name]) {
