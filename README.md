@@ -136,13 +136,12 @@ render(<Greeting toWaht="World" />, docment.getElementById('app'))
 
 In order of priority
 
-- [] Statefull components with lifecycle methods
-- [] Key attribute
-- [] Router 
-- [] Full JSX support
-- [] State manager
-- [] Official site
-
+- Statefull components with lifecycle methods
+- Key attribute
+- Router 
+- Full JSX support
+- State manager
+- Official site
 
 # License
 Released under the [MIT](https://github.com/Chrysalisss/chrysalis/blob/master/LICENSE) License.
