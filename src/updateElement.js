@@ -26,8 +26,8 @@ function updateElement(parentNode, newNode, oldNode, index, isSVG) {
     applyAttributes(parentNode.childNodes[index || 0], newNode.props, oldNode.props)
 
     const length = Math.max(newNode.children.length, oldNode.children.length)
-    let i = -1
-    while (++i < length) {
+
+    for (let i = -1; ++i < length; ) {
       updateElement(
         parentNode.childNodes[index || 0],
         newNode.children[i],
