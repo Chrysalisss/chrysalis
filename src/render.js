@@ -26,8 +26,11 @@ function createVnode(vnode, isSVG) {
   return $element
 }
 
-function render(vnode, parentNode) {
+function render(vnode, parentNode, callback) {
   parentNode.appendChild(createVnode(vnode))
+  if (callback !== undefined) {
+    callback()
+  }
 }
 
 export { render, createVnode, applyAttributes }
