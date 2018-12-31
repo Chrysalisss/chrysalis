@@ -119,7 +119,7 @@ import { h, render } from 'chrysalis.js'
 
 const Time = () => <p>Time is {new Date().toLocaleTimeString()}.</p>
 
-// creating componant with props
+// creating component with props
 const Greeting = ({ toWhat }) => {
   return (
     <div>
