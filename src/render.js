@@ -1,4 +1,4 @@
-function applyAttributes($element, newAttrs, oldAttrs = {}) {
+function applyAttributes($element, newAttrs, oldAttrs) {
   // putting attributes together and iterating
   Object.keys(Object.assign(newAttrs, oldAttrs)).map(name => {
     if (!newAttrs[name]) {
@@ -19,7 +19,7 @@ function createVnode(vnode, isSVG) {
     : document.createElement(vnode.nodeName)
 
   // props (not attributes) by this time are already applied to the vnode
-  applyAttributes($element, vnode.props)
+  applyAttributes($element, vnode.props, {})
 
   vnode.children.map(child => $element.appendChild(createVnode(child, isSVG)))
 
