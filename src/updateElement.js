@@ -9,9 +9,12 @@ function updateElement(parentNode, newNode, oldNode, index, isSVG) {
   if (!oldNode) {
     parentNode.appendChild(createVnode(newNode, isSVG))
   }
+  
   if (!newNode) {
     parentNode.removeChild(parentNode.childNodes[index || 0])
-  } else if (
+  } 
+  
+  if (
     /**
      * Detect DOM change
      *
