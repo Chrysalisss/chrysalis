@@ -25,7 +25,7 @@ describe('updateElement()', () => {
     const element2 = <h1>Hello, world!</h1>
 
     render(element1, app)
-    updateElement(app, element2, element1)
+    updateElement(element2, element1)
 
     const result = '<h1>Hello, world!</h1>'
 
@@ -39,7 +39,7 @@ describe('updateElement()', () => {
     const element2 = <h1 style="color: purple">Hello, world!</h1>
 
     render(element1, app)
-    updateElement(app, element2, element1)
+    updateElement(element2, element1)
 
     const result = '<h1 style="color: purple">Hello, world!</h1>'
 
@@ -53,7 +53,7 @@ describe('updateElement()', () => {
     const element2 = <div style="color: purple">Hello, world!</div>
 
     render(element1, app)
-    updateElement(app, element2, element1)
+    updateElement(element2, element1)
 
     const result = '<div style="color: purple">Hello, world!</div>'
 
@@ -71,7 +71,7 @@ describe('updateElement()', () => {
     )
 
     render(element1, app)
-    updateElement(app, element2, element1)
+    updateElement(element2, element1)
 
     const result = '<div><h1>Hey!</h1></div>'
 
