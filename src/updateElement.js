@@ -12,8 +12,10 @@ function updateElement(parentNode, newNode, oldNode, index, isSVG) {
   }
   
   if (!newNode) {
-    parentNode.removeChild(parentNode.childNodes[index || 0])
-  } 
+    while (parentNode.childNodes.length != parentNode.childNodes.length - index) {
+      parentNode.removeChild(parentNode.lastChild);
+    }
+  }
   
   if (
     /**
