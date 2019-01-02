@@ -5,7 +5,7 @@ const toReplace = {
   props: 'G',
   children: 'H',
   merge: 'L',
-  _a: 'P',
+  updateAttrs: 'P',
   ROOT_ELEMENT: 'J'
 }
 
