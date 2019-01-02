@@ -138,6 +138,7 @@ In order of priority
 
 - Statefull components with lifecycle methods
 - Key attribute
+- Fragments
 - Router 
 - Full JSX support
 - State manager
