@@ -6,19 +6,19 @@
 import { createVnode, ROOT_ELEMENT } from './render'
 import _a from './updateAttributes'
 
-function updateElement(newNode, oldNode, index, isSVG, parent) {
-  const parentNode = parent || ROOT_ELEMENT
+function updateElement(newNode, oldNode, index, isSVG, element) {
+  const parentNode = element || ROOT_ELEMENT
 
   if (!oldNode) {
     parentNode.appendChild(createVnode(newNode, isSVG))
   }
-  
+
   if (!newNode) {
     while (parentNode.childNodes.length != parentNode.childNodes.length - index) {
-      parentNode.removeChild(parentNode.lastChild);
+      parentNode.removeChild(parentNode.lastChild)
     }
   }
-  
+
   if (
     /**
      * Detect DOM change

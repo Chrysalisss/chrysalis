@@ -13,11 +13,11 @@ function createVnode(vnode, isSVG) {
   _a($element, vnode.props, {})
 
   vnode.children.map(child => $element.appendChild(createVnode(child, isSVG)))
-  
+
   return $element
 }
 
-let ROOT_ELEMENT 
+let ROOT_ELEMENT
 
 function render(vnode, parentNode, callback) {
   ROOT_ELEMENT = parentNode
