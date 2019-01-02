@@ -4,7 +4,7 @@
  */
 
 import { createVnode } from './render'
-import updateAttributes from './updateAttributes'
+import _a from './updateAttributes'
 
 function updateElement(parentNode, newNode, oldNode, index, isSVG) {
   if (!oldNode) {
@@ -27,7 +27,7 @@ function updateElement(parentNode, newNode, oldNode, index, isSVG) {
   ) {
     parentNode.replaceChild(createVnode(newNode, isSVG), parentNode.childNodes[index || 0])
   } else {
-    updateAttributes(parentNode.childNodes[index || 0], newNode.props, oldNode.props)
+    _a(parentNode.childNodes[index || 0], newNode.props, oldNode.props)
 
     const length = Math.max(newNode.children.length, oldNode.children.length)
 

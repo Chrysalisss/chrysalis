@@ -1,6 +1,6 @@
 import merge from './utill'
 
-function updateAttributes($element, newAttrs, oldAttrs) {
+function _a($element, newAttrs, oldAttrs) {
   // putting attributes together and iterating
   Object.keys(merge(newAttrs, oldAttrs)).map(name => {
     if (name == 'class') {
@@ -15,4 +15,4 @@ function updateAttributes($element, newAttrs, oldAttrs) {
   })
 }
 
-export default updateAttributes
+export default _a
