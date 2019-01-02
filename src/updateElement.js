@@ -3,10 +3,12 @@
  * Lead time ~O(n^3)
  */
 
-import { createVnode } from './render'
+import { createVnode, ROOT_ELEMENT } from './render'
 import _a from './updateAttributes'
 
-function updateElement(parentNode, newNode, oldNode, index, isSVG) {
+function updateElement(newNode, oldNode, index, isSVG, parent) {
+  const parentNode = parent || ROOT_ELEMENT
+
   if (!oldNode) {
     parentNode.appendChild(createVnode(newNode, isSVG))
   }
@@ -35,11 +37,11 @@ function updateElement(parentNode, newNode, oldNode, index, isSVG) {
 
     for (let i = -1; ++i < length; ) {
       updateElement(
-        parentNode.childNodes[index || 0],
         newNode.children[i],
         oldNode.children[i],
         i,
-        (isSVG = isSVG || newNode.nodeName == 'svg')
+        (isSVG = isSVG || newNode.nodeName == 'svg'),
+        parentNode.childNodes[index || 0]
       )
     }
   }

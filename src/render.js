@@ -17,11 +17,14 @@ function createVnode(vnode, isSVG) {
   return $element
 }
 
+let ROOT_ELEMENT 
+
 function render(vnode, parentNode, callback) {
+  ROOT_ELEMENT = parentNode
   parentNode.appendChild(createVnode(vnode))
   if (callback !== undefined) {
     callback()
   }
 }
 
-export { render, createVnode }
+export { render, createVnode, ROOT_ELEMENT }
