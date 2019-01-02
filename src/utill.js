@@ -1,8 +1,8 @@
 function merge(a, b) {
   const src = {}
 
-  Object.keys(a).map(p => (src[p] = a[p]))
-  Object.keys(b).map(p => (src[p] = b[p]))
+  for (var i in a) src[i] = a[i]
+  for (var i in b) src[i] = b[i]
 
   return src
 }
