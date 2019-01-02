@@ -1,7 +1,6 @@
 import toReplace from './replace'
 
 import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
 import uglify from 'rollup-plugin-uglify-es'
 import babel from 'rollup-plugin-babel'
 import replace from 'rollup-plugin-replace'

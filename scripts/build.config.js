@@ -3,7 +3,6 @@ import pkg from '../package.json'
 import toReplace from './replace'
 
 import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
 import uglify from 'rollup-plugin-uglify-es'
 import license from 'rollup-plugin-license'
 import babel from 'rollup-plugin-babel'
