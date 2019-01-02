@@ -3,7 +3,8 @@
  * Lead time ~O(n^3)
  */
 
-import { createVnode, applyAttributes } from './render'
+import { createVnode } from './render'
+import updateAttributes from './updateAttributes'
 
 function updateElement(parentNode, newNode, oldNode, index, isSVG) {
   if (!oldNode) {
@@ -26,7 +27,7 @@ function updateElement(parentNode, newNode, oldNode, index, isSVG) {
   ) {
     parentNode.replaceChild(createVnode(newNode, isSVG), parentNode.childNodes[index || 0])
   } else {
-    applyAttributes(parentNode.childNodes[index || 0], newNode.props, oldNode.props)
+    updateAttributes(parentNode.childNodes[index || 0], newNode.props, oldNode.props)
 
     const length = Math.max(newNode.children.length, oldNode.children.length)
 
