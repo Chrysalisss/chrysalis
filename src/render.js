@@ -1,4 +1,5 @@
 import updateAttrs from './updateAttributes'
+import updateElement from './updateElement'
 
 function createVnode(vnode, isSVG) {
   if (typeof vnode !== 'object') {
@@ -19,11 +20,14 @@ function createVnode(vnode, isSVG) {
   return $element
 }
 
-let ROOT_ELEMENT
+let ROOT_ELEMENT, oldNode
 
 function render(vnode, parentNode, callback) {
   ROOT_ELEMENT = parentNode
-  parentNode.appendChild(createVnode(vnode))
+
+  updateElement(vnode, oldNode, parentNode)
+  oldNode = vnode
+
   if (callback !== undefined) {
     callback()
   }
