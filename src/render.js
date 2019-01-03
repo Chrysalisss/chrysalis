@@ -25,7 +25,7 @@ let ROOT_ELEMENT, currentNode
 function render(vnode, parentNode, callback) {
   ROOT_ELEMENT = parentNode
 
-  updateElement(vnode, oldNode, parentNode)
+  updateElement(vnode, currentNode, parentNode)
   currentNode = vnode
 
   if (callback !== undefined) {
