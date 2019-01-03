@@ -6,7 +6,8 @@ const toReplace = {
   children: 'H',
   merge: 'L',
   updateAttrs: 'P',
-  ROOT_ELEMENT: 'J'
+  ROOT_ELEMENT: 'J',
+  currentNode: 'D'
 }
 
 export default toReplace
