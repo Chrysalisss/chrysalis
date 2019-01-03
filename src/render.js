@@ -20,13 +20,13 @@ function createVnode(vnode, isSVG) {
   return $element
 }
 
-let ROOT_ELEMENT, oldNode
+let ROOT_ELEMENT, currentNode
 
 function render(vnode, parentNode, callback) {
   ROOT_ELEMENT = parentNode
 
   updateElement(vnode, oldNode, parentNode)
-  oldNode = vnode
+  currentNode = vnode
 
   if (callback !== undefined) {
     callback()
