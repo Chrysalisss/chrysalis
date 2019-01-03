@@ -82,7 +82,7 @@ import { h, render } from 'chrysalis.js'
 
 const element = <h1>Hello, 世界!</h1>
 
-render(element, docment.getElementById('app'))
+render(element, document.getElementById('app'))
 ```
 
 ### Updating the rendered element
@@ -98,7 +98,7 @@ render(element, docment.getElementById('app'))
 ```javascript
 import { h, render, updateElement } from 'chrysalis.js'
 
-const app = docment.getElementById('app')
+const app = document.getElementById('app')
 
 const element = <h1 style="color: green">Hello, 世界!</h1>
 const element2 = <h1>Hello, World!</h1>
@@ -129,7 +129,7 @@ const Greeting = ({ toWhat }) => {
   )
 } 
 
-render(<Greeting toWaht="World" />, docment.getElementById('app'))
+render(<Greeting toWaht="World" />, document.getElementById('app'))
 ```
 
 # TODO
