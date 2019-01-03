@@ -6,7 +6,7 @@
 import { createVnode, ROOT_ELEMENT } from './render'
 import updateAttrs from './updateAttributes'
 
-function updateElement(newNode, oldNode, index, isSVG, element) {
+function updateElement(newNode, oldNode, element, index, isSVG) {
   const parentNode = element || ROOT_ELEMENT
 
   if (!oldNode) {
@@ -30,7 +30,7 @@ function updateElement(newNode, oldNode, index, isSVG, element) {
     (typeof oldNode !== 'object' && oldNode !== newNode)
   ) {
     parentNode.replaceChild(createVnode(newNode, isSVG), parentNode.childNodes[index || 0])
-  } else {
+  } else if (newNode.nodeName) {
     updateAttrs(parentNode.childNodes[index || 0], newNode.props, oldNode.props)
 
     const length = Math.max(newNode.children.length, oldNode.children.length)
@@ -39,9 +39,9 @@ function updateElement(newNode, oldNode, index, isSVG, element) {
       updateElement(
         newNode.children[i],
         oldNode.children[i],
+        parentNode.childNodes[index || 0],
         i,
-        (isSVG = isSVG || newNode.nodeName == 'svg'),
-        parentNode.childNodes[index || 0]
+        (isSVG = isSVG || newNode.nodeName == 'svg')
       )
     }
   }
