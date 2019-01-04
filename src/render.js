@@ -13,8 +13,8 @@ function createVnode(vnode, isSVG) {
   // props (not attributes) by this time are already applied to the vnode
   updateAttrs($element, vnode.props, {})
 
-  for (let p in vnode.children) {
-    $element.appendChild(createVnode(vnode.children[p], isSVG))
+  for (let child in vnode.children) {
+    $element.appendChild(createVnode(vnode.children[child], isSVG))
   }
 
   return $element
