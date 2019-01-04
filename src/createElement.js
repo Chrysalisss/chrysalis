@@ -15,6 +15,10 @@ function h(nodeName, props) {
     return nodeName(props)
   }
 
+  if (Array.isArray(children[0])) {
+    children = children[0]
+  }
+
   return {
     nodeName,
     props: props || {},
