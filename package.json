@@ -5,12 +5,11 @@
   "main": "dis/chrysalis.umd.js",
   "module": "dist/chrysalis.esm.js",
   "scripts": {
-    "jest": "jest",
     "build": "rollup -c scripts/build.config.js --no-strict",
     "size": "rollup -c scripts/size.config.js --no-strict && bundlesize",
     "fix-code": "prettier --write '{src,test,scripts}/**/*.js'",
     "test": "rollup -c scripts/dev.config.js && prettier --write 'dist/chrysalis.umd.js' && mocha --require @babel/register",
-    "precommit": "lint-staged && npm jest"
+    "precommit": "lint-staged"
   },
   "files": [
     "dist"
