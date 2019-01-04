@@ -5,16 +5,16 @@ function updateAttrs($element, newAttrs, oldAttrs) {
   for (let name in merge(newAttrs, oldAttrs)) {
     if (!newAttrs[name]) {
       if (name === 'class') {
-        $el.removeAttribute('class')
+        $element.removeAttribute('class')
       } else {
-        $el[name] = null
-        delete $el[name]
+        $element[name] = null
+        delete $element[name]
       }
     } else if (newAttrs[name] !== oldAttrs[name]) {
       if (name === 'class') {
-        $el.setAttribute('class', newAttrs[name])
+        $element.setAttribute('class', newAttrs[name])
       } else {
-        $el[name] = newAttrs[name]
+        $element[name] = newAttrs[name]
       }
     }
   }
