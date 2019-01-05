@@ -91,7 +91,7 @@ You can use ```render()``` for multiple calls. React`s clock build with Chrysali
 import { h, render } from 'chrysalis.js'
 
 const tick = () => {
-	const element = (
+  const element = (
     <div>
       <h1>Hello, world!</h1>
       <h2>It is {new Date().toLocaleTimeString()}</h2>
@@ -101,7 +101,7 @@ const tick = () => {
   render(element, document.getElementById('app'))
   
   // update every second (1000ms)
-	setTimeout(tick, 1000)
+  setTimeout(tick, 1000)
 }
 
 tick()
