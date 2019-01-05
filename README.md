@@ -85,6 +85,29 @@ const element = <h1>Hello, 世界!</h1>
 render(element, document.getElementById('app'))
 ```
 
+You can use ```render()``` for multiple calls. React`s clock build with Chrysalis:
+
+```javascript
+import { h, render } from 'chrysalis.js'
+
+const tick = () => {
+	const element = (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {new Date().toLocaleTimeString()}</h2>
+    </div>
+  )
+
+  render(element, document.getElementById('app'))
+  
+  // update every second (1000ms)
+	setTimeout(tick, 1000)
+}
+
+tick()
+```
+[Try it on codepen](https://codepen.io/anon/pen/ZVxjEw?editors=0010)
+
 ### Updating the rendered element
 
 ```updateElement(parentNode, newNode, oldNode)```
@@ -133,7 +156,6 @@ render(<Greeting toWaht="World" />, document.getElementById('app'))
 ```
 
 # TODO
-
 In order of priority
 
 - Statefull components with lifecycle methods
