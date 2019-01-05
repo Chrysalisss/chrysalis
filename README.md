@@ -112,11 +112,11 @@ tick()
 
 ```updateElement(parentNode, newNode, oldNode)```
 
-**parentNode** — object, parent node for newNode/oldNode
+**newNode** — object|null, new virtual node. If you want to delete vnode you must specify null
 
-**newNode** (optional) — object, new virtual node
+**oldNode** — object, old virtual node
 
-**oldNode** (optional) — object, old virtual node
+**parentNode** (optional) — object, parent node for newNode/oldNode. If you used ```render()``` before, you can omit
 
 ```javascript
 import { h, render, updateElement } from 'chrysalis.js'
@@ -152,7 +152,7 @@ const Greeting = ({ toWhat }) => {
   )
 } 
 
-render(<Greeting toWaht="World" />, document.getElementById('app'))
+render(<Greeting toWhat="World" />, document.getElementById('app'))
 ```
 
 # TODO
