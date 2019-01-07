@@ -28,7 +28,7 @@ function render(vnode, parentNode, callback) {
   updateElement(vnode, currentNode, parentNode)
   currentNode = vnode
 
-  if (callback !== undefined) {
+  if (callback != undefined) {
     callback()
   }
 }
