@@ -3,7 +3,8 @@
  * Lead time ~O(n^3)
  */
 
-import { createVnode, ROOT_ELEMENT } from './render'
+import { ROOT_ELEMENT } from './render'
+import createVnode from './createVnode'
 import updateAttrs from './updateAttributes'
 
 function updateElement(newNode, oldNode, element, index, isSVG) {

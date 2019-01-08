@@ -1,31 +1,16 @@
-import updateAttrs from './updateAttributes'
 import updateElement from './updateElement'
 
-function createVnode(vnode, isSVG) {
-  if (typeof vnode !== 'object') {
-    return document.createTextNode(vnode)
-  }
+// define a root element for app
+let ROOT_ELEMENT
 
-  const $element = (isSVG = isSVG || vnode.nodeName == 'svg')
-    ? document.createElementNS('http://www.w3.org/2000/svg', vnode.nodeName)
-    : document.createElement(vnode.nodeName)
-
-  // props (not attributes) by this time are already applied to the vnode
-  updateAttrs($element, vnode.props, {})
-
-  for (let child in vnode.children) {
-    $element.appendChild(createVnode(vnode.children[child], isSVG))
-  }
-
-  return $element
-}
-
-let ROOT_ELEMENT, currentNode
+// vnode representation of current DOM
+let currentNode
 
 function render(vnode, parentNode, callback) {
   ROOT_ELEMENT = parentNode
 
   updateElement(vnode, currentNode, parentNode)
+
   currentNode = vnode
 
   if (callback != undefined) {
@@ -33,4 +18,4 @@ function render(vnode, parentNode, callback) {
   }
 }
 
-export { render, createVnode, ROOT_ELEMENT }
+export { render, ROOT_ELEMENT }
