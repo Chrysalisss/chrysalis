@@ -1,9 +1,9 @@
 import toReplace from './replace'
 
 import resolve from 'rollup-plugin-node-resolve'
-import uglify from 'rollup-plugin-uglify-es'
 import babel from 'rollup-plugin-babel'
 import replace from 'rollup-plugin-replace'
+import { terser } from 'rollup-plugin-terser'
 
 const config = {
   input: 'src/Chrysalis.js',
@@ -13,7 +13,7 @@ const config = {
     format: 'es'
   },
   moduleName: 'Chrysalis',
-  plugins: [resolve(), babel(), uglify(), replace(toReplace)]
+  plugins: [resolve(), babel(), terser(), replace(toReplace)]
 }
 
 export default config

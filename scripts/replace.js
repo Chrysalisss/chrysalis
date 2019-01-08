@@ -1,13 +1,7 @@
 const toReplace = {
-  createVnode$1: 'A',
-  createVnode: 'B',
-  nodeName: 'F',
-  props: 'G',
-  children: 'H',
-  merge: 'L',
-  updateAttrs: 'P',
-  ROOT_ELEMENT: 'J',
-  currentNode: 'D'
+  nodeName: 'e',
+  props: 't',
+  children: 'n'
 }
 
 export default toReplace
