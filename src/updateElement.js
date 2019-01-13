@@ -16,11 +16,7 @@ function updateElement(newNode, oldNode, element, index, isSVG) {
 
   if (!newNode && newNode !== 0) {
     parentNode.removeChild(parentNode.childNodes[index || 0])
-  } else if (
-    typeof newNode !== typeof oldNode ||
-    newNode.nodeName !== oldNode.nodeName ||
-    (typeof oldNode !== 'object' && oldNode !== newNode)
-  ) {
+  } else if (notSameNode(newNode, oldNode)) {
     parentNode.replaceChild(createVnode(newNode, isSVG), parentNode.childNodes[index || 0])
   } else if (newNode.nodeName) {
     updateAttrs(parentNode.childNodes[index || 0], newNode.props, oldNode.props)
@@ -39,4 +35,7 @@ function updateElement(newNode, oldNode, element, index, isSVG) {
   }
 }
 
+function notSameNode(a, b) {
+  return typeof a !== typeof b || a.nodeName !== b.nodeName || (typeof b !== 'object' && b !== a)
+}
 export default updateElement
