@@ -12,9 +12,7 @@ function updateElement(newNode, oldNode, element, index, isSVG) {
 
   if (!oldNode && oldNode !== 0) {
     parentNode.appendChild(createVnode(newNode, isSVG))
-  }
-
-  if (!newNode && newNode !== 0) {
+  } else if (!newNode && newNode !== 0) {
     parentNode.removeChild(parentNode.childNodes[index || 0])
   } else if (notSameNode(newNode, oldNode)) {
     parentNode.replaceChild(createVnode(newNode, isSVG), parentNode.childNodes[index || 0])
@@ -34,6 +32,11 @@ function updateElement(newNode, oldNode, element, index, isSVG) {
     }
   }
 }
+
+/**
+ * Node change detection algo
+ * Based on Snabbdom`s algorithm
+ */
 
 function notSameNode(a, b) {
   return typeof a !== typeof b || a.nodeName !== b.nodeName || (typeof b !== 'object' && b !== a)
