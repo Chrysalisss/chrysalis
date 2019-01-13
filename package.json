@@ -9,7 +9,8 @@
     "size": "rollup -c scripts/size.config.js --no-strict && bundlesize",
     "fix-code": "prettier --write '{src,test,scripts}/**/*.js'",
     "test": "rollup -c scripts/dev.config.js && prettier --write 'dist/chrysalis.umd.js' && mocha --require @babel/register",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "dev": "rollup -c scripts/dev.config.js --no-strict"
   },
   "files": [
     "dist"
