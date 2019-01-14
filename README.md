@@ -158,6 +158,7 @@ render(<Greeting toWhat="World" />, document.getElementById('app'))
 # TODO
 In order of priority
 
+- setState method (soon)
 - Statefull components with lifecycle methods
 - Key attribute
 - Fragments
