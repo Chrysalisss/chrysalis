@@ -6,12 +6,12 @@ let ROOT_ELEMENT
 // vnode representation of current DOM
 let currentNode
 
-function render(vnode, parentNode, callback) {
+function render(parentNode, callback) {
   ROOT_ELEMENT = parentNode
 
-  updateElement(vnode, currentNode, parentNode)
+  updateElement(App(), currentNode, parentNode)
 
-  currentNode = vnode
+  currentNode = App()
 
   if (callback != undefined) {
     callback()
