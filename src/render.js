@@ -6,7 +6,7 @@ let ROOT_ELEMENT
 // vnode representation of current DOM
 let currentNode
 
-function render(parentNode, callback) {
+function start(parentNode, callback) {
   ROOT_ELEMENT = parentNode
 
   updateElement(App(), currentNode, parentNode)
@@ -18,4 +18,4 @@ function render(parentNode, callback) {
   }
 }
 
-export { render, ROOT_ELEMENT }
+export { start, ROOT_ELEMENT }
