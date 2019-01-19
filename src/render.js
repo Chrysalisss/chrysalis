@@ -13,7 +13,7 @@ function start(parentNode, callback) {
 
   currentNode = App()
 
-  if (callback != undefined) {
+  if (callback) {
     callback()
   }
 }
