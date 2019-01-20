@@ -10,9 +10,9 @@ import updateAttrs from './updateAttributes'
 function updateElement(newNode, oldNode, element, index, isSVG) {
   const parentNode = element || ROOT_ELEMENT
 
-  if (!oldNode && oldNode !== 0) {
+  if (oldNode == null) {
     parentNode.appendChild(createVnode(newNode, isSVG))
-  } else if (!newNode && newNode !== 0) {
+  } else if (newNode == null) {
     parentNode.removeChild(parentNode.childNodes[index || 0])
   } else if (notSameNode(newNode, oldNode)) {
     parentNode.replaceChild(createVnode(newNode, isSVG), parentNode.childNodes[index || 0])
