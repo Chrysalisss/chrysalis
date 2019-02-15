@@ -11,27 +11,21 @@ global.window = window
 describe('start()', () => {
   const container = document.querySelector('#app')
 
-  const deleteNodes = () => {
-    while (container.firstChild) {
-      container.removeChild(container.firstChild)
-    }
-  }
-
-  it('<div><span>Hello World!</span></div>', () => {
+  it('simple page', () => {
     global.App = () => {
       return (
-        <div>
-          <span>Hello World!</span>
+        <div class="greeting">
+          <h1>みなさん、こんにちは</h1>
+          <span style="color: green">Hello World!</span>
         </div>
       )
     }
 
     start(container)
 
-    const result = '<div><span>Hello World!</span></div>'
+    const result =
+      '<div class="greeting"><h1>みなさん、こんにちは</h1><span style="color: green;">Hello World!</span></div>'
 
     assert.equal(container.innerHTML, result)
-
-    deleteNodes()
   })
 })
