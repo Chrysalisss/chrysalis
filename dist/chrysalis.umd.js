@@ -1,156 +1,64 @@
-;(function(global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined'
-    ? factory(exports)
-    : typeof define === 'function' && define.amd
-    ? define(['exports'], factory)
-    : factory((global.Chrysalis = {}))
-})(this, function(exports) {
-  'use strict'
+/**
+ * Chrysalis v0.12.0-β
+ * Casper Søkol, 2019
+ * Distributed under the MIT license
+ */
 
-  /**
-   * JSX/hyperscript notation
-   * Creates a virtual DOM node
-   *
-   * @see https://facebook.github.io/jsx & https://github.com/hyperhype/hyperscript
-   */
-  function h(nodeName, props) {
-    var children = []
-    var len = arguments.length - 2
-
-    while (len-- > 0) {
-      children[len] = arguments[len + 2]
-    } // nodeName is a function -> it`s a component
-
-    if (typeof nodeName === 'function') {
-      return nodeName(props)
-    }
-
-    if (Array.isArray(children[0])) {
-      children = children[0]
-    }
-
-    return {
-      nodeName: nodeName,
-      props: props || {},
-      children: children
-    }
+!(function(e, t) {
+  'object' == typeof exports && 'undefined' != typeof module
+    ? t(exports)
+    : 'function' == typeof define && define.amd
+    ? define(['exports'], t)
+    : t((e.Chrysalis = {}))
+})(this, function(e) {
+  function t(e, t, n) {
+    for (var o in (function(e, t) {
+      var n = {}
+      for (var o in e) n[o] = e[o]
+      for (var o in t) n[o] = t[o]
+      return n
+    })(t, n))
+      t[o]
+        ? t[o] != n[o] && ('class' == o ? e.setAttribute('class', t[o]) : (e[o] = t[o]))
+        : 'class' == o
+        ? e.removeAttribute('class')
+        : ((e[o] = null), delete e[o])
   }
-
-  function merge(a, b) {
-    var src = {}
-
-    for (var i in a) {
-      src[i] = a[i]
-    }
-
-    for (var i in b) {
-      src[i] = b[i]
-    }
-
-    return src
+  function n(e, o) {
+    if ('object' != typeof e) return document.createTextNode(e)
+    var r = (o = o || 'svg' == e.e)
+      ? document.createElementNS('http://www.w3.org/2000/svg', e.e)
+      : document.createElement(e.e)
+    for (var i in (t(r, e.t, {}), e.n)) r.appendChild(n(e.n[i], o))
+    return r
   }
-
-  function updateAttrs($element, newAttrs, oldAttrs) {
-    // putting attributes together and iterating
-    for (var name in merge(newAttrs, oldAttrs)) {
-      if (!newAttrs[name]) {
-        if (name == 'class') {
-          $element.removeAttribute('class')
-        } else {
-          $element[name] = null
-          delete $element[name]
+  var o, r
+  function i(e, i) {
+    ;(o = e),
+      (function e(r, i, f, l, c) {
+        var a,
+          s,
+          d = f || o
+        if (null == i) d.appendChild(n(r, c))
+        else if (null == r) d.removeChild(d.childNodes[l || 0])
+        else if (typeof (a = r) != typeof (s = i) || a.e !== s.e || ('object' != typeof s && s !== a))
+          d.replaceChild(n(r, c), d.childNodes[l || 0])
+        else if (r.e) {
+          t(d.childNodes[l || 0], r.t, i.t)
+          for (var u = Math.max(r.n.length, i.n.length), p = -1; ++p < u; )
+            e(r.n[p], i.n[p], d.childNodes[l || 0], p, (c = c || 'svg' == r.e))
         }
-      } else if (newAttrs[name] != oldAttrs[name]) {
-        if (name == 'class') {
-          $element.setAttribute('class', newAttrs[name])
-        } else {
-          $element[name] = newAttrs[name]
-        }
-      }
-    }
+      })(App(), r, e),
+      (r = App()),
+      i && i()
   }
-
-  function createVnode(vnode, isSVG) {
-    if (typeof vnode !== 'object') {
-      return document.createTextNode(vnode)
-    }
-
-    var element = (isSVG = isSVG || vnode.nodeName == 'svg')
-      ? document.createElementNS('http://www.w3.org/2000/svg', vnode.nodeName)
-      : document.createElement(vnode.nodeName) // props (not attributes) by this time are already applied to the vnode
-
-    updateAttrs(element, vnode.props, {})
-
-    for (var child in vnode.children) {
-      element.appendChild(createVnode(vnode.children[child], isSVG))
-    }
-
-    return element
-  }
-
-  /**
-   * Comparison algorithm DOM and Virtual DOM
-   * Lead time ~O(n^3)
-   */
-
-  function updateElement(newNode, oldNode, element, index, isSVG) {
-    var parentNode = element || ROOT_ELEMENT
-
-    if (oldNode == null) {
-      parentNode.appendChild(createVnode(newNode, isSVG))
-    } else if (newNode == null) {
-      parentNode.removeChild(parentNode.childNodes[index || 0])
-    } else if (notSameNode(newNode, oldNode)) {
-      parentNode.replaceChild(createVnode(newNode, isSVG), parentNode.childNodes[index || 0])
-    } else if (newNode.nodeName) {
-      updateAttrs(parentNode.childNodes[index || 0], newNode.props, oldNode.props)
-      var length = Math.max(newNode.children.length, oldNode.children.length)
-
-      for (var i = -1; ++i < length; ) {
-        updateElement(
-          newNode.children[i],
-          oldNode.children[i],
-          parentNode.childNodes[index || 0],
-          i,
-          (isSVG = isSVG || newNode.nodeName == 'svg')
-        )
-      }
-    }
-  }
-  /**
-   * Node change detection algo
-   * Based on Snabbdom`s algorithm
-   */
-
-  function notSameNode(a, b) {
-    return typeof a !== typeof b || a.nodeName !== b.nodeName || (typeof b !== 'object' && b !== a)
-  }
-
-  var ROOT_ELEMENT // vnode representation of current DOM
-
-  var currentNode
-
-  function start(parentNode, callback) {
-    ROOT_ELEMENT = parentNode
-    updateElement(App(), currentNode, parentNode)
-    currentNode = App()
-
-    if (callback) {
-      callback()
-    }
-  }
-
-  function setState(fn) {
-    if (fn) {
-      fn()
-    }
-
-    start(ROOT_ELEMENT)
-  }
-
-  exports.h = h
-  exports.start = start
-  exports.setState = setState
-
-  Object.defineProperty(exports, '__esModule', { value: true })
+  ;(e.h = function(e, t) {
+    for (var n = [], o = arguments.length - 2; o-- > 0; ) n[o] = arguments[o + 2]
+    return 'function' == typeof e ? e(t) : (Array.isArray(n[0]) && (n = n[0]), { e: e, t: t || {}, n: n })
+  }),
+    (e.start = i),
+    (e.setState = function(e) {
+      e && e(), i(o)
+    }),
+    Object.defineProperty(e, '__esModule', { value: !0 })
 })

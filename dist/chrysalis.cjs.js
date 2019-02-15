@@ -1,7 +1,57 @@
 /**
- * Chrysalis v0.11.0-β
- * Casper Søkol, 2018
+ * Chrysalis v0.12.0-β
+ * Casper Søkol, 2019
  * Distributed under the MIT license
  */
 
-function h(e,t){for(var n=[],o=arguments.length-2;o-- >0;)n[o]=arguments[o+2];return"function"==typeof e?e(t):{F:e,G:t||{},H:n}}function C(e,t,n){void 0===n&&(n={}),Object.keys(Object.assign(t,n)).map(function(o){t[o]?n[o]&&t[o]===n[o]||e.setAttribute(o,t[o]):e.removeAttribute(o)})}function B(e,t){if("object"!=typeof e)return document.createTextNode(e);var n=(t=t||"svg"==e.F)?document.createElementNS("http://www.w3.org/2000/svg",e.F):document.createElement(e.F);return C(n,e.G),e.H.map(function(e){return n.appendChild(B(e,t))}),n}function render(e,t,n){t.appendChild(B(e)),void 0!==n&&n()}function updateElement(e,t,n,o,r){if(n||e.appendChild(B(t,r)),t)if(typeof t!=typeof n||t.F!==n.F||"object"!=typeof n&&n!==t)e.replaceChild(B(t,r),e.childNodes[o||0]);else{C(e.childNodes[o||0],t.G,n.G);for(var d=Math.max(t.H.length,n.H.length),i=-1;++i<d;)updateElement(e.childNodes[o||0],t.H[i],n.H[i],i,r=r||"svg"==t.F)}else e.removeChild(e.childNodes[o||0])}Object.defineProperty(exports,"__esModule",{value:!0}),exports.h=h,exports.render=render,exports.updateElement=updateElement;
+function h(e, t) {
+  for (var r = [], n = arguments.length - 2; n-- > 0; ) r[n] = arguments[n + 2]
+  return 'function' == typeof e ? e(t) : (Array.isArray(r[0]) && (r = r[0]), { e: e, t: t || {}, n: r })
+}
+function merge(e, t) {
+  var r = {}
+  for (var n in e) r[n] = e[n]
+  for (var n in t) r[n] = t[n]
+  return r
+}
+function updateAttrs(e, t, r) {
+  for (var n in merge(t, r))
+    t[n]
+      ? t[n] != r[n] && ('class' == n ? e.setAttribute('class', t[n]) : (e[n] = t[n]))
+      : 'class' == n
+      ? e.removeAttribute('class')
+      : ((e[n] = null), delete e[n])
+}
+function createVnode(e, t) {
+  if ('object' != typeof e) return document.createTextNode(e)
+  var r = (t = t || 'svg' == e.e)
+    ? document.createElementNS('http://www.w3.org/2000/svg', e.e)
+    : document.createElement(e.e)
+  for (var n in (updateAttrs(r, e.t, {}), e.n)) r.appendChild(createVnode(e.n[n], t))
+  return r
+}
+function updateElement(e, t, r, n, o) {
+  var a = r || ROOT_ELEMENT
+  if (null == t) a.appendChild(createVnode(e, o))
+  else if (null == e) a.removeChild(a.childNodes[n || 0])
+  else if (notSameNode(e, t)) a.replaceChild(createVnode(e, o), a.childNodes[n || 0])
+  else if (e.e) {
+    updateAttrs(a.childNodes[n || 0], e.t, t.t)
+    for (var d = Math.max(e.n.length, t.n.length), s = -1; ++s < d; )
+      updateElement(e.n[s], t.n[s], a.childNodes[n || 0], s, (o = o || 'svg' == e.e))
+  }
+}
+function notSameNode(e, t) {
+  return typeof e != typeof t || e.e !== t.e || ('object' != typeof t && t !== e)
+}
+var ROOT_ELEMENT, currentNode
+function start(e, t) {
+  ;(ROOT_ELEMENT = e), updateElement(App(), currentNode, e), (currentNode = App()), t && t()
+}
+function setState(e) {
+  e && e(), start(ROOT_ELEMENT)
+}
+Object.defineProperty(exports, '__esModule', { value: !0 }),
+  (exports.h = h),
+  (exports.start = start),
+  (exports.setState = setState)
