@@ -226,6 +226,7 @@ const methods = {
   up: () => setState(() => state.count++),
   down: () => setState(() => state.count--)
 }
+
 const App = () => {
   return (
     <div>
