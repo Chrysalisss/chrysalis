@@ -210,6 +210,39 @@ setInterval(() => setState(() => time = new Date()), 1000)
 start(container)
 ```
 
+### Add More Interactivity!
+
+Let`s create a simple counter!
+
+```javascript
+import { h, start, setState } from 'chrysalis.js'
+
+const state = {
+  count: 0 // default value for counter
+}
+
+// methods for counter
+const methods = {
+  up: () => setState(() => state.count++),
+  down: () => setState(() => state.count--)
+}
+const App = () => {
+  return (
+    <div>
+      <h1>This is simle counter</h1>
+      <p>{state.count}</p>
+      <button onclick={() => methods.up()}>add</button>
+      <button onclick={() => methods.down()}>minus</button>
+    </div>
+  )
+}
+
+// update every 1000ms
+setInterval(() => setState(() => time = new Date()), 1000)
+
+start(document.body)
+```
+
 # TODO
 In order of priority
 
