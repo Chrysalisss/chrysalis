@@ -12,10 +12,10 @@
 
 ### Why use?
 
-- Lightweight (~550B min & gzip)
+- Lightweight (~600B min & gzip), zero dependencies
 - Fast due to Virtual DOM inside 
 - Flexible
-- IE9 support
+- IE6 support (no polyfills required)
 
 # Install
 
@@ -23,41 +23,31 @@ via [npm](https://www.npmjs.com/package/chrysalis.js)
 ```bash
 npm install chrysalis.js
 ```
-# Usage
-### Creating virtual node
+# Let's create the first application!
 
-To create an virtual node you need to use hyperscript like function 
-
-```h(nodeName, attributes, ...children)```
-
-**nodeName** — string|function, name of node or component 
-
-**attributes** — object|null, node attributes, if there are no attributes you must specify null
-
-**children** (optional) — array|string|boolean|number, children for node 
+### Import Chrysalis
 
 ```javascript
-import { h } from 'chrysalis.js'
-
-h1('p', { style: 'color: red' }, 'Hello, 世界!')
-
-// {
-//   nodeName: 'p',
-//   attributes: { style: 'color: red' },
-//   children: ['Hello, 世界!']
-// }
+import { h, start, setState } from 'chrysalis.js'
 ```
 
+```h(nodeName, attributes, ...children)``` — creating elements
+
+```start(parentNode)``` — run the application
+
+```setState(fn)``` — control under the app state
 
 ### Using JSX
-You can also create elements with [JSX](https://facebook.github.io/jsx/)
 
-- Install [babel-plugin-transform-react-jsx
-](https://www.npmjs.com/package/babel-plugin-transform-react-jsx)
-- Configurate .babelrc (or other config file)
+Highly recommended to use [JSX
+](https://www.npmjs.com/package/babel-plugin-transform-react-jsx) for for easier creation of elements
 
+#### Set up the jsx-pragma
+
+Use ```.babelrc``` config file
+
+**Babel 7**
 ```javascript
-// .babelrc (v7):
 {
   "plugins": [
     ["transform-react-jsx", {
@@ -67,92 +57,154 @@ You can also create elements with [JSX](https://facebook.github.io/jsx/)
 }
 ```
 
-### Rendering an element into the DOM
-
-```render(VNode, parentNode, callback)``` 
-
-**nodeName** — string|function, virtual node
-
-**parentNode** — object, parent node
-
-**callback** (optional) — function, callback function
-
+**Babel 6**
 ```javascript
-import { h, render } from 'chrysalis.js'
-
-const element = <h1>Hello, 世界!</h1>
-
-render(element, document.getElementById('app'))
+{
+  "plugins": [
+    ["transform-react-jsx", { "pragma":"h" }]
+  ]
+}
 ```
 
-You can use ```render()``` for multiple calls. React`s clock build with Chrysalis:
+### Getting Started
+
+First, declare the App function (the name should be strictly like this) and run the application
 
 ```javascript
-import { h, render } from 'chrysalis.js'
+import { h, start } from 'chrysalis.js'
 
-const tick = () => {
-  const element = (
-    <div>
-      <h1>Hello, world!</h1>
-      <h2>It is {new Date().toLocaleTimeString()}</h2>
-    </div>
+// define a root element for our app
+const container = document.getElementById('app')
+
+const App = () => {
+  return (
+    // code will be here
   )
-
-  render(element, document.getElementById('app'))
-  
-  // update every second (1000ms)
-  setTimeout(tick, 1000)
 }
 
-tick()
-```
-[Try it on codepen](https://codepen.io/anon/pen/ZVxjEw?editors=0010)
-
-### Updating the rendered element
-
-```updateElement(parentNode, newNode, oldNode)```
-
-**newNode** — object|null, new virtual node. If you want to delete vnode you must specify null
-
-**oldNode** — object, old virtual node
-
-**parentNode** (optional) — object, parent node for newNode/oldNode. If you used ```render()``` before, you can omit
-
-```javascript
-import { h, render, updateElement } from 'chrysalis.js'
-
-const app = document.getElementById('app')
-
-const element = <h1 style="color: green">Hello, 世界!</h1>
-const element2 = <h1>Hello, World!</h1>
-
-render(element, app)
-
-updateElemnent(app, element2, element)
+start(container)
 ```
 
-### Creating component 
+### Creating Simple Elements
 
-You can easily create functional stateless components
-
-> You must start component names with a capital letter
+Well, now we create simple elements
 
 ```javascript
-import { h, render } from 'chrysalis.js'
+import { h, start } from 'chrysalis.js'
 
-const Time = () => <p>Time is {new Date().toLocaleTimeString()}.</p>
+const container = document.getElementById('app')
 
-// creating component with props
-const Greeting = ({ toWhat }) => {
+const App = () => {
   return (
     <div>
-      <h1>Hello, {toWhat}!</h1>
-      <Time />
+      <h1>Hello, 世界!</h1>
     </div>
   )
-} 
+}
 
-render(<Greeting toWhat="World" />, document.getElementById('app'))
+start(container)
+```
+
+### First Component
+
+But how best to organize an application if there are a lot of elements? Simple — separate them into components.
+
+```javascript
+import { h, start } from 'chrysalis.js'
+
+const container = document.getElementById('app')
+
+// You must start component names with a capital letter
+const Greeting = () => <h1>Hello, 世界!</h1>
+
+const App = () => {
+  return (
+    <div>
+      <Greeting />
+    </div>
+  )
+}
+
+start(container)
+```
+
+To make the components reusable, you can use props
+
+```javascript
+import { h, start } from 'chrysalis.js'
+
+const container = document.getElementById('app')
+
+const Hello = ({ toWhat }) => <h1>Hello, { toWhat }!</h1>
+
+const App = () => {
+  return (
+    <div>
+      <Hello toWhat="World" />
+    </div>
+  )
+}
+
+start(container)
+```
+
+Of course, you can put each component in a separate file.
+
+**main.js**
+```javascript
+import { h, start } from 'chrysalis.js'
+import Hello from 'Hello'
+
+const container = document.getElementById('app')
+
+const App = () => {
+  return (
+    <div>
+      <Hello toWhat="World" />
+    </div>
+  )
+}
+
+start(container)
+```
+
+**Hello.js**
+```javascript
+import { h } from 'chrysalis.js'
+
+const Hello = ({ toWhat }) => {
+  <h1>Hello, { toWhat }!</h1>
+}
+
+export default Hello
+
+start(container)
+```
+### Add Interactivity
+
+We'll use ```setState()``` to monitor the state and create a timer.
+
+```javascript
+import { h, start, setState } from 'chrysalis.js'
+
+const container = document.getElementById('app')
+
+let time = new Date()
+
+const App = () => {
+  return (
+    <div>
+      <h1>Time is {time.toLocaleTimeString()}</h1>
+    </div>
+  )
+}
+
+// update every 1000ms
+setInterval(() => {
+  setState(() => time = new Date())
+}, 1000)
+
+start(container)
 ```
 
 # TODO
