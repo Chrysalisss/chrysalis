@@ -200,9 +200,7 @@ const App = () => {
 }
 
 // update every 1000ms
-setInterval(() => {
-  setState(() => time = new Date())
-}, 1000)
+setInterval(() => setState(() => time = new Date()), 1000)
 
 start(container)
 ```
