@@ -182,8 +182,6 @@ const Hello = ({ toWhat }) => {
 }
 
 export default Hello
-
-start(container)
 ```
 ### Add Interactivity
 
