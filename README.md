@@ -254,7 +254,7 @@ In order of priority
 - Router 
 - Full JSX support
 - State manager
-- Official site
+- ~~Official site~~
 
 # License
 Released under the [MIT](https://github.com/Chrysalisss/chrysalis/blob/master/LICENSE) License.
