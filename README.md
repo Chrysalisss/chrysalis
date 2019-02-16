@@ -38,7 +38,7 @@ import { h, start, setState } from 'chrysalis.js'
 
 ```h(nodeName, attributes, ...children)``` — creating elements
 
-```start(parentNode)``` — run the application
+```start(parentNode, callback)``` — run the application
 
 ```setState(fn)``` — control under the app state
 
