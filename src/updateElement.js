@@ -3,7 +3,7 @@
  * Lead time ~O(n^3)
  */
 
-import { ROOT_ELEMENT } from './render'
+import { ROOT_ELEMENT } from './start'
 import createVnode from './createVnode'
 import updateAttrs from './updateAttributes'
 

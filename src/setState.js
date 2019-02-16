@@ -1,4 +1,4 @@
-import { start, ROOT_ELEMENT } from './render'
+import { start, ROOT_ELEMENT } from './start'
 
 function setState(fn) {
   if (fn) {

@@ -1,5 +1,5 @@
 import h from './createElement'
-import { start } from './render'
+import { start } from './start'
 import setState from './setState'
 
 export {
