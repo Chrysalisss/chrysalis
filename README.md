@@ -178,7 +178,7 @@ start(container)
 import { h } from 'chrysalis.js'
 
 const Hello = ({ toWhat }) => {
-  <h1>Hello, { toWhat }!</h1>
+  return <h1>Hello, { toWhat }!</h1>
 }
 
 export default Hello
