@@ -17,9 +17,9 @@
 - Flexible
 - IE6 support (no polyfills required)
 
-You can start develop with [Chrysalis Starter Kit](https://github.com/Chrysalisss/Chrysalis-starter-kit)
-
 # Install
+
+You can start develop with [Chrysalis Starter Kit](https://github.com/Chrysalisss/Chrysalis-starter-kit)
 
 via [npm](https://www.npmjs.com/package/chrysalis.js)
 ```bash
