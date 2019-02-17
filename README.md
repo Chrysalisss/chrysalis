@@ -17,6 +17,8 @@
 - Flexible
 - IE6 support (no polyfills required)
 
+You can start develop with [Chrysalis Starter Kit](https://github.com/Chrysalisss/Chrysalis-starter-kit)
+
 # Install
 
 via [npm](https://www.npmjs.com/package/chrysalis.js)
@@ -153,7 +155,7 @@ const App = () => {
 start(container)
 ```
 
-Of course, you can put each component in a separate file.
+Of course, you can put each component in a separate file
 
 **main.js**
 ```javascript
@@ -185,7 +187,7 @@ export default Hello
 ```
 ### Add Interactivity
 
-We'll use ```setState()``` to monitor the state and create a timer.
+We'll use ```setState()``` to monitor the state and create a timer
 
 ```javascript
 import { h, start, setState } from 'chrysalis.js'
