@@ -230,7 +230,7 @@ const methods = {
 const App = () => {
   return (
     <div>
-      <h1>This is simle counter</h1>
+      <h1>This is simple counter</h1>
       <p>{state.count}</p>
       <button onclick={() => methods.up()}>add</button>
       <button onclick={() => methods.down()}>minus</button>
