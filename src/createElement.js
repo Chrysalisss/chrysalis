@@ -16,7 +16,7 @@ function h(nodeName, props) {
 
   // nodeName is a function -> it`s a component
   if (typeof nodeName === 'function') {
-    return nodeName(props, children)
+    return nodeName(props || children, children)
   }
 
   return {
