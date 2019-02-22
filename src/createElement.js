@@ -10,13 +10,13 @@ function h(nodeName, props) {
   let len = arguments.length - 2
   while (len-- > 0) children[len] = arguments[len + 2]
 
-  // nodeName is a function -> it`s a component
-  if (typeof nodeName === 'function') {
-    return nodeName(props)
-  }
-
   if (Array.isArray(children[0])) {
     children = children[0]
+  }
+
+  // nodeName is a function -> it`s a component
+  if (typeof nodeName === 'function') {
+    return nodeName(props, children)
   }
 
   return {
