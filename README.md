@@ -160,7 +160,7 @@ Of course, you can put each component in a separate file
 **main.js**
 ```javascript
 import { h, start } from 'chrysalis.js'
-import Hello from 'Hello'
+import Hello from './Hello'
 
 const container = document.getElementById('app')
 
