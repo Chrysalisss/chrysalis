@@ -41,4 +41,5 @@ function updateElement(newNode, oldNode, element, index, isSVG) {
 function notSameNode(a, b) {
   return typeof a !== typeof b || a.nodeName !== b.nodeName || (typeof b !== 'object' && b !== a)
 }
+
 export default updateElement
