@@ -233,7 +233,7 @@ const container = document.getElementById('app')
 const App = () => {
   return (
     <div>
-      <Hello toWhat="World" />
+      <Hello $class="header">Greeting page!</Hello>
     </div>
   )
 }
@@ -245,8 +245,8 @@ start(container)
 ```javascript
 import { h } from 'chrysalis.js'
 
-const Hello = ({ toWhat }) => {
-  return <h1>Hello, { toWhat }!</h1>
+const Hello = (props, children) => {
+  return <h1 class={props.$class}>{ children }</h1>
 }
 
 export default Hello
