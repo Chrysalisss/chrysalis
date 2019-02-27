@@ -348,6 +348,7 @@ In order of priority
 
 - ~~setState method (soon)~~
 - Statefull components with lifecycle methods
+- readable docs
 - Key attribute
 - Fragments
 - Router 
