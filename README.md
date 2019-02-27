@@ -185,6 +185,108 @@ const Hello = ({ toWhat }) => {
 
 export default Hello
 ```
+
+#### Component children
+
+You can use childs for your components like in example
+
+If your component requires props and childs:
+
+**main.js**
+```javascript
+import { h, start } from 'chrysalis.js'
+import Hello from './Hello'
+
+const container = document.getElementById('app')
+
+const App = () => {
+  return (
+    <div>
+      <Hello $class="World">Greeting page!</Hello>
+    </div>
+  )
+}
+
+start(container)
+```
+
+**Hello.js**
+```javascript
+import { h } from 'chrysalis.js'
+
+const Hello = (props, children) => {
+  return <h1 class={props.$class}>{ children }</h1>
+}
+
+export default Hello
+```
+
+If your component requires only childs
+
+**main.js**
+```javascript
+import { h, start } from 'chrysalis.js'
+import Hello from './Hello'
+
+const container = document.getElementById('app')
+
+const App = () => {
+  return (
+    <div>
+      <Hello toWhat="World" />
+    </div>
+  )
+}
+
+start(container)
+```
+
+**Hello.js**
+```javascript
+import { h } from 'chrysalis.js'
+
+const Hello = ({ toWhat }) => {
+  return <h1>Hello, { toWhat }!</h1>
+}
+
+export default Hello
+```
+
+#### Component children
+
+You can use childs for your components like in example
+
+If your component requires props and childs:
+
+**main.js**
+```javascript
+import { h, start } from 'chrysalis.js'
+import Hello from './Hello'
+
+const container = document.getElementById('app')
+
+const App = () => {
+  return (
+    <div>
+      <Hello>Greeting page!</Hello>
+    </div>
+  )
+}
+
+start(container)
+```
+
+**Hello.js**
+```javascript
+import { h } from 'chrysalis.js'
+
+const Hello = children => {
+  return <h1>{ children }</h1>
+}
+
+export default Hello
+```
+
 ### Add Interactivity
 
 We'll use ```setState()``` to monitor the state and create a timer
