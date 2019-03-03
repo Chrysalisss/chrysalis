@@ -1,4 +1,5 @@
 import merge from './utill'
+import { refs } from './refs'
 
 function updateAttrs($element, newAttrs, oldAttrs) {
   // putting attributes together and iterating
@@ -11,7 +12,13 @@ function updateAttrs($element, newAttrs, oldAttrs) {
         delete $element[name]
       }
     } else if (newAttrs[name] != oldAttrs[name]) {
-      if (name == 'class') {
+      if (name == 'ref') {
+        if (typeof newAttrs[name] == 'string') {
+          refs[newAttrs[name]] = $element
+        } else {
+          newAttrs[name].ref = $element
+        }
+      } else if (name == 'class') {
         $element.setAttribute('class', newAttrs[name])
       } else {
         $element[name] = newAttrs[name]
