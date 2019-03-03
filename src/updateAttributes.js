@@ -18,6 +18,8 @@ function updateAttrs($element, newAttrs, oldAttrs) {
         } else {
           newAttrs[name].ref = $element
         }
+      } else if (name == 'dangerouslySetInnerHTML') {
+        $element.innerHTML = newAttrs[name].__html
       } else if (name == 'class') {
         $element.setAttribute('class', newAttrs[name])
       } else {
