@@ -26,9 +26,9 @@ via [npm](https://www.npmjs.com/package/chrysalis.js)
 npm install chrysalis.js
 ```
 
-via [CDN](https://unpkg.com/chrysalis.js@0.12.1/dist/chrysalis.umd.js)
+via [CDN](https://unpkg.com/chrysalis.js@0.14.0/dist/chrysalis.umd.js)
 ```HTML
-<script src="https://unpkg.com/chrysalis.js@0.12.1/dist/chrysalis.umd.js">
+<script src="https://unpkg.com/chrysalis.js@0.14.0/dist/chrysalis.umd.js">
 ```
 # Let's create the first application!
 
