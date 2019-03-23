@@ -1,10 +1,7 @@
 function merge(a, b) {
-  const src = {}
+  for (let i in b) a[i] = b[i]
 
-  for (var i in a) src[i] = a[i]
-  for (var i in b) src[i] = b[i]
-
-  return src
+  return a
 }
 
 export default merge
