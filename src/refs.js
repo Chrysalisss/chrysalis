@@ -1,7 +1,5 @@
 function createRef() {
-  return {
-    ref: null
-  }
+  return {}
 }
 
 const refs = {}
