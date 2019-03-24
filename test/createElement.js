@@ -1,8 +1,8 @@
 const assert = require('assert')
 const { h } = require('../dist/chrysalis.umd')
 
-describe('h()', () => {
-  it("h('div', null)", () => {
+describe('hyperscript', () => {
+  it('#1', () => {
     const element = h('div', null)
     const result = {
       nodeName: 'div',
@@ -12,7 +12,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('div', {})", () => {
+  it('#2', () => {
     const element = h('div', {})
     const result = {
       nodeName: 'div',
@@ -22,7 +22,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('div', null, 'Hello, world!')", () => {
+  it('#3', () => {
     const element = h('div', null, 'Hello, world!')
     const result = {
       nodeName: 'div',
@@ -32,7 +32,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('div', {}, 'Hello, world!')", () => {
+  it('#4', () => {
     const element = h('div', {}, 'Hello, world!')
     const result = {
       nodeName: 'div',
@@ -42,7 +42,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('span', null, 23)", () => {
+  it('#5', () => {
     const element = h('span', null, 23)
     const result = {
       nodeName: 'span',
@@ -52,7 +52,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('span', null, 1 + 17)", () => {
+  it('#6', () => {
     const element = h('span', null, 1 + 17)
     const result = {
       nodeName: 'span',
@@ -62,7 +62,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('span', null, null)", () => {
+  it('#7', () => {
     const element = h('span', null, null)
     const result = {
       nodeName: 'span',
@@ -72,7 +72,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('span', null, undefined)", () => {
+  it('#8', () => {
     const element = h('span', null, undefined)
     const result = {
       nodeName: 'span',
@@ -82,7 +82,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('span', { style: 'color: red' }, 'Hello, wold!')", () => {
+  it('#9', () => {
     const element = h('span', { style: 'color: red' }, 'Hello, wold!')
     const result = {
       nodeName: 'span',
@@ -92,7 +92,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('h1', { style: 'color: red', title: 'greeting' }, 'Hello, wold!')", () => {
+  it('#10', () => {
     const element = h('h1', { style: 'color: red', title: 'greeting' }, 'Hello, wold!')
     const result = {
       nodeName: 'h1',
@@ -102,7 +102,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('div', { style: 'color: red' }, h('span', { style: 'color: red' }, 'Hello, wold!'))", () => {
+  it('#11', () => {
     const element = h('span', { style: 'color: red' }, h('span', { style: 'color: red' }, 'Hello, wold!'))
     const result = {
       nodeName: 'span',
@@ -118,7 +118,7 @@ describe('h()', () => {
     assert.deepEqual(element, result)
   })
 
-  it("h('div', { style: 'color: red' }, h('span', null, 'Hello, wold!'))", () => {
+  it('#12', () => {
     const element = h('span', { style: 'color: red' }, h('span', null, 'Hello, wold!'))
     const result = {
       nodeName: 'span',
