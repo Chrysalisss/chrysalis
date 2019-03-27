@@ -1,6 +1,6 @@
 const jsdom = require('jsdom')
 const assert = require('assert')
-const { h, start, setState } = require('../dist/chrysalis.umd')
+const { h, start, setState, refs, createRef } = require('../dist/chrysalis.umd')
 
 const { JSDOM } = jsdom
 const { window } = new JSDOM('<!doctype html><html><body><div id="app"></div></body></html>')
@@ -69,7 +69,7 @@ describe('start()', () => {
 
     global.App = () => {
       return (
-        <div class="greeting">
+        <div class="greeting" ref="main">
           <h1>Time is {state.time.toLocaleTimeString()}</h1>
         </div>
       )
@@ -94,9 +94,11 @@ describe('start()', () => {
       down: () => setState(() => state.count--)
     }
 
+    const main = createRef()
+
     global.App = () => {
       return (
-        <div class="greeting">
+        <div class="greeting" ref={main}>
           <h1>This is simple counter</h1>
           <p>{state.count}</p>
           <button onclick={() => methods.up()}>add</button>
