@@ -15,8 +15,7 @@ function updateAttrs($element, newAttrs, oldAttrs) {
       if (name == 'ref') {
         if (typeof newAttrs[name] == 'string') {
           refs[newAttrs[name]] = $element
-        }
-        if (typeof newAttrs[name] == 'function') {
+        } else if (typeof newAttrs[name] == 'function') {
           newAttrs[name](element)
         } else {
           newAttrs[name].current = $element
