@@ -12,11 +12,8 @@
  * github.com/elm/virtual-dom
  * github.com/jorgebucaran/superfine
  *
- * Optimizations techniques
- * (elm-lang.org/blog/blazing-fast-html-round-two#methodology):
- * Prefer arrays over dictionary objects
- * Do not allocate
- * Never look anything up
+ * See Elm`s optimizations techniques:
+ * elm-lang.org/blog/blazing-fast-html-round-two#methodology
  *
  * This algo supports keys
  */
