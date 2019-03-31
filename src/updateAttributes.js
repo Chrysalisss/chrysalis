@@ -1,4 +1,4 @@
-import merge from './utill'
+import { merge } from './utill'
 import { refs } from './refs'
 
 function updateAttrs($element, newAttrs, oldAttrs) {

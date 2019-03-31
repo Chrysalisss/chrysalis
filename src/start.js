@@ -1,17 +1,11 @@
-import updateElement from './updateElement'
+import patch from './patch'
 
-// define a root element for app
-let ROOT_ELEMENT
-
-// vnode representation of current DOM
-let currentNode
+let ROOT_ELEMENT, element, oldNode
 
 function start(parentNode, callback) {
   ROOT_ELEMENT = parentNode
 
-  updateElement(App(), currentNode, parentNode)
-
-  currentNode = App()
+  element = patch(parentNode, element, oldNode, (oldNode = App()))
 
   if (callback) {
     callback()

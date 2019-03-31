@@ -1,4 +1,4 @@
-import h from './createElement'
+import h from './h'
 import { start } from './start'
 import setState from './setState'
 import { createRef, refs } from './refs'

@@ -1,31 +1,22 @@
-/**
- * JSX/hyperscript notation
- * Creates a virtual DOM node
- *
- * https://facebook.github.io/jsx
- * https://github.com/hyperhype/hyperscript
- */
+import updateAttrs from './updateAttributes'
 
-function h(nodeName, props) {
-  let children = []
-  let len = arguments.length - 2
-
-  while (len-- > 0) children[len] = arguments[len + 2]
-
-  if (Array.isArray(children[0])) {
-    children = children[0]
+function createElement(vnode, isSVG) {
+  if (typeof vnode !== 'object') {
+    return document.createTextNode(vnode)
   }
 
-  // nodeName is a function -> it`s a component
-  if (typeof nodeName === 'function') {
-    return nodeName(props || children, children)
+  const element = (isSVG = isSVG || vnode.nodeName == 'svg')
+    ? document.createElementNS('http://www.w3.org/2000/svg', vnode.nodeName)
+    : document.createElement(vnode.nodeName)
+
+  // props (not attributes) by this time are already applied to the vnode
+  updateAttrs(element, vnode.props, {})
+
+  for (let child in vnode.children) {
+    element.appendChild(createElement(vnode.children[child], isSVG))
   }
 
-  return {
-    nodeName,
-    props: props || {},
-    children
-  }
+  return element
 }
 
-export default h
+export default createElement

@@ -4,4 +4,14 @@ function merge(a, b) {
   return a
 }
 
-export default merge
+function getKey(node) {
+  if (node && (node = node.props)) {
+    return node.key
+  }
+}
+
+function removeElement(parent, element) {
+  parent.removeChild(element)
+}
+
+export { merge, getKey, removeElement }
