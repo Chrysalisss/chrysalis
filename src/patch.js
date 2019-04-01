@@ -34,7 +34,7 @@ function patch(parent, element, oldNode, node, isSVG) {
     const oldElements = []
     const newKeys = {}
 
-    for (var i = 0; i < oldLen; i++) {
+    for (let i = 0; i < oldLen; i++) {
       const oldElement = element.childNodes[i]
       oldElements[i] = oldElement
 
