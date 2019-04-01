@@ -108,7 +108,7 @@ function patch(parent, element, oldNode, node, isSVG) {
     }
   } else if (node !== oldNode) {
     const i = element
-    parent.replaceChild(((element = createElement(node)), (isSVG = isSVG || newNode.nodeName == 'svg')), i)
+    parent.replaceChild((element = createElement(node, (isSVG = isSVG || newNode.nodeName == 'svg'))), i)
   }
 
   return element
