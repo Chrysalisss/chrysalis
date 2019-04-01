@@ -22,9 +22,9 @@ import createElement from './createElement'
 import updateAttrs from './updateAttributes'
 import { removeElement, getKey } from './utill'
 
-function patch(parent, element, oldNode, node) {
+function patch(parent, element, oldNode, node, isSVG) {
   if (oldNode == null) {
-    element = parent.insertBefore(createElement(node), element)
+    element = parent.insertBefore(createElement(node, isSVG), element)
   } else if (node.nodeName && node.nodeName === oldNode.nodeName) {
     updateAttrs(element, oldNode.props, node.props)
 
@@ -67,19 +67,19 @@ function patch(parent, element, oldNode, node) {
 
       if (null == newKey) {
         if (null == oldKey) {
-          patch(element, oldElement, oldChild, newChild)
+          patch(element, oldElement, oldChild, newChild, isSVG)
           j++
         }
         i++
       } else {
         if (oldKey === newKey) {
-          patch(element, reusableChild[0], reusableChild[1], newChild)
+          patch(element, reusableChild[0], reusableChild[1], newChild, isSVG)
           i++
         } else if (reusableChild[0]) {
           element.insertBefore(reusableChild[0], oldElement)
-          patch(element, reusableChild[0], reusableChild[1], newChild)
+          patch(element, reusableChild[0], reusableChild[1], newChild, isSVG)
         } else {
-          patch(element, oldElement, null, newChild)
+          patch(element, oldElement, null, newChild, isSVG)
         }
 
         j++
@@ -108,7 +108,7 @@ function patch(parent, element, oldNode, node) {
     }
   } else if (node !== oldNode) {
     const i = element
-    parent.replaceChild((element = createElement(node)), i)
+    parent.replaceChild(((element = createElement(node)), (isSVG = isSVG || newNode.nodeName == 'svg')), i)
   }
 
   return element
