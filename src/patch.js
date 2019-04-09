@@ -23,10 +23,14 @@ import updateAttrs from './updateAttributes'
 import { removeElement, getKey } from './utill'
 
 function patch(parent, element, oldNode, node, isSVG) {
-  if (oldNode == null) {
+  if (node === oldNode) {
+    // just skip
+  } else if (oldNode == null) {
     element = parent.insertBefore(createElement(node, isSVG), element)
   } else if (node.nodeName && node.nodeName === oldNode.nodeName) {
     updateAttrs(element, oldNode.props, node.props)
+
+    isSVG = isSVG || node.nodeName == 'svg'
 
     const len = node.children.length
     const oldLen = oldNode.children.length
@@ -108,7 +112,7 @@ function patch(parent, element, oldNode, node, isSVG) {
     }
   } else if (node !== oldNode) {
     const i = element
-    parent.replaceChild((element = createElement(node, (isSVG = isSVG || newNode.nodeName == 'svg'))), i)
+    parent.replaceChild((element = createElement(node, isSVG)), i)
   }
 
   return element
