@@ -6,7 +6,7 @@
  * https://github.com/hyperhype/hyperscript
  */
 
-function h(nodeName, props) {
+function h(type, props) {
   let children = []
   let len = arguments.length - 2
 
@@ -16,13 +16,13 @@ function h(nodeName, props) {
     children = children[0]
   }
 
-  // nodeName is a function -> it`s a component
-  if (typeof nodeName === 'function') {
-    return nodeName(props || children, children)
+  // type is a function -> it`s a component
+  if (typeof type === 'function') {
+    return type(props || children, children)
   }
 
   return {
-    nodeName,
+    type,
     props: props || {},
     children
   }

@@ -5,7 +5,7 @@ describe('hyperscript', () => {
   it('#1', () => {
     const element = h('div', null)
     const result = {
-      nodeName: 'div',
+      type: 'div',
       props: {},
       children: []
     }
@@ -15,7 +15,7 @@ describe('hyperscript', () => {
   it('#2', () => {
     const element = h('div', {})
     const result = {
-      nodeName: 'div',
+      type: 'div',
       props: {},
       children: []
     }
@@ -25,7 +25,7 @@ describe('hyperscript', () => {
   it('#3', () => {
     const element = h('div', null, 'Hello, world!')
     const result = {
-      nodeName: 'div',
+      type: 'div',
       props: {},
       children: ['Hello, world!']
     }
@@ -35,7 +35,7 @@ describe('hyperscript', () => {
   it('#4', () => {
     const element = h('div', {}, 'Hello, world!')
     const result = {
-      nodeName: 'div',
+      type: 'div',
       props: {},
       children: ['Hello, world!']
     }
@@ -45,7 +45,7 @@ describe('hyperscript', () => {
   it('#5', () => {
     const element = h('span', null, 23)
     const result = {
-      nodeName: 'span',
+      type: 'span',
       props: {},
       children: [23]
     }
@@ -55,7 +55,7 @@ describe('hyperscript', () => {
   it('#6', () => {
     const element = h('span', null, 1 + 17)
     const result = {
-      nodeName: 'span',
+      type: 'span',
       props: {},
       children: [18]
     }
@@ -65,7 +65,7 @@ describe('hyperscript', () => {
   it('#7', () => {
     const element = h('span', null, null)
     const result = {
-      nodeName: 'span',
+      type: 'span',
       props: {},
       children: [null]
     }
@@ -75,7 +75,7 @@ describe('hyperscript', () => {
   it('#8', () => {
     const element = h('span', null, undefined)
     const result = {
-      nodeName: 'span',
+      type: 'span',
       props: {},
       children: [undefined]
     }
@@ -85,7 +85,7 @@ describe('hyperscript', () => {
   it('#9', () => {
     const element = h('span', { style: 'color: red' }, 'Hello, wold!')
     const result = {
-      nodeName: 'span',
+      type: 'span',
       props: { style: 'color: red' },
       children: ['Hello, wold!']
     }
@@ -95,7 +95,7 @@ describe('hyperscript', () => {
   it('#10', () => {
     const element = h('h1', { style: 'color: red', title: 'greeting' }, 'Hello, wold!')
     const result = {
-      nodeName: 'h1',
+      type: 'h1',
       props: { style: 'color: red', title: 'greeting' },
       children: ['Hello, wold!']
     }
@@ -105,11 +105,11 @@ describe('hyperscript', () => {
   it('#11', () => {
     const element = h('span', { style: 'color: red' }, h('span', { style: 'color: red' }, 'Hello, wold!'))
     const result = {
-      nodeName: 'span',
+      type: 'span',
       props: { style: 'color: red' },
       children: [
         {
-          nodeName: 'span',
+          type: 'span',
           props: { style: 'color: red' },
           children: ['Hello, wold!']
         }
@@ -121,11 +121,11 @@ describe('hyperscript', () => {
   it('#12', () => {
     const element = h('span', { style: 'color: red' }, h('span', null, 'Hello, wold!'))
     const result = {
-      nodeName: 'span',
+      type: 'span',
       props: { style: 'color: red' },
       children: [
         {
-          nodeName: 'span',
+          type: 'span',
           props: {},
           children: ['Hello, wold!']
         }

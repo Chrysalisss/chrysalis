@@ -27,10 +27,10 @@ function patch(parent, element, oldNode, node, isSVG) {
     // just skip
   } else if (oldNode == null) {
     element = parent.insertBefore(createElement(node, isSVG), element)
-  } else if (node.nodeName && node.nodeName === oldNode.nodeName) {
+  } else if (node.type && node.type === oldNode.type) {
     updateAttrs(element, oldNode.props, node.props)
 
-    isSVG = isSVG || node.nodeName == 'svg'
+    isSVG = isSVG || node.type == 'svg'
 
     const len = node.children.length
     const oldLen = oldNode.children.length
