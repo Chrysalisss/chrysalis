@@ -9,7 +9,8 @@
  * whose created this awesome libraries
  *
  * github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js
- * github.com/elm/virtual-dom
+ * g
+ ithub.com/elm/virtual-dom
  * github.com/jorgebucaran/superfine
  *
  * See Elm`s optimizations techniques:
@@ -34,7 +35,7 @@ function patch(parent, element, oldNode, node, isSVG) {
 
     const len = node.children.length
     const oldLen = oldNode.children.length
-    const reusableChildren = {}
+    const cachedNodes = {}
     const oldElements = []
     const newKeys = {}
 
@@ -46,7 +47,7 @@ function patch(parent, element, oldNode, node, isSVG) {
       const oldKey = getKey(oldChild)
 
       if (null != oldKey) {
-        reusableChildren[oldKey] = [oldElement, oldChild]
+        cachedNodes[oldKey] = [oldElement, oldChild]
       }
     }
 
@@ -67,7 +68,7 @@ function patch(parent, element, oldNode, node, isSVG) {
 
       const newKey = getKey(newChild)
 
-      const reusableChild = reusableChildren[newKey] || []
+      const cachedNode = cachedNodes[newKey] || []
 
       if (null == newKey) {
         if (null == oldKey) {
@@ -77,11 +78,11 @@ function patch(parent, element, oldNode, node, isSVG) {
         i++
       } else {
         if (oldKey === newKey) {
-          patch(element, reusableChild[0], reusableChild[1], newChild, isSVG)
+          patch(element, cachedNode[0], cachedNode[1], newChild, isSVG)
           i++
-        } else if (reusableChild[0]) {
-          element.insertBefore(reusableChild[0], oldElement)
-          patch(element, reusableChild[0], reusableChild[1], newChild, isSVG)
+        } else if (cachedNode[0]) {
+          element.insertBefore(cachedNode[0], oldElement)
+          patch(element, cachedNode[0], cachedNode[1], newChild, isSVG)
         } else {
           patch(element, oldElement, null, newChild, isSVG)
         }
@@ -102,12 +103,12 @@ function patch(parent, element, oldNode, node, isSVG) {
       i++
     }
 
-    for (let i in reusableChildren) {
-      const reusableChild = reusableChildren[i]
-      const reusableNode = reusableChild[1]
+    for (let i in cachedNodes) {
+      const cachedNode = cachedNodes[i]
+      const reusableNode = cachedNode[1]
 
       if (!newKeys[reusableNode.props.key]) {
-        removeElement(element, reusableChild[0], reusableNode)
+        removeElement(element, cachedNode[0], reusableNode)
       }
     }
   } else if (node !== oldNode) {
