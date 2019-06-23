@@ -32,7 +32,12 @@ function createComponent(component, props) {
     _update() {
       const index = getNode(component._element)
 
-      patch(elements[index - 1], elements[index], component._vnode, (component._vnode = component.render()))
+      patch(
+        elements[index - 1], 
+        elements[index], 
+        component._vnode, 
+        (component._vnode = component.render())
+      )
     },
     _vnode: component.render(),
     _element: createElement(component.render())
