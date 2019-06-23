@@ -5,6 +5,12 @@ function createElement(vnode, isSVG) {
     return document.createTextNode(vnode)
   }
 
+  if (vnode.type.render) {
+    createComponent(vnode.type, vnode.props)
+
+    return vnode.type._element
+  }
+
   const element = (isSVG = isSVG || vnode.type == 'svg')
     ? document.createElementNS('http://www.w3.org/2000/svg', vnode.type)
     : document.createElement(vnode.type)
