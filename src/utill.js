@@ -4,6 +4,10 @@ function merge(a, b) {
   return a
 }
 
+function isTextNode(node) {
+	return typeof node != 'object'
+}
+
 function getKey(node) {
   if (node && (node = node.props)) {
     return node.key
@@ -14,4 +18,4 @@ function removeElement(parent, element) {
   parent.removeChild(element)
 }
 
-export { merge, getKey, removeElement }
+export { merge, getKey, removeElement, isTextNode }

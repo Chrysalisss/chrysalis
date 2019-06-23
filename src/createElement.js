@@ -1,6 +1,6 @@
 import updateAttrs from './updateAttributes'
 import { elements } from './render'
-import { merge } from './utill'
+import { merge, isTextNode } from './utill'
 import patch from './patch'
 
 function getNode(node) {
@@ -44,7 +44,7 @@ function createComponent(component, props) {
 }
 
 function createElement(node, isSVG) {
-  if (typeof node != 'object') {
+  if (isTextNode(node)) {
     return document.createTextNode(node)
   }
 

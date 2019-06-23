@@ -20,11 +20,17 @@
 
 import createElement from './createElement'
 import updateAttrs from './updateAttributes'
-import { removeElement, getKey } from './utill'
+import { removeElement, getKey, isTextNode } from './utill'
 
 function patch(parent, element, oldNode, node, isSVG) {
   if (node === oldNode) {
-    // just skip
+  } else if (
+    oldNode != null &&
+    isTextNode(oldNode) &&
+    isTextNode(node) &&
+    oldNode.type !== node.type
+  ) {
+    oldNode.firstChild.data = node.name
   } else if (oldNode == null) {
     element = parent.insertBefore(createElement(node, isSVG), element)
   } else if (node.type && node.type === oldNode.type) {
