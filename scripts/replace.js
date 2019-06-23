@@ -1,7 +1,9 @@
 const toReplace = {
-  nodeName: 'e',
+  type: 'e',
   props: 't',
-  children: 'n'
+  children: 'n',
+  _element: 'k',
+  createComponent: 'i'
 }
 
 export default toReplace
