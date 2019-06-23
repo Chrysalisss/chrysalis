@@ -1,6 +1,6 @@
 import patch from './patch'
 
-let ROOT_ELEMENT, element, oldNode
+let ROOT_ELEMENT, element, oldNode, elements
 
 function render(node, container, callback) {
   ROOT_ELEMENT = container
@@ -10,6 +10,8 @@ function render(node, container, callback) {
   if (callback) {
     callback()
   }
+
+  elements = ROOT_ELEMENT.querySelectorAll('*')
 }
 
-export { render, ROOT_ELEMENT }
+export { render, ROOT_ELEMENT, elements }

@@ -1,8 +1,7 @@
 import updateAttrs from './updateAttributes'
-import { ROOT_ELEMENT } from './render'
+import { elements } from './render'
 import { merge } from './utill'
-
-const elements = ROOT_ELEMENT.querySelectorAll('*')
+import patch from './patch'
 
 function getNode(node) {
   for (let i = 0; i <= elements.length; i++) {
@@ -45,7 +44,7 @@ function createComponent(component, props) {
 }
 
 function createElement(node, isSVG) {
-  if (typeof node !== 'object') {
+  if (typeof node != 'object') {
     return document.createTextNode(node)
   }
 
