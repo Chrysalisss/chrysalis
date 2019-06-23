@@ -9,8 +9,7 @@
  * whose created this awesome libraries
  *
  * github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js
- * g
- ithub.com/elm/virtual-dom
+ * github.com/elm/virtual-dom
  * github.com/jorgebucaran/superfine
  *
  * See Elm`s optimizations techniques:

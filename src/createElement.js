@@ -1,25 +1,24 @@
 import updateAttrs from './updateAttributes'
 
-function createElement(vnode, isSVG) {
-  if (typeof vnode !== 'object') {
-    return document.createTextNode(vnode)
+function createElement(node, isSVG) {
+  if (typeof node !== 'object') {
+    return document.createTextNode(node)
   }
 
-  if (vnode.type.render) {
-    createComponent(vnode.type, vnode.props)
+  if (node.type.render) {
+    createComponent(node.type, node.props)
 
-    return vnode.type._element
+    return node.type._element
   }
 
-  const element = (isSVG = isSVG || vnode.type == 'svg')
-    ? document.createElementNS('http://www.w3.org/2000/svg', vnode.type)
-    : document.createElement(vnode.type)
+  const element = (isSVG = isSVG || node.type == 'svg')
+    ? document.createElementNS('http://www.w3.org/2000/svg', node.type)
+    : document.createElement(node.type)
 
-  // props (not attributes) by this time are already applied to the vnode
-  updateAttrs(element, vnode.props, {})
+  updateAttrs(element, node.props, {})
 
-  for (let child in vnode.children) {
-    element.appendChild(createElement(vnode.children[child], isSVG))
+  for (let child in node.children) {
+    element.appendChild(createElement(node.children[child], isSVG))
   }
 
   return element
