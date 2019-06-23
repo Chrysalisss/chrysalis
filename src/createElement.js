@@ -1,5 +1,5 @@
 import updateAttrs from './updateAttributes'
-import { ROOT_ELEMENT } from './start'
+import { ROOT_ELEMENT } from './render'
 import { merge } from './utill'
 
 const elements = ROOT_ELEMENT.querySelectorAll('*')

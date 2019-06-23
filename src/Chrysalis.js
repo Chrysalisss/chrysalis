@@ -4,8 +4,7 @@ import { createRef, refs } from './refs'
 
 export {
 	h, 
-	start, 
-  setState,
+	render, 
   createRef,
   refs
 }
