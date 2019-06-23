@@ -1,6 +1,5 @@
 import h from './h'
-import { start } from './start'
-import setState from './setState'
+import { render } from './render'
 import { createRef, refs } from './refs'
 
 export {
