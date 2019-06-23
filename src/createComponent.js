@@ -1,4 +1,7 @@
 import createElement from './createElement'
+import { ROOT_ELEMENT } from './start'
+
+const elements = ROOT_ELEMENT.querySelectorAll('*')
 
 function getNode(node) {
   for (let i = 0; i <= elements.length; i++) {
