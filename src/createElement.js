@@ -1,4 +1,4 @@
-import updateAttrs from './updateAttributes'
+import updateProps from './updateProps'
 import { merge, isTextNode } from './utill'
 import patch from './patch'
 
@@ -47,7 +47,7 @@ function createElement(node, isSVG) {
     ? document.createElementNS('http://www.w3.org/2000/svg', node.type)
     : document.createElement(node.type)
 
-  updateAttrs(element, node.props, {})
+  updateProps(element, node.props, {})
 
   for (let child in node.children) {
     element.appendChild(createElement(node.children[child], isSVG))

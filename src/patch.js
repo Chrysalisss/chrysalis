@@ -19,7 +19,7 @@
  */
 
 import createElement from './createElement'
-import updateAttrs from './updateAttributes'
+import updateProps from './updateProps'
 import { removeElement, getKey, isTextNode } from './utill'
 
 function patch(parent, element, oldNode, node, isSVG) {
@@ -34,7 +34,7 @@ function patch(parent, element, oldNode, node, isSVG) {
   } else if (oldNode == null) {
     element = parent.insertBefore(createElement(node, isSVG), element)
   } else if (node.type && node.type === oldNode.type) {
-    updateAttrs(element, oldNode.props, node.props)
+    updateProps(element, oldNode.props, node.props)
 
     isSVG = isSVG || node.type == 'svg'
 
