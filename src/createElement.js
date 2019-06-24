@@ -1,15 +1,6 @@
 import updateAttrs from './updateAttributes'
-import { elements } from './render'
 import { merge, isTextNode } from './utill'
 import patch from './patch'
-
-function getNode(node) {
-  for (let i = 0; i <= elements.length; i++) {
-    if (elements[i] === node) {
-      return i
-    }
-  }
-}
 
 function createComponent(component, props) {
   if (typeof component.state === 'function') {
@@ -28,12 +19,10 @@ function createComponent(component, props) {
 
       component._update()
     },
-    _update() {
-      const index = getNode(component._element)
-
+    _update() {    
       patch(
-        elements[index - 1], 
-        elements[index], 
+        component._element.previousElementSibling, 
+        component._element, 
         component._vnode, 
         (component._vnode = component.render())
       )
