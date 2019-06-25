@@ -38,6 +38,8 @@ function createElement(node, isSVG) {
   }
 
   if (node.type.render) {
+    node.props.children = node.children
+    
     createComponent(node.type, node.props)
 
     return node.type._element

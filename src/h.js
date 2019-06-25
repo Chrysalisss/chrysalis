@@ -16,9 +16,10 @@ function h(type, props) {
     children = children[0]
   }
 
-  // type is a function -> it`s a component
+  // type is a function -> it`s a functional component
   if (typeof type === 'function') {
-    return type(props || children, children)
+    props.children = children
+    return type(props)
   }
 
   return {
