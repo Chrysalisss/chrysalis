@@ -28,9 +28,9 @@ function patch(parent, element, oldNode, node, isSVG) {
     oldNode != null &&
     isTextNode(oldNode) &&
     isTextNode(node) &&
-    oldNode.type !== node.type
+    oldNode != node
   ) {
-    oldNode.firstChild.data = node.name
+    element.data = node
   } else if (oldNode == null) {
     element = parent.insertBefore(createElement(node, isSVG), element)
   } else if (node.type && node.type === oldNode.type) {
