@@ -49,8 +49,14 @@ function createElement(node, isSVG) {
 
   updateProps(element, node.props, {})
 
-  for (let child in node.children) {
-    element.appendChild(createElement(node.children[child], isSVG))
+  // check the benchmark jsben.ch/y3SpC
+  for (let i = 0, len = node.children.length; i < len; i++) {
+    element.appendChild(
+      createElement(
+        Array.isArray(node.children[i]) ? node.children[i][0] : node.children[i], 
+        isSVG
+      )
+    )
   }
 
   return element
