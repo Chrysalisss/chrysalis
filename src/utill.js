@@ -4,6 +4,8 @@ function merge(a, b) {
   return a
 }
 
+const isArray = Array.isArray
+
 function isTextNode(node) {
 	return typeof node != 'object'
 }
@@ -18,4 +20,4 @@ function removeElement(parent, element) {
   parent.removeChild(element)
 }
 
-export { merge, getKey, removeElement, isTextNode }
+export { merge, getKey, removeElement, isTextNode, isArray }

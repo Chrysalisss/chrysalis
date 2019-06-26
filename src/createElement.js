@@ -1,5 +1,5 @@
 import updateProps from './updateProps'
-import { merge, isTextNode } from './utill'
+import { merge, isTextNode, isArray } from './utill'
 import patch from './patch'
 
 function createComponent(component, props) {
@@ -53,7 +53,7 @@ function createElement(node, isSVG) {
   for (let i = 0, len = node.children.length; i < len; i++) {
     element.appendChild(
       createElement(
-        Array.isArray(node.children[i]) ? node.children[i][0] : node.children[i], 
+        isArray(node.children[i]) ? node.children[i][0] : node.children[i], 
         isSVG
       )
     )
