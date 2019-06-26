@@ -13,9 +13,7 @@ function createComponent(component, props) {
         state = state(component.state)
       }
 
-      for (let key in state) {
-        component.state[key] = state[key]
-      }
+      merge(component.state, state)
 
       component._update()
     },
