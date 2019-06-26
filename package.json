@@ -6,7 +6,7 @@
   "module": "dist/chrysalis.esm.js",
   "scripts": {
     "build": "rollup -c scripts/build.config.js --no-strict",
-    "size": "rollup -c scripts/size.config.js --no-strict && bundlesize",
+    "size": "rollup -c scripts/size.config.js --no-strict && size-limit",
     "fix-code": "prettier --write '{src,test,scripts}/**/*.js'",
     "test": "rollup -c scripts/dev.config.js && prettier --write 'dist/chrysalis.umd.js' && mocha --require @babel/register",
     "prepare": "rollup -c scripts/dev.config.js",
@@ -22,9 +22,9 @@
       "git add"
     ]
   },
-  "bundlesize": [
+  "size-limit": [
     {
-      "path": "./dist/chrysalis.esm.js"
+      "path": "dist/chrysalis.esm.js"
     }
   ],
   "keywords": [
@@ -59,7 +59,6 @@
     "babel-plugin-transform-remove-strict-mode": "0.0.2",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-minify": "^0.5.0",
-    "bundlesize": "^0.17.0",
     "chai": "^4.2.0",
     "husky": "^1.3.1",
     "jest": "^23.6.0",
