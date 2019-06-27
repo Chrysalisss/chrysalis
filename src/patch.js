@@ -45,7 +45,7 @@ function patch(parent, element, oldNode, node, isSVG) {
 
       merge(component.props, node.props)
 
-      if(component.initialState) {
+      if (component.initialState) {
         component.setState(component.initialState(component.props))
       } else {
         component._update()
