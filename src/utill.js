@@ -16,6 +16,8 @@ function shouldUpdate(a, b) {
 
 const isArray = Array.isArray
 
+const doc = document
+
 function isTextNode(node) {
   return typeof node != 'object'
 }
@@ -30,4 +32,12 @@ function removeElement(parent, element) {
   parent.removeChild(element)
 }
 
-export { merge, getKey, removeElement, isTextNode, isArray, shouldUpdate }
+export {
+ merge, 
+ getKey, 
+ removeElement, 
+ isTextNode, 
+ isArray, 
+ shouldUpdate,
+ doc 
+}

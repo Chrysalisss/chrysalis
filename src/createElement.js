@@ -3,7 +3,8 @@ import patch from './patch'
 import { 
   merge, 
   isTextNode, 
-  isArray
+  isArray,
+  doc
 } from './utill'
 
 function createComponent(component, props) {
@@ -39,7 +40,7 @@ function createComponent(component, props) {
 
 function createElement(node, isSVG) {
   if (isTextNode(node)) {
-    return document.createTextNode(node)
+    return doc.createTextNode(node)
   }
 
   if (node.type.render) {
@@ -51,8 +52,8 @@ function createElement(node, isSVG) {
   }
 
   const element = (isSVG = isSVG || node.type == 'svg')
-    ? document.createElementNS('http://www.w3.org/2000/svg', node.type)
-    : document.createElement(node.type)
+    ? doc.createElementNS('http://www.w3.org/2000/svg', node.type)
+    : doc.createElement(node.type)
 
   updateProps(element, node.props, {})
 
