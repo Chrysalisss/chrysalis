@@ -5,7 +5,8 @@ const toReplace = {
   _element: 'k',
   _update: 'f',
   _vnode: 'o',
-  createComponent: 'i'
+  createComponent: 'i',
+  initialState: 'w'
 }
 
 export default toReplace

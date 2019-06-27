@@ -1,9 +1,16 @@
 import updateProps from './updateProps'
-import { merge, isTextNode, isArray } from './utill'
 import patch from './patch'
+import { 
+  merge, 
+  isTextNode, 
+  isArray
+} from './utill'
 
 function createComponent(component, props) {
+  component.props = props
+
   if (typeof component.state === 'function') {
+    component.initialState = state
     component.state = component.state(props)
   }
 

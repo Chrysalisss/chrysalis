@@ -20,7 +20,12 @@
 
 import createElement from './createElement'
 import updateProps from './updateProps'
-import { removeElement, getKey, isTextNode } from './utill'
+import { 
+  removeElement, 
+  getKey, 
+  isTextNode, 
+  shouldUpdate
+} from './utill'
 
 function patch(parent, element, oldNode, node, isSVG) {
   if (node === oldNode) {
@@ -33,7 +38,20 @@ function patch(parent, element, oldNode, node, isSVG) {
     element.data = node
   } else if (oldNode == null) {
     element = parent.insertBefore(createElement(node, isSVG), element)
-  } else if (node.type && node.type === oldNode.type) {
+  } else if (node.type.render) {
+    if (shouldUpdate(oldNode.props, node.props)) {
+      const component = oldNode.type
+
+      merge(component.props, node.props)
+
+      if(component.initialState) {
+        component.setState(component.initialState(component.props))
+      } else {
+        component._update()
+      }
+    }
+  }   
+  else if (node.type && node.type === oldNode.type) {
     updateProps(element, oldNode.props, node.props)
 
     isSVG = isSVG || node.type == 'svg'
