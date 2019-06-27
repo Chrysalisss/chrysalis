@@ -11,7 +11,7 @@ function createComponent(component, props) {
   component.props = props
 
   if (typeof component.state === 'function') {
-    component.initialState = state
+    component.initialState = component.state
     component.state = component.state(props)
   }
 

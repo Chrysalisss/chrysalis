@@ -24,7 +24,8 @@ import {
   removeElement, 
   getKey, 
   isTextNode, 
-  shouldUpdate
+  shouldUpdate,
+  merge
 } from './utill'
 
 function patch(parent, element, oldNode, node, isSVG) {
