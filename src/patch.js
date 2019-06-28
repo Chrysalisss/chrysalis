@@ -53,9 +53,9 @@ function patch(parent, element, oldNode, node, isSVG) {
     }
   }   
   else if (node.type && node.type === oldNode.type) {
-    updateProps(element, oldNode.props, node.props)
-
     isSVG = isSVG || node.type == 'svg'
+
+    updateProps(element, oldNode.props, node.props, isSVG)
 
     const len = node.children.length
     const oldLen = oldNode.children.length

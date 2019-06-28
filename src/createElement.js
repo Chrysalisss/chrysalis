@@ -55,7 +55,7 @@ function createElement(node, isSVG) {
     ? doc.createElementNS('http://www.w3.org/2000/svg', node.type)
     : doc.createElement(node.type)
 
-  updateProps(element, node.props, {})
+  updateProps(element, node.props, {}, isSVG)
 
   // check the benchmark jsben.ch/y3SpC
   for (let i = 0, len = node.children.length; i < len; i++) {

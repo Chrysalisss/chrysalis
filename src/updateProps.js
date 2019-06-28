@@ -1,32 +1,56 @@
 import { merge } from './utill'
 import { refs } from './refs'
 
-function updateProps(element, newProps, oldProps) {
-  // putting props together and iterating
-  for (let name in merge(newProps, oldProps)) {
-    if (!newProps[name]) {
-      if (name == 'class') {
-        element.removeAttribute('class')
-      } else {
-        element[name] = null
-        delete element[name]
-      }
-    } else if (newProps[name] != oldProps[name]) {
-      if (name == 'ref') {
-        if (typeof newProps[name] == 'string') {
-          refs[newProps[name]] = element
-        } else if (typeof newProps[name] == 'function') {
-          newProps[name](element)
+function updateProps(element, newProps, oldProps, isSVG) {
+  for (var name in merge(newProps, oldProps)) {
+
+    var newValue = newProps[name]
+    var oldValue = oldProps[name]
+
+    name = isSVG 
+      ? (name == 'className' ? 'class' : name) 
+      : (name == 'class' ? 'className' : name)
+
+    if (name == 'key') {   
+    } else if (name == 'style') {
+      for (let i in merge(newValue, oldValue)) {
+        if ((newValue || {})[i] == (oldValue || {})[i]) {
+          
         } else {
-          newProps[name].current = element
+          element.style.setProperty(
+            (i[0] == '-' && i[1] == '-') ? i : i.replace(/[A-Z]/g, '-$&'),
+            (newValue && (i in newValue))
+            ? (typeof newValue[i] == 'number')
+              ? newValue[i] + 'px'
+              : newValue[i]
+              : ''
+          )
         }
-      } else if (name == 'dangerouslySetInnerHTML') {
-        element.innerHTML = newProps[name].__html
-      } else if (name == 'class') {
-        element.setAttribute('class', newProps[name])
-      } else {
-        element[name] = newProps[name]
       }
+    } else if (name[0] == 'o' && name[1] == 'n') {
+      name = name.slice(2).toLowerCase()
+      console.log(element, newValue, name)
+      if (newValue) {
+        element.addEventListener(name, newValue)
+      } else {
+        element.removeEventListener(name)
+      }
+    } else if (name == 'ref') {
+      if (typeof newValue == 'string') {
+        refs[newValue] = element
+      } else if (typeof newValue == 'function') {
+         newValue(element)
+      } else {
+        newValue.current = element
+      }
+    } else if (name == 'dangerouslySetInnerHTML') {
+      element.innerHTML =  newValue.__html 
+    } else if (!isSVG && name != 'list' && name in element) {
+      element[name] = newValue == null ? '' : newValue 
+    } else if (newValue == null || value === false) {
+      element.removeAttribute(name)
+    } else {
+      element.setAttribute(name, newValue)
     }
   }
 }
