@@ -2,10 +2,10 @@ import { merge } from './utill'
 import { refs } from './refs'
 
 function updateProps(element, newProps, oldProps, isSVG) {
-  for (var name in merge(newProps, oldProps)) {
+  for (let name in merge(newProps, oldProps)) {
 
-    var newValue = newProps[name]
-    var oldValue = oldProps[name]
+    let newValue = newProps[name]
+    let oldValue = oldProps[name]
 
     name = isSVG 
       ? (name == 'className' ? 'class' : name) 
