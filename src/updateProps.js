@@ -1,4 +1,4 @@
-import { merge } from './utill'
+import { merge, className, NULL } from './utill'
 import { refs } from './refs'
 
 function updateProps(element, newProps, oldProps, isSVG) {
@@ -8,8 +8,8 @@ function updateProps(element, newProps, oldProps, isSVG) {
     let oldValue = oldProps[name]
 
     name = isSVG 
-      ? (name == 'className' ? 'class' : name) 
-      : (name == 'class' ? 'className' : name)
+      ? (name == className ? 'class' : name) 
+      : (name == 'class' ? className : name)
 
     if (name == 'key') {   
     } else if (name == 'style') {
@@ -27,14 +27,6 @@ function updateProps(element, newProps, oldProps, isSVG) {
           )
         }
       }
-    } else if (name[0] == 'o' && name[1] == 'n') {
-      name = name.slice(2).toLowerCase()
-      console.log(element, newValue, name)
-      if (newValue) {
-        element.addEventListener(name, newValue)
-      } else {
-        element.removeEventListener(name)
-      }
     } else if (name == 'ref') {
       if (typeof newValue == 'string') {
         refs[newValue] = element
@@ -46,8 +38,8 @@ function updateProps(element, newProps, oldProps, isSVG) {
     } else if (name == 'dangerouslySetInnerHTML') {
       element.innerHTML =  newValue.__html 
     } else if (!isSVG && name != 'list' && name in element) {
-      element[name] = newValue == null ? '' : newValue 
-    } else if (newValue == null || value === false) {
+      element[name] = newValue == NULL ? '' : newValue 
+    } else if (newValue == NULL || newValue === false) {
       element.removeAttribute(name)
     } else {
       element.setAttribute(name, newValue)

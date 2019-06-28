@@ -14,6 +14,10 @@ function shouldUpdate(a, b) {
   }
 }
 
+const NULL = null
+
+const className = 'className'
+
 const isArray = Array.isArray
 
 const doc = document
@@ -39,5 +43,7 @@ export {
  isTextNode, 
  isArray, 
  shouldUpdate,
- doc 
+ doc,
+ className,
+ NULL
 }

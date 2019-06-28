@@ -25,19 +25,20 @@ import {
   getKey, 
   isTextNode, 
   shouldUpdate,
-  merge
+  merge,
+  NULL
 } from './utill'
 
 function patch(parent, element, oldNode, node, isSVG) {
   if (node === oldNode) {
   } else if (
-    oldNode != null &&
+    oldNode != NULL &&
     isTextNode(oldNode) &&
     isTextNode(node) &&
     oldNode != node
   ) {
     element.data = node
-  } else if (oldNode == null) {
+  } else if (oldNode == NULL) {
     element = parent.insertBefore(createElement(node, isSVG), element)
   } else if (node.type.render) {
     if (shouldUpdate(oldNode.props, node.props)) {
@@ -70,7 +71,7 @@ function patch(parent, element, oldNode, node, isSVG) {
       const oldChild = oldNode.children[i]
       const oldKey = getKey(oldChild)
 
-      if (null != oldKey) {
+      if (NULL != oldKey) {
         cachedNodes[oldKey] = [oldElement, oldChild]
       }
     }
@@ -94,8 +95,8 @@ function patch(parent, element, oldNode, node, isSVG) {
 
       const cachedNode = cachedNodes[newKey] || []
 
-      if (null == newKey) {
-        if (null == oldKey) {
+      if (NULL == newKey) {
+        if (NULL == oldKey) {
           patch(element, oldElement, oldChild, newChild, isSVG)
           j++
         }
@@ -108,7 +109,7 @@ function patch(parent, element, oldNode, node, isSVG) {
           element.insertBefore(cachedNode[0], oldElement)
           patch(element, cachedNode[0], cachedNode[1], newChild, isSVG)
         } else {
-          patch(element, oldElement, null, newChild, isSVG)
+          patch(element, oldElement, NULL, newChild, isSVG)
         }
 
         j++
@@ -120,7 +121,7 @@ function patch(parent, element, oldNode, node, isSVG) {
       const oldChild = oldNode.children[i]
       const oldKey = getKey(oldChild)
 
-      if (null == oldKey) {
+      if (NULL == oldKey) {
         removeElement(element, oldElements[i], oldChild)
       }
 
