@@ -32,7 +32,7 @@ function h(type, props) {
 
   return {
     type,
-    props: props,
+    props,
     children
   }
 }
