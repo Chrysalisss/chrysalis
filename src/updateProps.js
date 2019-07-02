@@ -1,6 +1,10 @@
 import { merge, className, NULL } from './utill'
 import { refs } from './refs'
 
+function eventListener(event) {
+  return event.currentTarget.events[event.type](event)
+}
+
 function updateProps(element, newProps, oldProps, isSVG) {
   for (let name in merge(newProps, oldProps)) {
 
@@ -27,6 +31,16 @@ function updateProps(element, newProps, oldProps, isSVG) {
           )
         }
       }
+    } else if (name[0] === "o" && name[1] === "n") {
+        if (
+          !((element.events || (element.events = {}))[
+            (name = name.slice(2).toLowerCase())
+          ] = newValue)
+        ) {
+          element.removeEventListener(name, eventListener)
+        } else if (!oldValue) {
+          element.addEventListener(name, eventListener)
+        }
     } else if (name == 'ref') {
       if (typeof newValue == 'string') {
         refs[newValue] = element
