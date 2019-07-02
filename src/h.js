@@ -8,7 +8,7 @@
 import { isArray } from './utill'
 
 function h(type, props) {
-  for (let node, rest = [], children = [], i = arguments.length; i-- > 2; ) {
+  for (var node, rest = [], children = [], i = arguments.length; i-- > 2; ) {
     rest.push(arguments[i])
   }
 
