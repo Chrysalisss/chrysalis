@@ -5,7 +5,7 @@
  * https://facebook.github.io/jsx
  * https://github.com/hyperhype/hyperscript
  */
-import { isArray } from './utill'
+import { isArray, NULL } from './utill'
 
 function h(type, props) {
   for (var node, rest = [], children = [], i = arguments.length; i-- > 2; ) {
@@ -17,7 +17,7 @@ function h(type, props) {
       for (let i = node.length; i-- > 0; ) {
         rest.push(node[i])
       }
-    } else if (node === false || node === true || node == null) {
+    } else if (node === false || node === true || node == NULL) {
     } else {
       children.push(node)
     }
