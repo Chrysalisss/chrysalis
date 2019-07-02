@@ -8,24 +8,31 @@
 import { isArray } from './utill'
 
 function h(type, props) {
-  let children = []
-  let len = arguments.length - 2
-
-  while (len-- > 0) children[len] = arguments[len + 2]
-
-  if (isArray(children[0])) {
-    children = children[0]
+  for (let node, rest = [], children = [], i = arguments.length; i-- > 2; ) {
+    rest.push(arguments[i])
   }
 
-  // type is a function -> it`s a functional component
-  if (typeof type === 'function') {
+  while (rest.length > 0) {
+    if (isArray((node = rest.pop()))) {
+      for (let i = node.length; i-- > 0; ) {
+        rest.push(node[i])
+      }
+    } else if (node === false || node === true || node == null) {
+    } else {
+      children.push(node)
+    }
+  }
+
+  props = props || {}
+
+  if (typeof type == 'function') {
     props.children = children
     return type(props)
   }
 
   return {
     type,
-    props: props || {},
+    props: props,
     children
   }
 }
