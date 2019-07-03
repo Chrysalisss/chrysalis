@@ -1,11 +1,12 @@
 import updateProps from './updateProps'
 import patch from './patch'
+import { merge, isTextNode } from './utill'
+
 import { 
-  merge, 
-  isTextNode, 
-  isArray,
-  doc
-} from './utill'
+  isArray, 
+  doc, 
+  EMPTY_OBJ
+} from './constants'
 
 function createComponent(component, props) {
   component.props = props
@@ -55,7 +56,7 @@ function createElement(node, isSVG) {
     ? doc.createElementNS('http://www.w3.org/2000/svg', node.type)
     : doc.createElement(node.type)
 
-  updateProps(element, node.props, {}, isSVG)
+  updateProps(element, node.props, EMPTY_OBJ, isSVG)
 
   // check the benchmark jsben.ch/y3SpC
   for (let i = 0, len = node.children.length; i < len; i++) {

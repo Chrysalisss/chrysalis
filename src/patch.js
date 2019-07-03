@@ -21,12 +21,17 @@
 import createElement from './createElement'
 import updateProps from './updateProps'
 import { 
+  NULL, 
+  EMPTY_OBJ, 
+  EMPTY_ARR 
+} from './constants'
+
+import { 
   removeElement, 
   getKey, 
   isTextNode, 
   shouldUpdate,
-  merge,
-  NULL
+  merge
 } from './utill'
 
 function patch(parent, element, oldNode, node, isSVG) {
@@ -60,9 +65,9 @@ function patch(parent, element, oldNode, node, isSVG) {
 
     const len = node.children.length
     const oldLen = oldNode.children.length
-    const cachedNodes = {}
-    const oldElements = []
-    const newKeys = {}
+    const cachedNodes = EMPTY_OBJ
+    const oldElements = EMPTY_ARR
+    const newKeys = EMPTY_OBJ
 
     for (let i = 0; i < oldLen; i++) {
       const oldElement = element.childNodes[i]
@@ -93,7 +98,7 @@ function patch(parent, element, oldNode, node, isSVG) {
 
       const newKey = getKey(newChild)
 
-      const cachedNode = cachedNodes[newKey] || []
+      const cachedNode = cachedNodes[newKey] || EMPTY_ARR
 
       if (NULL == newKey) {
         if (NULL == oldKey) {

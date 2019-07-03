@@ -14,14 +14,6 @@ function shouldUpdate(a, b) {
   }
 }
 
-const NULL = null
-
-const className = 'className'
-
-const isArray = Array.isArray
-
-const doc = document
-
 function isTextNode(node) {
   return typeof node != 'object'
 }
@@ -41,9 +33,5 @@ export {
  getKey, 
  removeElement, 
  isTextNode, 
- isArray, 
  shouldUpdate,
- doc,
- className,
- NULL
 }

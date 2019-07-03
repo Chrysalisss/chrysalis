@@ -5,10 +5,16 @@
  * https://facebook.github.io/jsx
  * https://github.com/hyperhype/hyperscript
  */
-import { isArray, NULL } from './utill'
+import { 
+  isArray, 
+  NULL, 
+  EMPTY_OBJ,
+  EMPTY_ARR,
+  FUNCTION 
+} from './constants'
 
 function h(type, props) {
-  for (var node, rest = [], children = [], i = arguments.length; i-- > 2; ) {
+  for (var node, rest = EMPTY_ARR, children = EMPTY_ARR, i = arguments.length; i-- > 2; ) {
     rest.push(arguments[i])
   }
 
@@ -23,9 +29,9 @@ function h(type, props) {
     }
   }
 
-  props = props || {}
+  props = props || EMPTY_OBJ
 
-  if (typeof type == 'function') {
+  if (typeof type == FUNCTION) {
     props.children = children
     return type(props)
   }

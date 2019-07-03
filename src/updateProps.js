@@ -1,5 +1,13 @@
-import { merge, className, NULL } from './utill'
+import { merge } from './utill'
 import { refs } from './refs'
+
+import { 
+  className, 
+  NULL, 
+  EMPTY_OBJ,
+  CLASS,
+  FUNCTION
+} from './constants'
 
 function eventListener(event) {
   return event.currentTarget.events[event.type](event)
@@ -12,13 +20,13 @@ function updateProps(element, newProps, oldProps, isSVG) {
     let oldValue = oldProps[name]
 
     name = isSVG 
-      ? (name == className ? 'class' : name) 
-      : (name == 'class' ? className : name)
+      ? (name == className ? CLASS : name) 
+      : (name == CLASS ? className : name)
 
     if (name == 'key') {   
     } else if (name == 'style') {
       for (let i in merge(newValue, oldValue)) {
-        if ((newValue || {})[i] == (oldValue || {})[i]) {
+        if ((newValue || EMPTY_OBJ)[i] == (oldValue || EMPTY_OBJ)[i]) {
           
         } else {
           element.style.setProperty(
@@ -33,7 +41,7 @@ function updateProps(element, newProps, oldProps, isSVG) {
       }
     } else if (name[0] === "o" && name[1] === "n") {
         if (
-          !((element.events || (element.events = {}))[
+          !((element.events || (element.events = EMPTY_OBJ))[
             (name = name.slice(2).toLowerCase())
           ] = newValue)
         ) {
@@ -44,7 +52,7 @@ function updateProps(element, newProps, oldProps, isSVG) {
     } else if (name == 'ref') {
       if (typeof newValue == 'string') {
         refs[newValue] = element
-      } else if (typeof newValue == 'function') {
+      } else if (typeof newValue == FUNCTION) {
          newValue(element)
       } else {
         newValue.current = element
