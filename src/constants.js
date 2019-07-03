@@ -4,7 +4,6 @@ const CLASS = 'class'
 const doc = document
 const NULL = null
 const EMPTY_OBJ = {}
-const EMPTY_ARR = []
 const FUNCTION = 'function'
 
 export {

@@ -1,9 +1,7 @@
-import { EMPTY_OBJ } from './constants'
-
 function createRef() {
-  return EMPTY_OBJ
+  return {}
 }
 
-const refs = EMPTY_OBJ
+const refs = {}
 
 export { createRef, refs }
