@@ -10,7 +10,7 @@ import {
   isArray, 
   NULL, 
   FUNCTION 
-} from './constants'
+} from './helpers/index'
 
 function h(type, props) {
   for (var node, rest = [], children = [], i = arguments.length; i-- > 2; ) {

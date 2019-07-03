@@ -13,6 +13,5 @@ export {
 	doc,
 	NULL,
 	EMPTY_OBJ,
-	EMPTY_ARR,
 	FUNCTION
 }

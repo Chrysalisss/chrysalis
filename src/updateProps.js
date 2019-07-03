@@ -1,13 +1,13 @@
-import { merge } from './utill'
 import { refs } from './refs'
 
-import { 
+import {
+  merge,
   className, 
   NULL, 
   EMPTY_OBJ,
   CLASS,
   FUNCTION
-} from './constants'
+} from './helpers/index'
 
 function eventListener(event) {
   return event.currentTarget.events[event.type](event)

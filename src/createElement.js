@@ -1,12 +1,13 @@
 import updateProps from './updateProps'
 import patch from './patch'
-import { merge, isTextNode } from './utill'
 
-import { 
+import {
+  merge,
+  isTextNode,
   isArray, 
   doc, 
   EMPTY_OBJ
-} from './constants'
+} from './helpers/index'
 
 function createComponent(component, props) {
   component.props = props

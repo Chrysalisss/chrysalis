@@ -20,15 +20,15 @@
 
 import createElement from './createElement'
 import updateProps from './updateProps'
-import { NULL } from './constants'
 
-import { 
+import {
+  NULL, 
   removeElement, 
   getKey, 
   isTextNode, 
   shouldUpdate,
   merge
-} from './utill'
+} from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
   if (node === oldNode) {
