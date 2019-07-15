@@ -61,12 +61,7 @@ function createElement(node, isSVG) {
 
   // check the benchmark jsben.ch/y3SpC
   for (let i = 0, len = node.children.length; i < len; i++) {
-    element.appendChild(
-      createElement(
-        isArray(node.children[i]) ? node.children[i][0] : node.children[i], 
-        isSVG
-      )
-    )
+    element.appendChild(createElement(node.children[i]))
   }
 
   return element
