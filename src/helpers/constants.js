@@ -1,4 +1,3 @@
-const isArray = Array.isArray
 const className = 'className'
 const CLASS = 'class'
 const doc = document
@@ -7,7 +6,6 @@ const EMPTY_OBJ = {}
 const FUNCTION = 'function'
 
 export {
-	isArray,
 	className,
 	CLASS,
 	doc,

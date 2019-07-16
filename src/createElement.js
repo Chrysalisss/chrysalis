@@ -3,8 +3,7 @@ import patch from './patch'
 
 import {
   merge,
-  isTextNode,
-  isArray, 
+  isTextNode, 
   doc, 
   EMPTY_OBJ
 } from './helpers/index'

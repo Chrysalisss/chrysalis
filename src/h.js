@@ -7,11 +7,7 @@
  * css-tricks.com/what-does-the-h-stand-for-in-vues-render-method/
  */
  
-import { 
-  isArray, 
-  NULL, 
-  FUNCTION 
-} from './helpers/index'
+import { NULL, FUNCTION } from './helpers/index'
 
 function h(type, props) {
   for (var node, rest = [], children = [], i = arguments.length; i-- > 2; ) {
@@ -19,7 +15,7 @@ function h(type, props) {
   }
 
   while (rest.length > 0) {
-    if (isArray((node = rest.pop()))) {
+    if (Array.isArray((node = rest.pop()))) {
       for (let i = node.length; i-- > 0; ) {
         rest.push(node[i])
       }
