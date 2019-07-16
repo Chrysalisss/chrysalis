@@ -16,6 +16,8 @@ function createComponent(component, props) {
     component.state = component.state(props)
   }
 
+  const vnode = component.render()
+
   merge(component, {
     setState(state) {
       if (typeof state === 'function') {
@@ -34,8 +36,8 @@ function createComponent(component, props) {
         (component._vnode = component.render())
       )
     },
-    _vnode: component.render(),
-    _element: createElement(component.render())
+    _vnode: vnode,
+    _element: createElement(vnode)
   })
 }
 
