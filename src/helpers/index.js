@@ -1,2 +1,2 @@
 export * from './constants'
-export * from './utill'
+export * from './utils'
