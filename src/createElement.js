@@ -41,6 +41,14 @@ function createComponent(component, props) {
 }
 
 function createElement(node, isSVG) {
+  // Fragment support
+  // set up config: "pragmaFrag": "''" 
+  // <><h1>Hello!</h1></> will compile to
+  // h('', null, h('h1', null, Hello!))
+  if (node.type == '') {
+    node = node.children[0]
+  }
+
   if (isTextNode(node)) {
     return doc.createTextNode(node)
   }
