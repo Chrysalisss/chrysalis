@@ -2,8 +2,9 @@
  * JSX/hyperscript notation
  * Creates a virtual DOM node
  *
- * https://facebook.github.io/jsx
- * https://github.com/hyperhype/hyperscript
+ * facebook.github.io/jsx
+ * github.com/hyperhype/hyperscript
+ * css-tricks.com/what-does-the-h-stand-for-in-vues-render-method/
  */
  
 import { 

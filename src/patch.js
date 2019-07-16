@@ -4,7 +4,7 @@
  *
  * Licensed under the MIT License
  *
- * Based on Vue, Elm and picodom
+ * Based on Vue, Elm & Superfine
  * Big thanks to Evan You, Evan Czaplicki, Jorge Bucaran
  * whose created this awesome libraries
  *
@@ -13,7 +13,7 @@
  * github.com/jorgebucaran/superfine
  *
  * See Elm`s optimizations techniques:
- * elm-lang.org/blog/blazing-fast-html-round-two#methodology
+ * elm-lang.org/blog/blazing-fast-html-round-two
  *
  * This algo supports keys
  */
@@ -53,8 +53,7 @@ function patch(parent, element, oldNode, node, isSVG) {
         component._update()
       }
     }
-  }   
-  else if (node.type && node.type === oldNode.type) {
+  } else if (node.type && node.type === oldNode.type) {
     isSVG = isSVG || node.type == 'svg'
 
     updateProps(element, oldNode.props, node.props, isSVG)
