@@ -36,6 +36,9 @@ function createComponent(component, props) {
         (component._vnode = component.render(component.state, component.props))
       )
     },
+    destroy() {
+      removeElement(component._element.parentNode, component._element)
+    },
     _vnode: vnode,
     _element: createElement(vnode)
   })
