@@ -44,7 +44,7 @@ function createComponent(component, props) {
   })
 }
 
-function createElement(node, isSVG) {
+function createElement(node, hooks, isSVG) {
   // Fragment support
   // set up config: "pragmaFrag": "''" 
   // <><h1>Hello!</h1></> will compile to
@@ -58,9 +58,15 @@ function createElement(node, isSVG) {
   }
 
   if (node.type.render) {
+    if (node.type.oncreate) {
+      hooks.push(node.type.oncreate)
+    }
+
     node.props.children = node.children
     
     createComponent(node.type, node.props)
+
+    node.type.oninit && node.type.oninit()
 
     return node.type._element
   }
@@ -73,7 +79,7 @@ function createElement(node, isSVG) {
 
   // check the benchmark jsben.ch/y3SpC
   for (let i = 0, len = node.children.length; i < len; i++) {
-    element.appendChild(createElement(node.children[i]))
+    element.appendChild(createElement(node.children[i], hooks, isSVG))
   }
 
   return element

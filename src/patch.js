@@ -31,6 +31,8 @@ import {
 } from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
+  const hooks = []
+
   if (node === oldNode) {
   } else if (
     oldNode != NULL &&
@@ -40,7 +42,7 @@ function patch(parent, element, oldNode, node, isSVG) {
   ) {
     element.data = node
   } else if (oldNode == NULL) {
-    element = parent.insertBefore(createElement(node, isSVG), element)
+    element = parent.insertBefore(createElement(node, hooks, isSVG), element)
   } else if (node.type.render) {
     if (shouldUpdate(oldNode.props, node.props)) {
       const component = oldNode.type
@@ -138,8 +140,10 @@ function patch(parent, element, oldNode, node, isSVG) {
     }
   } else if (node !== oldNode) {
     const i = element
-    parent.replaceChild((element = createElement(node, isSVG)), i)
+    parent.replaceChild((element = createElement(node, hooks, isSVG)), i)
   }
+
+  while (hooks) hooks.pop()()
 
   return element
 }

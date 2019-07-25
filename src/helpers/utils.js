@@ -24,8 +24,12 @@ function getKey(node) {
   }
 }
 
-function removeElement(parent, element) {
+function removeElement(parent, element, node) {
+  node.onremove && node.onremove()
+
   parent.removeChild(element)
+
+  node.ondestroy && node.ondestroy()
 }
 
 export {
