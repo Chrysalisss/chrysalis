@@ -28,20 +28,17 @@ function createComponent(component, props) {
 
       component._update()
     },
+    _base: component._element.previousElementSibling,
     _update() {    
       patch(
-        component._element.previousElementSibling, 
+        component._base, 
         component._element, 
         component._vnode, 
         (component._vnode = component.render(component.state, component.props))
       )
     },
     destroy() {
-      removeElement(
-        component._element.previousElementSibling, 
-        component._element, 
-        component
-      )
+      removeElement(component._base, component._element, component)
     },
     _vnode: vnode,
     _element: createElement(vnode)
