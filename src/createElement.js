@@ -37,7 +37,11 @@ function createComponent(component, props) {
       )
     },
     destroy() {
-      removeElement(component._element.parentNode, component._element)
+      removeElement(
+        component._element.previousElementSibling, 
+        component._element, 
+        component
+      )
     },
     _vnode: vnode,
     _element: createElement(vnode)
