@@ -9,7 +9,7 @@ import {
   FUNCTION
 } from './helpers/index'
 
-function eventListener(event) {
+function eventProxy(event) {
   return event.currentTarget.events[event.type](event)
 }
 
@@ -45,9 +45,9 @@ function updateProps(element, newProps, oldProps, isSVG) {
             (name = name.slice(2).toLowerCase())
           ] = newValue)
         ) {
-          element.removeEventListener(name, eventListener)
+          element.removeEventListener(name, eventProxy)
         } else if (!oldValue) {
-          element.addEventListener(name, eventListener)
+          element.addEventListener(name, eventProxy)
         }
     } else if (name == 'ref') {
       if (typeof newValue == 'string') {
