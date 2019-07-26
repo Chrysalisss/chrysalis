@@ -122,7 +122,7 @@ class Timer extends React.Component {
   }
 }
 
-ReactDOM.render(<Timer />, document.getElem entById('app'))
+ReactDOM.render(<Timer />, document.getElementById('app'))
 ```
 
 # License
