@@ -2,8 +2,9 @@
   "name": "chrysalis.js",
   "version": "0.15.0",
   "description": "A lightweight JavaScript library for building fast, modern & scalable applications",
-  "main": "dis/chrysalis.umd.js",
+  "main": "dist/chrysalis.umd.js",
   "module": "dist/chrysalis.esm.js",
+  "types": "chrysalis.d.ts",
   "scripts": {
     "build": "rollup -c scripts/build.config.js --no-strict",
     "size": "rollup -c scripts/size.config.js --no-strict && size-limit",
