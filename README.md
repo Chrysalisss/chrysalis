@@ -1,6 +1,6 @@
   ![](/chrysalis.svg)
 
-<h1 align="center">Creatе UI quickly and easily</h1>
+<h2 align="center">Creatе UI quickly and easily</h2>
 <p align="center">A lightweight JS-library for building fast, modern &amp; scalable applications</p>
 <p align="center">
 	<a href="https://www.npmjs.com/package/chrysalis.js"><img src="https://img.shields.io/npm/v/chrysalis.js.svg?style=flat-square" alt="npm"></a>
