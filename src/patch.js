@@ -143,7 +143,7 @@ function patch(parent, element, oldNode, node, isSVG) {
     parent.replaceChild((element = createElement(node, hooks, isSVG)), i)
   }
 
-  while (hooks) hooks.pop()()
+  while (hooks.length) hooks.pop()()
 
   return element
 }
