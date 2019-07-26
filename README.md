@@ -56,7 +56,7 @@ via [CDN](https://unpkg.com/chrysalis.js@0.14.0/dist/chrysalis.umd.js)
 const { h, render } = Chrysalis
 ```
 ## Timer example
-### Chrysalis (29 LOC)
+### Chrysalis (20 SLOC)
 ```js
 import { h, render } from 'chrysalis.js'
   
@@ -69,11 +69,11 @@ const Timer = {
     }))
   },  
   
-  oninit() {
+  oncreate() {
     this.interval = setInterval(() => this.tick(), 1000)
   },
   
-  ondestroy() {
+  onremove() {
     clearInterval(this.interval)
   },
 
@@ -88,7 +88,7 @@ const Timer = {
 
 render(<Timer />, document.getElementById('app'))
 ```
-### React (33 LOC)
+### React (26 SLOC)
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -124,6 +124,35 @@ class Timer extends React.Component {
 
 ReactDOM.render(<Timer />, document.getElementById('app'))
 ```
+### Vue (22 SLOC)
+``vue
+<template>
+  <div>
+    Seconds: {{ seconds }}
+  </div>
+</template>
 
+<script>
+  export default {
+    data() {
+      return { seconds: 0 }
+    },
+
+    methods: {
+      tick: function() {
+        this.seconds++
+      }
+    },
+
+    mounted() {
+      this.interval = setInterval(() => this.tick(), 1000)
+    },
+
+    beforeDestroy() {
+      clearInterval(this.interval)
+    }
+  }
+</script>
+```
 # License
 Released under the [MIT](https://github.com/Chrysalisss/chrysalis/blob/master/LICENSE) License.
