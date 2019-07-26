@@ -1,7 +1,15 @@
+const jsdom = require('jsdom')
 const assert = require('assert')
-const { h } = require('../dist/chrysalis.umd')
 
-describe('hyperscript', () => {
+const { JSDOM } = jsdom
+const { window } = new JSDOM('<!doctype html><html><body><div id="app"></div></body></html>')
+
+global.document = window.document
+global.window = window
+
+const { h, createRef } = require('../dist/chrysalis.umd')
+
+describe('h()', () => {
   it('#1', () => {
     const element = h('div', null)
     const result = {
@@ -13,17 +21,17 @@ describe('hyperscript', () => {
   })
 
   it('#2', () => {
-    const element = h('div', {})
+    const element = <div id="main"/>
     const result = {
       type: 'div',
-      props: {},
+      props: { id: 'main' },
       children: []
     }
     assert.deepEqual(element, result)
   })
 
   it('#3', () => {
-    const element = h('div', null, 'Hello, world!')
+    const element = <div>Hello, world!</div>
     const result = {
       type: 'div',
       props: {},
@@ -33,17 +41,17 @@ describe('hyperscript', () => {
   })
 
   it('#4', () => {
-    const element = h('div', {}, 'Hello, world!')
+    const element = <div />
     const result = {
       type: 'div',
       props: {},
-      children: ['Hello, world!']
+      children: []
     }
     assert.deepEqual(element, result)
   })
 
   it('#5', () => {
-    const element = h('span', null, 23)
+    const element = <span>23</span>
     const result = {
       type: 'span',
       props: {},
@@ -53,7 +61,7 @@ describe('hyperscript', () => {
   })
 
   it('#6', () => {
-    const element = h('span', null, 1 + 17)
+    const element = h('span', {}, 1 + 17)
     const result = {
       type: 'span',
       props: {},
@@ -63,54 +71,55 @@ describe('hyperscript', () => {
   })
 
   it('#7', () => {
-    const element = h('span', null, null)
+    const element = <span>{null}</span>
     const result = {
       type: 'span',
       props: {},
-      children: [null]
+      children: []
     }
     assert.deepEqual(element, result)
   })
 
   it('#8', () => {
-    const element = h('span', null, undefined)
+    const element = <span>{undefined}</span>
     const result = {
       type: 'span',
       props: {},
-      children: [undefined]
+      children: []
     }
     assert.deepEqual(element, result)
   })
 
   it('#9', () => {
-    const element = h('span', { style: 'color: red' }, 'Hello, wold!')
+    const element = <span style={{ color: 'red', fontSize: '24px'}}>Hello, world!</span>
     const result = {
       type: 'span',
-      props: { style: 'color: red' },
-      children: ['Hello, wold!']
+      props: { style: { color: 'red', fontSize: '24px'} },
+      children: ['Hello, world!']
     }
     assert.deepEqual(element, result)
   })
 
   it('#10', () => {
-    const element = h('h1', { style: 'color: red', title: 'greeting' }, 'Hello, wold!')
+    const element = <h1 title="greeting">Hello, world!</h1>
     const result = {
       type: 'h1',
-      props: { style: 'color: red', title: 'greeting' },
-      children: ['Hello, wold!']
+      props: { title: 'greeting' },
+      children: ['Hello, world!']
     }
     assert.deepEqual(element, result)
   })
 
   it('#11', () => {
-    const element = h('span', { style: 'color: red' }, h('span', { style: 'color: red' }, 'Hello, wold!'))
+    const styles = { color: 'red' }
+    const element = <div style={styles}><span style={styles}>Hello, wold!</span></div>
     const result = {
-      type: 'span',
-      props: { style: 'color: red' },
+      type: 'div',
+      props: { style: { color: 'red' } },
       children: [
         {
           type: 'span',
-          props: { style: 'color: red' },
+          props: { style: { color: 'red' } },
           children: ['Hello, wold!']
         }
       ]
@@ -119,10 +128,10 @@ describe('hyperscript', () => {
   })
 
   it('#12', () => {
-    const element = h('span', { style: 'color: red' }, h('span', null, 'Hello, wold!'))
+    const element = <div style={{ color: 'red' }}><span>Hello, wold!</span></div>
     const result = {
-      type: 'span',
-      props: { style: 'color: red' },
+      type: 'div',
+      props: { style: { color: 'red' } },
       children: [
         {
           type: 'span',
