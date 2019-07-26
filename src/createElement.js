@@ -28,7 +28,6 @@ function createComponent(component, props) {
 
       component._update()
     },
-    _base: component._element.previousElementSibling,
     _update() {    
       patch(
         component._base, 
@@ -43,6 +42,8 @@ function createComponent(component, props) {
     _vnode: vnode,
     _element: createElement(vnode)
   })
+
+  component._base = component._element.previousElementSibling
 }
 
 function createElement(node, hooks, isSVG) {
