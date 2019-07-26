@@ -125,7 +125,7 @@ class Timer extends React.Component {
 ReactDOM.render(<Timer />, document.getElementById('app'))
 ```
 ### Vue (22 SLOC)
-``vue
+```vue
 <template>
   <div>
     Seconds: {{ seconds }}
