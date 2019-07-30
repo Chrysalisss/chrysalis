@@ -1,38 +1,28 @@
 import updateProps from './updateProps'
 import patch from './patch'
 
-import {
-  merge,
-  isTextNode, 
-  doc, 
-  EMPTY_OBJ
-} from './helpers/index'
+import { merge, isTextNode, doc, EMPTY_OBJ } from './helpers/index'
 
 function createComponent(component, props) {
   component.props = props
-
-  if (typeof component.state === 'function') {
-    component.initialState = component.state
-    component.state = component.state(props)
-  }
 
   const vnode = component.render(component.state, component.props)
 
   merge(component, {
     setState(state) {
       if (typeof state === 'function') {
-        state = state(component.state)
+        state = state(component.state, component.props)
       }
 
       merge(component.state, state)
 
-      component._update()
+      component.forceUpdate()
     },
-    _update() {    
+    forceUpdate() {
       patch(
-        component._base, 
-        component._element, 
-        component._vnode, 
+        component._base,
+        component._element,
+        component._vnode,
         (component._vnode = component.render(component.state, component.props))
       )
     },
@@ -48,7 +38,7 @@ function createComponent(component, props) {
 
 function createElement(node, hooks, isSVG) {
   // Fragment support
-  // set up config: "pragmaFrag": "''" 
+  // set up config: "pragmaFrag": "''"
   // <><h1>Hello!</h1></> will compile to
   // h('', null, h('h1', null, Hello!))
   if (node.type == '') {
@@ -65,7 +55,7 @@ function createElement(node, hooks, isSVG) {
     }
 
     node.props.children = node.children
-    
+
     createComponent(node.type, node.props)
 
     node.type.oninit && node.type.oninit()

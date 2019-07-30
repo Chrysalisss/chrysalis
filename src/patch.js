@@ -21,25 +21,13 @@
 import createElement from './createElement'
 import updateProps from './updateProps'
 
-import {
-  NULL, 
-  removeElement, 
-  getKey, 
-  isTextNode, 
-  shouldUpdate,
-  merge
-} from './helpers/index'
+import { NULL, removeElement, getKey, isTextNode, shouldUpdate, merge } from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
   const hooks = []
 
   if (node === oldNode) {
-  } else if (
-    oldNode != NULL &&
-    isTextNode(oldNode) &&
-    isTextNode(node) &&
-    oldNode != node
-  ) {
+  } else if (oldNode != NULL && isTextNode(oldNode) && isTextNode(node) && oldNode != node) {
     element.data = node
   } else if (oldNode == NULL) {
     element = parent.insertBefore(createElement(node, hooks, isSVG), element)
@@ -49,11 +37,7 @@ function patch(parent, element, oldNode, node, isSVG) {
 
       merge(component.props, node.props)
 
-      if (component.initialState) {
-        component.setState(component.initialState(component.props))
-      } else {
-        component._update()
-      }
+      component.forceUpdate()
     }
   } else if (node.type && node.type === oldNode.type) {
     isSVG = isSVG || node.type == 'svg'
