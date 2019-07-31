@@ -1,5 +1,3 @@
-import { refs } from './refs'
-
 import { clone, className, NULL, EMPTY_OBJ, CLASS, FUNCTION } from './helpers/index'
 
 function eventProxy(event) {
@@ -39,9 +37,7 @@ function updateProps(element, newProps, oldProps, isSVG) {
         element.addEventListener(name, eventProxy)
       }
     } else if (name == 'ref') {
-      if (typeof newValue == 'string') {
-        refs[newValue] = element
-      } else if (typeof newValue == FUNCTION) {
+      if (typeof newValue == FUNCTION) {
         newValue(element)
       } else {
         newValue.current = element

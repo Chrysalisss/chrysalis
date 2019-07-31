@@ -1,10 +1,9 @@
 import h from './h'
 import { render } from './render'
-import { createRef, refs } from './refs'
+import { createRef } from './refs'
 
 export {
 	h, 
 	render, 
-  createRef,
-  refs
+  createRef
 }
