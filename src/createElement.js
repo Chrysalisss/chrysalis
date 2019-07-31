@@ -16,25 +16,30 @@ function createComponent(component, props) {
 
       const newState = clone(component.state, state)
 
+      const currentState = clone({}, component.state)
+      const currentProps = clone({}, component.props)
+
       if (component.shouldUpdate) {
         if (component.shouldUpdate(newState, newProps)) {
           component.props = newProps
           component.state = newState
-          component.forceUpdate()
+          component.forceUpdate(currentState, currentProps)
         }
       } else {
         component.props = newProps
         component.state = newState
-        component.forceUpdate()
+        component.forceUpdate(currentState, currentProps)
       }
     },
-    forceUpdate() {
+    forceUpdate(prevState, prevProps) {
       patch(
         component._base,
         component._element,
         component._vnode,
         (component._vnode = component.render(component.state, component.props))
       )
+
+      component.onupdate && component.onupdate(prevState, prevProps)
     },
     destroy() {
       removeElement(component._base, component._element, component)
