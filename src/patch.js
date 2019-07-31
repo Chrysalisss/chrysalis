@@ -21,7 +21,7 @@
 import createElement from './createElement'
 import updateProps from './updateProps'
 
-import { NULL, removeElement, getKey, isTextNode, shouldUpdate, merge } from './helpers/index'
+import { NULL, removeElement, getKey, isTextNode, isNew, clone } from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
   const hooks = []
@@ -32,12 +32,12 @@ function patch(parent, element, oldNode, node, isSVG) {
   } else if (oldNode == NULL) {
     element = parent.insertBefore(createElement(node, hooks, isSVG), element)
   } else if (node.type.render) {
-    if (shouldUpdate(oldNode.props, node.props)) {
+    if (isNew(oldNode.props, node.props)) {
       const component = oldNode.type
 
-      merge(component.props, node.props)
+      const newProps = clone(component.props, node.props)
 
-      component.forceUpdate()
+      component.setState({}, newProps)
     }
   } else if (node.type && node.type === oldNode.type) {
     isSVG = isSVG || node.type == 'svg'

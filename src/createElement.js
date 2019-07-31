@@ -1,7 +1,7 @@
 import updateProps from './updateProps'
 import patch from './patch'
 
-import { merge, isTextNode, doc, EMPTY_OBJ } from './helpers/index'
+import { merge, isTextNode, doc, EMPTY_OBJ, clone } from './helpers/index'
 
 function createComponent(component, props) {
   component.props = props
@@ -9,14 +9,24 @@ function createComponent(component, props) {
   const vnode = component.render(component.state, component.props)
 
   merge(component, {
-    setState(state) {
+    setState(state, newProps) {
       if (typeof state === 'function') {
         state = state(component.state, component.props)
       }
 
-      merge(component.state, state)
+      const newState = clone(component.state, state)
 
-      component.forceUpdate()
+      if (component.shouldUpdate) {
+        if (component.shouldUpdate(newState, newProps)) {
+          component.props = newProps
+          component.state = newState
+          component.forceUpdate()
+        }
+      } else {
+        component.props = newProps
+        component.state = newState
+        component.forceUpdate()
+      }
     },
     forceUpdate() {
       patch(
