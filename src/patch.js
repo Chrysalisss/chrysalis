@@ -21,7 +21,7 @@
 import createElement from './createElement'
 import updateProps from './updateProps'
 
-import { NULL, removeElement, getKey, isTextNode, isNew, clone } from './helpers/index'
+import { NULL, removeElement, getKey, isTextNode, isNew, clone, EMPTY_OBJ } from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
   const hooks = []
@@ -37,7 +37,7 @@ function patch(parent, element, oldNode, node, isSVG) {
 
       const newProps = clone(component.props, node.props)
 
-      component.setState({}, newProps)
+      component.setState(EMPTY_OBJ, newProps)
     }
   } else if (node.type && node.type === oldNode.type) {
     isSVG = isSVG || node.type == 'svg'
