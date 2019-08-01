@@ -1,61 +1,55 @@
-'use strict'
-
 const { h, render } = Chrysalis
+const target = document.getElementById('dbmon')
 
-/** @jsx h */
-
-// a simple render loop.
-var root = document.getElementById('dbmon'),
-  base = undefined
-function frame() {
-  Monitoring.renderRate.ping()
-  base = render(h(DBMon, { databases: ENV.generateData().toArray() }), root, base)
-  setTimeout(frame, ENV.timeout)
-}
-setTimeout(frame, 1)
-
-var DBMon = function DBMon(_ref) {
-  var databases = _ref.databases
-  return h(
+const Main = ({ data }) =>
+  h(
     'div',
-    null,
+    {},
     h(
       'table',
-      { class: 'table table-striped latest-data' },
-      h('tbody', null, databases.map(Database))
+      { className: 'table table-striped latest-data' },
+      h(
+        'tbody',
+        {},
+        data.map(({ dbname, lastSample }) =>
+          h(
+            'tr',
+            {},
+            h('td', { className: 'dbname' }, dbname),
+            h(
+              'td',
+              { className: 'query-count' },
+              h('span', { className: lastSample.countClassName }, lastSample.nbQueries)
+            ),
+            lastSample.topFiveQueries.map(({ query, formatElapsed, elapsedClassName }) =>
+              h(
+                'td',
+                { className: elapsedClassName },
+                formatElapsed,
+                h(
+                  'div',
+                  { className: 'popover left' },
+                  h('div', { className: 'popover-content' }, query),
+                  h('div', { className: 'arrow' })
+                )
+              )
+            )
+          )
+        )
+      )
     )
   )
-}
 
-var Database = function Database(_ref2) {
-  var dbname = _ref2.dbname
-  var lastSample = _ref2.lastSample
-  return h(
-    'tr',
-    { key: dbname },
-    h('td', { class: 'dbname' }, dbname),
-    h(
-      'td',
-      { class: 'query-count' },
-      h('span', { class: lastSample.countClassName }, lastSample.nbQueries)
-    ),
-    lastSample.topFiveQueries.map(Query)
-  )
-}
+perfMonitor.startFPSMonitor()
+perfMonitor.startMemMonitor()
+perfMonitor.initProfiler('render')
 
-var Query = function Query(_ref3) {
-  var elapsedClassName = _ref3.elapsedClassName
-  var formatElapsed = _ref3.formatElapsed
-  var query = _ref3.query
-  return h(
-    'td',
-    { class: 'Query ' + elapsedClassName },
-    formatElapsed,
-    h(
-      'div',
-      { class: 'popover left' },
-      h('div', { class: 'popover-content' }, query),
-      h('div', { class: 'arrow' })
-    )
-  )
-}
+requestAnimationFrame(function update() {
+  const data = ENV.generateData().toArray()
+  perfMonitor.startProfile('render')
+
+  render(h(Main, { data: data }), target)
+
+  perfMonitor.endProfile('render')
+  requestAnimationFrame(update)
+})
