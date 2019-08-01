@@ -16,8 +16,11 @@ function createComponent(component, props) {
 
       const newState = clone(component.state, state)
 
-      const currentState = clone(EMPTY_OBJ, component.state)
-      const currentProps = clone(EMPTY_OBJ, component.props)
+      let currentState, currentProps
+      if (component.update) {
+        currentState = clone(EMPTY_OBJ, component.state)
+        currentProps = clone(EMPTY_OBJ, component.props)
+      }
 
       if (component.shouldUpdate) {
         if (component.shouldUpdate(newState, newProps)) {

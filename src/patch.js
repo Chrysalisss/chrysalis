@@ -35,7 +35,10 @@ function patch(parent, element, oldNode, node, isSVG) {
     if (isNew(oldNode.props, node.props)) {
       const component = oldNode.type
 
-      const newProps = clone(component.props, node.props)
+      let newProps
+      if (component.onupdate) {
+        newProps = clone(component.props, node.props)
+      }
 
       component.setState(EMPTY_OBJ, newProps)
     }
