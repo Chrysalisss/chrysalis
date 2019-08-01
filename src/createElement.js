@@ -36,8 +36,8 @@ function createComponent(component, props) {
     },
     forceUpdate(prevState, prevProps) {
       patch(
-        component._base,
-        component._element,
+        component.$root,
+        component.$el,
         component._vnode,
         (component._vnode = component.render(component.state, component.props))
       )
@@ -45,13 +45,13 @@ function createComponent(component, props) {
       component.onupdate && component.onupdate(prevState, prevProps)
     },
     destroy() {
-      removeElement(component._base, component._element, component)
+      removeElement(component.$root, component.$el, component)
     },
     _vnode: vnode,
-    _element: createElement(vnode)
+    $el: createElement(vnode)
   })
 
-  component._base = component._element.previousElementSibling
+  component.$root = component.$el.previousElementSibling
 }
 
 function createElement(node, hooks, isSVG) {
@@ -78,7 +78,7 @@ function createElement(node, hooks, isSVG) {
 
     node.type.oninit && node.type.oninit()
 
-    return node.type._element
+    return node.type.$el
   }
 
   const element = (isSVG = isSVG || node.type == 'svg')
