@@ -1,7 +1,7 @@
 import updateProps from './updateProps'
 import patch from './patch'
 
-import { merge, isTextNode, doc, EMPTY_OBJ, clone } from './helpers/index'
+import { merge, isTextNode, doc, EMPTY_OBJ, clone, removeElement } from './helpers/index'
 
 function createComponent(component, props) {
   component.props = props
