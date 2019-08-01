@@ -59,7 +59,7 @@ function createElement(node, hooks, isSVG) {
   // set up config: "pragmaFrag": "''"
   // <><h1>Hello!</h1></> will compile to
   // h('', null, h('h1', null, Hello!))
-  if (node.type == '') {
+  if (node.name == '') {
     node = node.children[0]
   }
 
@@ -67,23 +67,23 @@ function createElement(node, hooks, isSVG) {
     return doc.createTextNode(node)
   }
 
-  if (node.type.render) {
-    if (node.type.oncreate) {
-      hooks.push(node.type.oncreate)
+  if (node.name.render) {
+    if (node.name.oncreate) {
+      hooks.push(node.name.oncreate)
     }
 
     node.props.children = node.children
 
-    createComponent(node.type, node.props)
+    createComponent(node.name, node.props)
 
-    node.type.oninit && node.type.oninit()
+    node.name.oninit && node.name.oninit()
 
-    return node.type.$el
+    return node.name.$el
   }
 
-  const element = (isSVG = isSVG || node.type == 'svg')
-    ? doc.createElementNS('http://www.w3.org/2000/svg', node.type)
-    : doc.createElement(node.type)
+  const element = (isSVG = isSVG || node.name == 'svg')
+    ? doc.createElementNS('http://www.w3.org/2000/svg', node.name)
+    : doc.createElement(node.name)
 
   updateProps(element, node.props, EMPTY_OBJ, isSVG)
 
