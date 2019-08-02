@@ -48,7 +48,7 @@ Optionally you can install the babel plugin for transform [JSX](https://www.npmj
 ```
 
 ### For browser
-via [CDN](https://unpkg.com/chrysalis.js@0.14.0/dist/chrysalis.umd.js)  
+via [CDN](https://unpkg.com/chrysalis.js)  
 ```HTML
 <script src="https://unpkg.com/chrysalis.js">
 ```
