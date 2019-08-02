@@ -1,4 +1,4 @@
-import { clone, className, NULL, EMPTY_OBJ, CLASS, FUNCTION, STRING } from './helpers/index'
+import { merge, clone, className, NULL, EMPTY_OBJ, CLASS, FUNCTION, STRING } from './helpers/index'
 
 function eventProxy(event) {
   this.events[event.type](event)
