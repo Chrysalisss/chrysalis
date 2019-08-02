@@ -24,5 +24,6 @@ addons:
 script:
   - npm run build
   - COVERAGE=true npm run test
+  - npm run size
 
 after_success: npm run size
