@@ -17,7 +17,8 @@ import {
   FORCEUPDATE,
   STATE,
   PROPS,
-  PARENT_NODE
+  PARENT_NODE,
+  LENGTH
 } from './helpers/index'
 
 function createComponent(component, props) {
@@ -103,7 +104,7 @@ function createElement(node, hooks, isSVG) {
   updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
   // check the benchmark jsben.ch/y3SpC
-  for (let i = 0, len = node.children.length; i < len; i++) {
+  for (let i = 0, len = node.children[LENGTH]; i < len; i++) {
     element.appendChild(createElement(node.children[i], hooks, isSVG))
   }
 

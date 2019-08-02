@@ -9,6 +9,7 @@ const STRING = 'string'
 const STATE = 'state'
 const PROPS = 'props'
 const PARENT_NODE = 'parentNode'
+const LENGTH = 'length'
 
 export {
 	className,
@@ -21,5 +22,6 @@ export {
 	STRING,
 	PROPS,
 	STATE,
-	PARENT_NODE
+	PARENT_NODE,
+	LENGTH
 }

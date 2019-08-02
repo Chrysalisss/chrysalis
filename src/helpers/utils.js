@@ -1,5 +1,5 @@
 import { ONREMOVE, ONDESTROY } from './hooks'
-import { STRING } from './constants'
+import { STRING, PROPS } from './constants'
 
 function merge(a, b) {
   for (let i in b) a[i] = b[i]
@@ -22,7 +22,7 @@ function isTextNode(node) {
 }
 
 function getKey(node) {
-  if (node && (node = node.props)) {
+  if (node && (node = node[PROPS])) {
     return node.key
   }
 }

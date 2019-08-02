@@ -31,7 +31,8 @@ import {
   EMPTY_OBJ, 
   ONUPDATE,
   RENDER,
-  PROPS
+  PROPS,
+  LENGTH
 } from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
@@ -58,8 +59,8 @@ function patch(parent, element, oldNode, node, isSVG) {
 
     updateProps(element, oldNode[PROPS], node[PROPS], isSVG)
 
-    const len = node.children.length
-    const oldLen = oldNode.children.length
+    const len = node.children[LENGTH]
+    const oldLen = oldNode.children[LENGTH]
     const cachedNodes = {}
     const oldElements = []
     const newKeys = {}
@@ -141,7 +142,7 @@ function patch(parent, element, oldNode, node, isSVG) {
     parent.replaceChild((element = createElement(node, hooks, isSVG)), i)
   }
 
-  while (hooks.length) hooks.pop()()
+  while (hooks[LENGTH]) hooks.pop()()
 
   return element
 }
