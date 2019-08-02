@@ -14,61 +14,59 @@ import {
   ONINIT,
   SHOULDUPDATE,
   RENDER,
-  FORCEUPDATE
+  FORCEUPDATE,
+  STATE,
+  PROPS,
+  PARENT_NODE
 } from './helpers/index'
 
 function createComponent(component, props) {
-  _props = component.props
-  _state = component.state
+  component[PROPS] = props
 
-  _props = props
-
-  const vnode = component[RENDER](_state, _props)
+  const vnode = component[RENDER](component[STATE], component[PROPS])
 
   merge(component, {
     setState(state, newProps) {
       if (typeof state == FUNCTION) {
-        state = state(_state, _props)
+        state = state(component[STATE], component[PROPS])
       }
 
-      const newState = clone(_state, state)
+      const newState = clone(component[STATE], state)
 
       let currentState, currentProps
       if (component[ONUPDATE]) {
-        currentState = clone(EMPTY_OBJ, _state)
-        currentProps = clone(EMPTY_OBJ, _props)
+        currentState = clone(EMPTY_OBJ, component[STATE])
+        currentProps = clone(EMPTY_OBJ, component[PROPS])
       }
 
       if (component[SHOULDUPDATE]) {
         if (component[SHOULDUPDATE](newState, newProps)) {
-          _props = newProps
-          _state = newState
+          component[PROPS] = newProps
+          component[STATE] = newState
           component[FORCEUPDATE](currentState, currentProps, true)
         }
       } else {
-        _props = newProps
-        _state = newState
+        component[PROPS] = newProps
+        component[STATE] = newState
         component[FORCEUPDATE](currentState, currentProps, true)
       }
     },
     forceUpdate(prevState, prevProps, fromSetState) {
       patch(
-        component.$root,
+        component.$el[PARENT_NODE],
         component.$el,
         component._vnode,
-        (component._vnode = component[RENDER](_state, _props))
+        (component._vnode = component[RENDER](component[STATE], component[PROPS]))
       )
 
       fromSetState && component[ONUPDATE] && component[ONUPDATE](prevState, prevProps)
     },
     destroy() {
-      removeElement(component.$root, component.$el, component)
+      removeElement(component.$el[PARENT_NODE], component.$el, component)
     },
     _vnode: vnode,
     $el: createElement(vnode)
   })
-
-  component.$root = component.$el.previousElementSibling
 }
 
 function createElement(node, hooks, isSVG) {

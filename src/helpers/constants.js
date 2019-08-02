@@ -6,6 +6,9 @@ const EMPTY_OBJ = {}
 const FUNCTION = 'function'
 const RENDER = 'render'
 const STRING = 'string'
+const STATE = 'state'
+const PROPS = 'props'
+const PARENT_NODE = 'parentNode'
 
 export {
 	className,
@@ -15,5 +18,8 @@ export {
 	EMPTY_OBJ,
 	FUNCTION,
 	RENDER,
-	STRING
+	STRING,
+	PROPS,
+	STATE,
+	PARENT_NODE
 }
