@@ -26,7 +26,7 @@ function updateProps(element, newProps, oldProps, isSVG) {
           )
         }
       }
-    } else if (name[0] === 'o' && name[1] === 'n') {
+    } else if (name[0] == 'o' && name[1] == 'n') {
       if (
         !((element.events || (element.events = {}))[
           (name = name.slice(2).toLowerCase())
