@@ -30,7 +30,8 @@ import {
   clone, 
   EMPTY_OBJ, 
   ONUPDATE,
-  RENDER
+  RENDER,
+  PROPS
 } from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
@@ -42,12 +43,12 @@ function patch(parent, element, oldNode, node, isSVG) {
   } else if (oldNode == NULL) {
     element = parent.insertBefore(createElement(node, hooks, isSVG), element)
   } else if (node.name[RENDER]) {
-    if (isNew(oldNode.props, node.props)) {
+    if (isNew(oldNode[PROPS], node[PROPS])) {
       const component = oldNode.name
 
       let newProps
       if (component[ONUPDATE]) {
-        newProps = clone(component.props, node.props)
+        newProps = clone(component[PROPS], node[PROPS])
       }
 
       component.setState(EMPTY_OBJ, newProps)
@@ -55,7 +56,7 @@ function patch(parent, element, oldNode, node, isSVG) {
   } else if (node.name && node.name === oldNode.name) {
     isSVG = isSVG || node.name == 'svg'
 
-    updateProps(element, oldNode.props, node.props, isSVG)
+    updateProps(element, oldNode[PROPS], node[PROPS], isSVG)
 
     const len = node.children.length
     const oldLen = oldNode.children.length

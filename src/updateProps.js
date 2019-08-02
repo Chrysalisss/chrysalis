@@ -1,4 +1,13 @@
-import { clone, className, NULL, EMPTY_OBJ, CLASS, FUNCTION, STRING } from './helpers/index'
+import { 
+  merge,
+  clone, 
+  className, 
+  NULL, 
+  EMPTY_OBJ, 
+  CLASS, 
+  FUNCTION, 
+  STRING 
+} from './helpers/index'
 
 function eventProxy(event) {
   this.events[event.type](event)
@@ -13,7 +22,7 @@ function updateProps(element, newProps, oldProps, isSVG) {
 
     if (name == 'key') {
     } else if (name == 'style') {
-      if (typeof value == STRING) {
+      if (typeof newValue == STRING) {
         element[name].cssText = newValue
       } else {
         if (typeof oldValue == STRING) oldValue = element[name].cssText = ''

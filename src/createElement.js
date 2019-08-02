@@ -87,9 +87,9 @@ function createElement(node, hooks, isSVG) {
       hooks.push(node.name[ONCREATE])
     }
 
-    node.props.children = node.children
+    node[PROPS].children = node.children
 
-    createComponent(node.name, node.props)
+    createComponent(node.name, node[PROPS])
 
     node.name[ONINIT] && node.name[ONINIT]()
 
@@ -100,7 +100,7 @@ function createElement(node, hooks, isSVG) {
     ? doc.createElementNS('http://www.w3.org/2000/svg', node.name)
     : doc.createElement(node.name)
 
-  updateProps(element, node.props, EMPTY_OBJ, isSVG)
+  updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
   // check the benchmark jsben.ch/y3SpC
   for (let i = 0, len = node.children.length; i < len; i++) {
