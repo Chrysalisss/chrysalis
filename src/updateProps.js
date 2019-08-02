@@ -1,7 +1,7 @@
 import { clone, className, NULL, EMPTY_OBJ, CLASS, FUNCTION } from './helpers/index'
 
 function eventProxy(event) {
-  return event.currentTarget.events[event.type](event)
+  this.events[event.type](event)
 }
 
 function updateProps(element, newProps, oldProps, isSVG) {
