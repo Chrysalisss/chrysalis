@@ -88,7 +88,8 @@ const Timer = {
 
 render(<Timer />, document.getElementById('app'))
 ```
-### React (26 SLOC)
+<details><summary><strong>React (26 SLOC)</strong></summary><br>
+  
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -124,7 +125,11 @@ class Timer extends React.Component {
 
 ReactDOM.render(<Timer />, document.getElementById('app'))
 ```
-### Vue (22 SLOC)
+
+</details>
+
+<details><summary><strong>Vue (22 SLOC)</strong></summary><br>
+  
 ```vue
 <template>
   <div>
@@ -154,5 +159,17 @@ ReactDOM.render(<Timer />, document.getElementById('app'))
   }
 </script>
 ```
+
+</details><br>
+
+# Get Involved
+PRs are welcome!
+
+- just fork it
+- and submit PR
+
 # License
-Released under the [MIT](https://github.com/Chrysalisss/chrysalis/blob/master/LICENSE) License.
+**Chrysalis** with :heart: by [heavy](https://github.com/j-heavy), Released under the [MIT](https://github.com/Chrysalisss/chrysalis/blob/master/LICENSE) License.
+
+> [j-heavy.github.io](https://j-heavy.github.io) · GitHub [@j-heavy](https://github.com/j-heavy)
+    
