@@ -29,7 +29,8 @@ import {
   isNew, 
   clone, 
   EMPTY_OBJ, 
-  ONUPDATE 
+  ONUPDATE,
+  RENDER
 } from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
@@ -40,7 +41,7 @@ function patch(parent, element, oldNode, node, isSVG) {
     element.data = node
   } else if (oldNode == NULL) {
     element = parent.insertBefore(createElement(node, hooks, isSVG), element)
-  } else if (node.name.render) {
+  } else if (node.name[RENDER]) {
     if (isNew(oldNode.props, node.props)) {
       const component = oldNode.name
 

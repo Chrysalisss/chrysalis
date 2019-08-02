@@ -11,13 +11,15 @@ import {
   FUNCTION,
   ONUPDATE,
   ONCREATE,
-  ONINIT
+  ONINIT,
+  SHOULDUPDATE,
+  RENDER
 } from './helpers/index'
 
 function createComponent(component, props) {
   component.props = props
 
-  const vnode = component.render(component.state, component.props)
+  const vnode = component[RENDER](component.state, component.props)
 
   merge(component, {
     setState(state, newProps) {
@@ -33,8 +35,8 @@ function createComponent(component, props) {
         currentProps = clone(EMPTY_OBJ, component.props)
       }
 
-      if (component.shouldUpdate) {
-        if (component.shouldUpdate(newState, newProps)) {
+      if (component[SHOULDUPDATE]) {
+        if (component[SHOULDUPDATE](newState, newProps)) {
           component.props = newProps
           component.state = newState
           component.forceUpdate(currentState, currentProps, true)
@@ -50,7 +52,7 @@ function createComponent(component, props) {
         component.$root,
         component.$el,
         component._vnode,
-        (component._vnode = component.render(component.state, component.props))
+        (component._vnode = component[RENDER](component.state, component.props))
       )
 
       fromSetState && component[ONUPDATE] && component[ONUPDATE](prevState, prevProps)
@@ -78,7 +80,7 @@ function createElement(node, hooks, isSVG) {
     return doc.createTextNode(node)
   }
 
-  if (node.name.render) {
+  if (node.name[RENDER]) {
     if (node.name[ONCREATE]) {
       hooks.push(node.name[ONCREATE])
     }
