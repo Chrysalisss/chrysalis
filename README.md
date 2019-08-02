@@ -160,15 +160,15 @@ ReactDOM.render(<Timer />, document.getElementById('app'))
 </script>
 ```
 
-</details><br>
+</details>
 
-# Get Involved
+## Get Involved
 PRs are welcome!
 
 - just fork it
 - and submit PR
 
-# License
+## License
 **Chrysalis** with :heart: by [heavy](https://github.com/j-heavy), Released under the [MIT](https://github.com/Chrysalisss/chrysalis/blob/master/LICENSE) License.
 
 > [j-heavy.github.io](https://j-heavy.github.io) · GitHub [@j-heavy](https://github.com/j-heavy)
