@@ -1,7 +1,15 @@
 import updateProps from './updateProps'
 import patch from './patch'
 
-import { merge, isTextNode, doc, EMPTY_OBJ, clone, removeElement } from './helpers/index'
+import { 
+  merge, 
+  isTextNode, 
+  doc, 
+  EMPTY_OBJ, 
+  clone, 
+  removeElement, 
+  FUNCTION 
+} from './helpers/index'
 
 function createComponent(component, props) {
   component.props = props
@@ -10,7 +18,7 @@ function createComponent(component, props) {
 
   merge(component, {
     setState(state, newProps) {
-      if (typeof state === 'function') {
+      if (typeof state == FUNCTION) {
         state = state(component.state, component.props)
       }
 
