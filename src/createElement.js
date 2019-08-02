@@ -13,38 +13,42 @@ import {
   ONCREATE,
   ONINIT,
   SHOULDUPDATE,
-  RENDER
+  RENDER,
+  FORCEUPDATE
 } from './helpers/index'
 
 function createComponent(component, props) {
-  component.props = props
+  _props = component.props
+  _state = component.state
 
-  const vnode = component[RENDER](component.state, component.props)
+  component._props = props
+
+  const vnode = component[RENDER](component.state, _props)
 
   merge(component, {
     setState(state, newProps) {
       if (typeof state == FUNCTION) {
-        state = state(component.state, component.props)
+        state = state(_state, _props)
       }
 
-      const newState = clone(component.state, state)
+      const newState = clone(_state, state)
 
       let currentState, currentProps
       if (component[ONUPDATE]) {
-        currentState = clone(EMPTY_OBJ, component.state)
-        currentProps = clone(EMPTY_OBJ, component.props)
+        currentState = clone(EMPTY_OBJ, _state)
+        currentProps = clone(EMPTY_OBJ, _props)
       }
 
       if (component[SHOULDUPDATE]) {
         if (component[SHOULDUPDATE](newState, newProps)) {
-          component.props = newProps
-          component.state = newState
-          component.forceUpdate(currentState, currentProps, true)
+          _props = newProps
+          _state = newState
+          component[FORCEUPDATE](currentState, currentProps, true)
         }
       } else {
-        component.props = newProps
-        component.state = newState
-        component.forceUpdate(currentState, currentProps, true)
+        _props = newProps
+        _state = newState
+        component[FORCEUPDATE](currentState, currentProps, true)
       }
     },
     forceUpdate(prevState, prevProps, fromSetState) {
@@ -52,7 +56,7 @@ function createComponent(component, props) {
         component.$root,
         component.$el,
         component._vnode,
-        (component._vnode = component[RENDER](component.state, component.props))
+        (component._vnode = component[RENDER](_state, _props))
       )
 
       fromSetState && component[ONUPDATE] && component[ONUPDATE](prevState, prevProps)

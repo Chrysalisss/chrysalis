@@ -4,6 +4,7 @@ const ONREMOVE = 'onremove'
 const ONUPDATE = 'onupdate'
 const ONINIT = 'oninit'
 const SHOULDUPDATE = 'shouldUpdate'
+const FORCEUPDATE = 'forceUpdate'
 
 export {
 	ONCREATE,
@@ -11,5 +12,6 @@ export {
 	ONREMOVE,
 	ONUPDATE,
 	ONINIT,
-	SHOULDUPDATE
+	SHOULDUPDATE,
+	FORCEUPDATE
 }

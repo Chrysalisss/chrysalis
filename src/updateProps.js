@@ -1,4 +1,4 @@
-import { clone, className, NULL, EMPTY_OBJ, CLASS, FUNCTION } from './helpers/index'
+import { clone, className, NULL, EMPTY_OBJ, CLASS, FUNCTION, STRING } from './helpers/index'
 
 function eventProxy(event) {
   this.events[event.type](event)
@@ -13,19 +13,24 @@ function updateProps(element, newProps, oldProps, isSVG) {
 
     if (name == 'key') {
     } else if (name == 'style') {
-      for (let i in merge(newValue, oldValue)) {
-        if ((newValue || EMPTY_OBJ)[i] == (oldValue || EMPTY_OBJ)[i]) {
-        } else {
-          element[name].setProperty(
-            i[0] == '-' && i[1] == '-' ? i : i.replace(/[A-Z]/g, '-$&'),
-            newValue && i in newValue
-              ? typeof newValue[i] == 'number'
-                ? newValue[i] + 'px'
-                : newValue[i]
-              : ''
-          )
+      if (typeof value == STRING) {
+        element[name].cssText = newValue
+      } else {
+        if (typeof oldValue == STRING) oldValue = element[name].cssText = ''
+        for (let i in merge(newValue, oldValue)) {
+          if ((newValue || EMPTY_OBJ)[i] == (oldValue || EMPTY_OBJ)[i]) {
+          } else {
+            element[name].setProperty(
+              i[0] == '-' && i[1] == '-' ? i : i.replace(/[A-Z]/g, '-$&'),
+              newValue && i in newValue
+                ? typeof newValue[i] == 'number'
+                  ? newValue[i] + 'px'
+                  : newValue[i]
+                : ''
+            )
+          }
         }
-      }
+      } 
     } else if (name[0] == 'o' && name[1] == 'n') {
       if (
         !((element.events || (element.events = {}))[

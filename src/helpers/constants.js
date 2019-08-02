@@ -5,6 +5,7 @@ const NULL = null
 const EMPTY_OBJ = {}
 const FUNCTION = 'function'
 const RENDER = 'render'
+const STRING = 'string'
 
 export {
 	className,
@@ -13,5 +14,6 @@ export {
 	NULL,
 	EMPTY_OBJ,
 	FUNCTION,
-	RENDER
+	RENDER,
+	STRING
 }
