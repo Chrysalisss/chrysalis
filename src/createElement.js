@@ -21,9 +21,9 @@ function createComponent(component, props) {
   _props = component.props
   _state = component.state
 
-  component._props = props
+  _props = props
 
-  const vnode = component[RENDER](component.state, _props)
+  const vnode = component[RENDER](_state, _props)
 
   merge(component, {
     setState(state, newProps) {
