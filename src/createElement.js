@@ -26,15 +26,15 @@ function createComponent(component, props) {
         if (component.shouldUpdate(newState, newProps)) {
           component.props = newProps
           component.state = newState
-          component.forceUpdate(currentState, currentProps)
+          component.forceUpdate(currentState, currentProps, true)
         }
       } else {
         component.props = newProps
         component.state = newState
-        component.forceUpdate(currentState, currentProps)
+        component.forceUpdate(currentState, currentProps, true)
       }
     },
-    forceUpdate(prevState, prevProps) {
+    forceUpdate(prevState, prevProps, fromSetState) {
       patch(
         component.$root,
         component.$el,
@@ -42,7 +42,7 @@ function createComponent(component, props) {
         (component._vnode = component.render(component.state, component.props))
       )
 
-      component.onupdate && component.onupdate(prevState, prevProps)
+      fromSetState && component.onupdate && component.onupdate(prevState, prevProps)
     },
     destroy() {
       removeElement(component.$root, component.$el, component)
