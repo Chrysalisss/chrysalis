@@ -8,7 +8,10 @@ import {
   EMPTY_OBJ, 
   clone, 
   removeElement, 
-  FUNCTION 
+  FUNCTION,
+  ONUPDATE,
+  ONCREATE,
+  ONINIT
 } from './helpers/index'
 
 function createComponent(component, props) {
@@ -25,7 +28,7 @@ function createComponent(component, props) {
       const newState = clone(component.state, state)
 
       let currentState, currentProps
-      if (component.onupdate) {
+      if (component[ONUPDATE]) {
         currentState = clone(EMPTY_OBJ, component.state)
         currentProps = clone(EMPTY_OBJ, component.props)
       }
@@ -50,7 +53,7 @@ function createComponent(component, props) {
         (component._vnode = component.render(component.state, component.props))
       )
 
-      fromSetState && component.onupdate && component.onupdate(prevState, prevProps)
+      fromSetState && component[ONUPDATE] && component[ONUPDATE](prevState, prevProps)
     },
     destroy() {
       removeElement(component.$root, component.$el, component)
@@ -76,15 +79,15 @@ function createElement(node, hooks, isSVG) {
   }
 
   if (node.name.render) {
-    if (node.name.oncreate) {
-      hooks.push(node.name.oncreate)
+    if (node.name[ONCREATE]) {
+      hooks.push(node.name[ONCREATE])
     }
 
     node.props.children = node.children
 
     createComponent(node.name, node.props)
 
-    node.name.oninit && node.name.oninit()
+    node.name[ONINIT] && node.name[ONINIT]()
 
     return node.name.$el
   }

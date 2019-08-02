@@ -21,7 +21,16 @@
 import createElement from './createElement'
 import updateProps from './updateProps'
 
-import { NULL, removeElement, getKey, isTextNode, isNew, clone, EMPTY_OBJ } from './helpers/index'
+import {
+  NULL, 
+  removeElement, 
+  getKey, 
+  isTextNode, 
+  isNew, 
+  clone, 
+  EMPTY_OBJ, 
+  ONUPDATE 
+} from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
   const hooks = []
@@ -36,7 +45,7 @@ function patch(parent, element, oldNode, node, isSVG) {
       const component = oldNode.name
 
       let newProps
-      if (component.onupdate) {
+      if (component[ONUPDATE]) {
         newProps = clone(component.props, node.props)
       }
 

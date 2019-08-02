@@ -1,3 +1,5 @@
+import { ONREMOVE, ONDESTROY } from './hooks'
+
 function merge(a, b) {
   for (let i in b) a[i] = b[i]
 
@@ -25,11 +27,11 @@ function getKey(node) {
 }
 
 function removeElement(parent, element, node) {
-  node.onremove && node.onremove()
+  node[ONREMOVE] && node[ONREMOVE]()
 
   parent.removeChild(element)
 
-  node.ondestroy && node.ondestroy()
+  node[ONDESTROY] && node[ONDESTROY]()
 }
 
 function clone(a, b) {
@@ -41,4 +43,11 @@ function clone(a, b) {
   return out
 }
 
-export { merge, getKey, removeElement, isTextNode, isNew, clone }
+export { 
+  merge, 
+  getKey, 
+  removeElement, 
+  isTextNode, 
+  isNew, 
+  clone 
+}
