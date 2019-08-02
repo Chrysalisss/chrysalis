@@ -16,7 +16,7 @@ function updateProps(element, newProps, oldProps, isSVG) {
       for (let i in merge(newValue, oldValue)) {
         if ((newValue || EMPTY_OBJ)[i] == (oldValue || EMPTY_OBJ)[i]) {
         } else {
-          element.style.setProperty(
+          element[name].setProperty(
             i[0] == '-' && i[1] == '-' ? i : i.replace(/[A-Z]/g, '-$&'),
             newValue && i in newValue
               ? typeof newValue[i] == 'number'
