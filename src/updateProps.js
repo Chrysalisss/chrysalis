@@ -1,4 +1,4 @@
-import { merge, clone, className, NULL, EMPTY_OBJ, CLASS, FUNCTION, STRING } from './helpers/index'
+import { merge, clone, NULL, EMPTY_OBJ, FUNCTION, STRING } from './helpers/index'
 
 function eventProxy(event) {
   this.events[event.type](event)
@@ -8,8 +8,6 @@ function updateProps(element, newProps, oldProps, isSVG) {
   for (let name in clone(newProps, oldProps)) {
     let newValue = newProps[name]
     let oldValue = oldProps[name]
-
-    name = isSVG ? (name == className ? CLASS : name) : name == CLASS ? className : name
 
     if (name == 'key') {
     } else if (name == 'style') {
