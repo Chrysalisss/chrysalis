@@ -35,7 +35,9 @@ function updateProps(element, newProps, oldProps, isSVG) {
     } else if (name[0] == 'o' && name[1] == 'n') {
       if (
         !((element.events || (element.events = {}))[
-          (name = name.slice(2).toLowerCase())
+          // benchmark:
+          // www.measurethat.net/Benchmarks/Show/2335/1/slice-vs-substr-vs-substring-with-no-end-index
+          (name = name.substr(2).toLowerCase())
         ] = newValue)
       ) {
         element.removeEventListener(name, eventProxy)
