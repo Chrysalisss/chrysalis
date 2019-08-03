@@ -86,7 +86,7 @@ function createElement(node, hooks, isSVG) {
 
   if (node.name[RENDER]) {
     if (node.name[ONCREATE]) {
-      hooks.push(node.name[ONCREATE])
+      hooks.push(node.name[ONCREATE].bind(this))
     }
 
     node[PROPS][CHILDREN] = node.childNodes
