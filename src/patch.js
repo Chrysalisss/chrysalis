@@ -59,8 +59,8 @@ function patch(parent, element, oldNode, node, isSVG) {
 
     updateProps(element, oldNode[PROPS], node[PROPS], isSVG)
 
-    const len = node.children[LENGTH]
-    const oldLen = oldNode.children[LENGTH]
+    const len = node.childNodes[LENGTH]
+    const oldLen = oldNode.childNodes[LENGTH]
     const cachedNodes = {}
     const oldElements = []
     const newKeys = {}
@@ -69,7 +69,7 @@ function patch(parent, element, oldNode, node, isSVG) {
       const oldElement = element.childNodes[i]
       oldElements[i] = oldElement
 
-      const oldChild = oldNode.children[i]
+      const oldChild = oldNode.childNodes[i]
       const oldKey = getKey(oldChild)
 
       if (NULL != oldKey) {
@@ -82,8 +82,8 @@ function patch(parent, element, oldNode, node, isSVG) {
 
     while (j < len) {
       const oldElement = oldElements[i]
-      const oldChild = oldNode.children[i]
-      const newChild = node.children[j]
+      const oldChild = oldNode.childNodes[i]
+      const newChild = node.childNodes[j]
 
       let oldKey = getKey(oldChild)
 
@@ -119,7 +119,7 @@ function patch(parent, element, oldNode, node, isSVG) {
     }
 
     while (i < oldLen) {
-      const oldChild = oldNode.children[i]
+      const oldChild = oldNode.childNodes[i]
       const oldKey = getKey(oldChild)
 
       if (NULL == oldKey) {

@@ -77,7 +77,7 @@ function createElement(node, hooks, isSVG) {
   // <><h1>Hello!</h1></> will compile to
   // h('', null, h('h1', null, Hello!))
   if (node.name == '') {
-    node = node.children[0]
+    node = node.childNodes[0]
   }
 
   if (isTextNode(node)) {
@@ -89,7 +89,7 @@ function createElement(node, hooks, isSVG) {
       hooks.push(node.name[ONCREATE])
     }
 
-    node[PROPS][CHILDREN] = node.children
+    node[PROPS][CHILDREN] = node.childNodes
 
     createComponent(node.name, node[PROPS])
 
@@ -105,8 +105,8 @@ function createElement(node, hooks, isSVG) {
   updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
   // check the benchmark jsben.ch/y3SpC
-  for (let i = 0, len = node.children[LENGTH]; i < len; i++) {
-    element.appendChild(createElement(node.children[i], hooks, isSVG))
+  for (let i = 0, len = node.childNodes[LENGTH]; i < len; i++) {
+    element.appendChild(createElement(node.childNodes[i], hooks, isSVG))
   }
 
   return element

@@ -10,7 +10,7 @@
 import { NULL, FUNCTION, LENGTH, EMPTY_OBJ, CHILDREN } from './helpers/index'
 
 function h(name, props) {
-  for (var node, rest = [], children = [], args = arguments, i = args[LENGTH]; i-- > 2; ) {
+  for (var node, rest = [], childNodes = [], args = arguments, i = args[LENGTH]; i-- > 2; ) {
     rest.push(args[i])
   }
 
@@ -21,21 +21,21 @@ function h(name, props) {
       }
     } else if (node === false || node === true || node == NULL) {
     } else {
-      children.push(node)
+      childNodes.push(node)
     }
   }
 
   props = props || EMPTY_OBJ
 
   if (typeof name == FUNCTION) {
-    props[CHILDREN] = children
+    props[CHILDREN] = childNodes
     return name(props)
   }
 
   return {
     name,
     props,
-    children
+    childNodes
   }
 }
 
