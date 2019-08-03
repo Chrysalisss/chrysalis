@@ -3,8 +3,9 @@ const toReplace = {
   merge: 'i',
   _vnode: 'u',
   name: 'n',
-  props: 'p',
-  children: 'c'
+  'props[CHILDREN]': 'props[CHILDREN]',
+  '[PROPS][CHILDREN]': '[PROPS][CHILDREN]',
+  children: 't' 
 }
 
 export default toReplace

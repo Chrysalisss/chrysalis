@@ -18,7 +18,8 @@ import {
   STATE,
   PROPS,
   PARENT_NODE,
-  LENGTH
+  LENGTH,
+  CHILDREN
 } from './helpers/index'
 
 function createComponent(component, props) {
@@ -88,7 +89,7 @@ function createElement(node, hooks, isSVG) {
       hooks.push(node.name[ONCREATE])
     }
 
-    node[PROPS].children = node.children
+    node[PROPS][CHILDREN] = node.children
 
     createComponent(node.name, node[PROPS])
 
