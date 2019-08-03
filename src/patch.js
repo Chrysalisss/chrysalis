@@ -133,7 +133,7 @@ function patch(parent, element, oldNode, node, isSVG) {
       const cachedNode = cachedNodes[i]
       const reusableNode = cachedNode[1]
 
-      if (!newKeys[reusableNode.props.key]) {
+      if (!newKeys[reusableNode[PROPS].key]) {
         removeElement(element, cachedNode[0], reusableNode)
       }
     }
