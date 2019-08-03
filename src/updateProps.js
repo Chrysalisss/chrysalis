@@ -1,4 +1,4 @@
-import { merge, clone, NULL, EMPTY_OBJ, FUNCTION, STRING } from './helpers/index'
+import { merge, clone, NULL, EMPTY_OBJ, FUNCTION, STRING, CHILDREN } from './helpers/index'
 
 function eventProxy(event) {
   this.events[event.type](event)
@@ -9,7 +9,7 @@ function updateProps(element, newProps, oldProps, isSVG) {
     let newValue = newProps[name]
     let oldValue = oldProps[name]
 
-    if (name == 'key') {
+    if (name == 'key' || name == CHILDREN) {
     } else if (name == 'style') {
       // see jsperf.com/style-vs-csstext-vs-setattribute
       if (typeof value == STRING) {

@@ -72,37 +72,31 @@ function createComponent(component, props) {
 }
 
 function createElement(node, hooks, isSVG) {
-  // Fragment support
-  // set up config: "pragmaFrag": "''"
-  // <><h1>Hello!</h1></> will compile to
-  // h('', null, h('h1', null, Hello!))
-  if (node.name == '') {
-    node = node.childNodes[0]
-  }
+  const name = node.name
 
   if (isTextNode(node)) {
     return doc.createTextNode(node)
   }
 
-  if (node.name[RENDER]) {
-    if (node.name[ONCREATE]) {
-      hooks.push(node.name[ONCREATE].bind(node.name))
+  if (name[RENDER]) {
+    if (name[ONCREATE]) {
+      hooks.push(name[ONCREATE].bind(name))
     }
 
-    node[PROPS][CHILDREN] = node.childNodes
+    !name.childNodes && (name[PROPS][CHILDREN] = node.childNodes)
 
-    createComponent(node.name, node[PROPS])
+    createComponent(name, node[PROPS])
 
-    node.name[ONINIT] && node.name[ONINIT]()
+    name[ONINIT] && name[ONINIT]()
 
-    return node.name.$el
+    return name.$el
   }
 
-  const element = (isSVG = isSVG || node.name == 'svg')
-    ? doc.createElementNS('http://www.w3.org/2000/svg', node.name)
-    : doc.createElement(node.name)
+  const element = (isSVG = isSVG || name == 'svg')
+    ? doc.createElementNS('http://www.w3.org/2000/svg', name)
+    : doc.createElement(name)
 
-  updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
+  node[PROPS] && updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
   // check the benchmark jsben.ch/y3SpC
   for (let i = 0, len = node.childNodes[LENGTH]; i < len; i++) {
