@@ -1,5 +1,5 @@
 import { ONREMOVE, ONDESTROY } from './hooks'
-import { STRING, PROPS } from './constants'
+import { PROPS } from './constants'
 
 function merge(a, b) {
   for (let i in b) a[i] = b[i]
@@ -18,7 +18,7 @@ function isNew(a, b) {
 }
 
 function isTextNode(node) {
-  return typeof node == STRING
+  return typeof node != 'object'
 }
 
 function getKey(node) {
