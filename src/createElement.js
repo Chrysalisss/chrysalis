@@ -112,7 +112,7 @@ function createElement(node, hooks, isSVG) {
     ? doc.createElementNS('http://www.w3.org/2000/svg', name)
     : doc.createElement(name)
 
-  node[PROPS] && updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
+  updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
   appendChild(element, node.childNodes, 0)
 
