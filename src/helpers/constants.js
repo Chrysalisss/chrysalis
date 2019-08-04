@@ -11,6 +11,7 @@ const PROPS = 'props'
 const PARENT_NODE = 'parentNode'
 const LENGTH = 'length'
 const CHILDREN = 'children'
+const isArray = Array.isArray
 
 export {
 	className,
@@ -25,5 +26,6 @@ export {
 	STATE,
 	PARENT_NODE,
 	LENGTH,
-	CHILDREN
+	CHILDREN,
+	isArray
 }

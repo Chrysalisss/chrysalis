@@ -19,7 +19,8 @@ import {
   PROPS,
   PARENT_NODE,
   LENGTH,
-  CHILDREN
+  CHILDREN,
+  isArray
 } from './helpers/index'
 
 function createComponent(component, props) {
@@ -72,11 +73,26 @@ function createComponent(component, props) {
 }
 
 function createElement(node, hooks, isSVG) {
-  const name = node.name
+  function appendChild(element, children) {
+    // check the benchmark jsben.ch/y3SpC
+    for (var i = 0, len = children[LENGTH]; i < len; i++) {
+      element.appendChild(createElement(children[i], hooks, isSVG))
+    }
+  }
+
+  if (isArray(node)) {
+    const element = createElement(node[0])
+
+    appendChild(element, node)
+
+    return element
+  }
 
   if (isTextNode(node)) {
     return doc.createTextNode(node)
   }
+
+  const name = node.name
 
   if (name[RENDER]) {
     if (name[ONCREATE]) {
@@ -98,10 +114,7 @@ function createElement(node, hooks, isSVG) {
 
   node[PROPS] && updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
-  // check the benchmark jsben.ch/y3SpC
-  for (let i = 0, len = node.childNodes[LENGTH]; i < len; i++) {
-    element.appendChild(createElement(node.childNodes[i], hooks, isSVG))
-  }
+  appendChild(element, node.childNodes)
 
   return element
 }
