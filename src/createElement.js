@@ -73,9 +73,9 @@ function createComponent(component, props) {
 }
 
 function createElement(node, hooks, isSVG) {
-  function appendChild(element, children) {
+  function appendChild(element, children, index) {
     // check the benchmark jsben.ch/y3SpC
-    for (var i = 0, len = children[LENGTH]; i < len; i++) {
+    for (var i = index, len = children[LENGTH]; i < len; i++) {
       element.appendChild(createElement(children[i], hooks, isSVG))
     }
   }
@@ -83,7 +83,7 @@ function createElement(node, hooks, isSVG) {
   if (isArray(node)) {
     const element = createElement(node[0])
 
-    appendChild(element, node)
+    appendChild(element, node, 1)
 
     return element
   }
@@ -114,7 +114,7 @@ function createElement(node, hooks, isSVG) {
 
   node[PROPS] && updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
-  appendChild(element, node.childNodes)
+  appendChild(element, node.childNodes, 0)
 
   return element
 }
