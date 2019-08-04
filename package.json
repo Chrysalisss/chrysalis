@@ -1,6 +1,6 @@
 {
   "name": "chrysalis.js",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A powerfull lightweight (1kB) JavaScript library for building fast, modern & scalable applications",
   "main": "dist/chrysalis.umd.js",
   "module": "dist/chrysalis.esm.js",
