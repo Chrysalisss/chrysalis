@@ -28,7 +28,7 @@ function h(name, props) {
   props = props || {}
 
   if (typeof name == FUNCTION) {
-    !childNodes && (props[CHILDREN] = childNodes)
+    childNodes[LENGTH] && (props[CHILDREN] = childNodes)
     return name(props)
   }
 

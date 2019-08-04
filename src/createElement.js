@@ -99,7 +99,7 @@ function createElement(node, hooks, isSVG) {
       hooks.push(name[ONCREATE].bind(name))
     }
 
-    !name.childNodes && (name[PROPS][CHILDREN] = node.childNodes)
+    name.childNodes[LENGTH] && (name[PROPS][CHILDREN] = node.childNodes)
 
     createComponent(name, node[PROPS])
 
