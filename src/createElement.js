@@ -49,7 +49,6 @@ function createComponent(component, props) {
           component[FORCEUPDATE](currentState, currentProps, true)
         }
       } else {
-        component[PROPS] = newProps
         component[STATE] = newState
         component[FORCEUPDATE](currentState, currentProps, true)
       }
@@ -99,7 +98,7 @@ function createElement(node, hooks, isSVG) {
       hooks.push(name[ONCREATE].bind(name))
     }
 
-    name.childNodes[LENGTH] && (name[PROPS][CHILDREN] = node.childNodes)
+    node.childNodes[LENGTH] && (node[PROPS][CHILDREN] = node.childNodes)
 
     createComponent(name, node[PROPS])
 
