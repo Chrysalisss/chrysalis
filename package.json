@@ -14,7 +14,8 @@
     "dev": "rollup -c scripts/dev.config.js --no-strict"
   },
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "lint-staged": {
     "*.js": [
