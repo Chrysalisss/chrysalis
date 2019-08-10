@@ -23,7 +23,9 @@ import {
   isArray
 } from './helpers/index'
 
-function createComponent(component, props) {
+function createComponent(input, props) {
+  const component = merge({}, input)
+
   component[PROPS] = props
 
   const vnode = component[RENDER](component[STATE], component[PROPS])
@@ -69,6 +71,10 @@ function createComponent(component, props) {
     _vnode: vnode,
     $el: createElement(vnode)
   })
+
+  component[ONINIT] && component[ONINIT]()
+
+  return component.$el
 }
 
 function createElement(node, hooks, isSVG) {
@@ -100,11 +106,7 @@ function createElement(node, hooks, isSVG) {
 
     node.childNodes[LENGTH] && (node[PROPS][CHILDREN] = node.childNodes)
 
-    createComponent(name, node[PROPS])
-
-    name[ONINIT] && name[ONINIT]()
-
-    return name.$el
+    return createComponent(name, node[PROPS])
   }
 
   const element = (isSVG = isSVG || name == 'svg')
