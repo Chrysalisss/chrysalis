@@ -23,11 +23,7 @@ import {
   isArray
 } from './helpers/index'
 
-function createComponent(input, props, hooks) {
-  const component = merge({}, input)
-
-  component[PROPS] = props
-
+function createComponent(component, hooks) {
   const vnode = component[RENDER](component[STATE], component[PROPS])
 
   merge(component, {
@@ -97,21 +93,17 @@ function createElement(node, hooks, isSVG) {
     return doc.createTextNode(node)
   }
 
-  const name = node.name
-
-  if (name[RENDER]) {
-    if (name[ONCREATE]) {
-      hooks.push(name[ONCREATE].bind(name))
+  if (node[RENDER]) {
+    if (node[ONCREATE]) {
+      hooks.push(node[ONCREATE].bind(node))
     }
 
-    node.childNodes[LENGTH] && (node[PROPS][CHILDREN] = node.childNodes)
-
-    return createComponent(name, node[PROPS], hooks)
+    return createComponent(node, hooks)
   }
 
-  const element = (isSVG = isSVG || name == 'svg')
-    ? doc.createElementNS('http://www.w3.org/2000/svg', name)
-    : doc.createElement(name)
+  const element = (isSVG = isSVG || node.name == 'svg')
+    ? doc.createElementNS('http://www.w3.org/2000/svg', node.name)
+    : doc.createElement(node.name)
 
   updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 

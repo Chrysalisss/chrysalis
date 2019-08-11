@@ -43,16 +43,15 @@ function patch(parent, element, oldNode, node, isSVG) {
     element.data = node
   } else if (oldNode == NULL) {
     element = parent.insertBefore(createElement(node, hooks, isSVG), element)
-  } else if (node.name[RENDER]) {
+  } else if (oldNode.id && oldNode.id == node.id) {
     if (isNew(oldNode[PROPS], node[PROPS])) {
-      const component = oldNode.name
 
       let newProps
-      if (component[ONUPDATE]) {
-        newProps = clone(component[PROPS], node[PROPS])
+      if (oldNode[ONUPDATE]) {
+        newProps = clone(oldNode[PROPS], node[PROPS])
       }
 
-      component.setState(EMPTY_OBJ, newProps)
+      oldNode.setState(EMPTY_OBJ, newProps)
     }
   } else if (node.name && node.name === oldNode.name) {
     isSVG = isSVG || node.name == 'svg'
