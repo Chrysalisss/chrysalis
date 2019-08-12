@@ -24,6 +24,8 @@ import {
 } from './helpers/index'
 
 function createComponent(component, hooks) {
+  component[ONINIT] && component[ONINIT](component[PROPS])
+
   const vnode = component[RENDER](component[STATE], component[PROPS])
 
   merge(component, {
@@ -67,8 +69,6 @@ function createComponent(component, hooks) {
     _vnode: vnode,
     $el: createElement(vnode, hooks)
   })
-
-  component[ONINIT] && component[ONINIT]()
 
   return component.$el
 }
