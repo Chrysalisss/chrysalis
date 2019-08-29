@@ -12,6 +12,7 @@ const PARENT_NODE = 'parentNode'
 const LENGTH = 'length'
 const CHILDREN = 'children'
 const isArray = Array.isArray
+const PUSH = 'push'
 
 export {
 	className,
@@ -27,5 +28,6 @@ export {
 	PARENT_NODE,
 	LENGTH,
 	CHILDREN,
-	isArray
+	isArray,
+	PUSH
 }

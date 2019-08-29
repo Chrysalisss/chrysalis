@@ -20,7 +20,8 @@ import {
   PARENT_NODE,
   LENGTH,
   CHILDREN,
-  isArray
+  isArray,
+  PUSH
 } from './helpers/index'
 
 function createComponent(component, hooks) {
@@ -96,7 +97,7 @@ function createElement(node, hooks, isSVG) {
 
   if (node[RENDER]) {
     if (node[ONCREATE]) {
-      hooks.push(node[ONCREATE].bind(node))
+      hooks[PUSH](node[ONCREATE].bind(node))
     }
 
     return createComponent(node, hooks)
