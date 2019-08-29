@@ -1,13 +1,13 @@
 import updateProps from './update-props'
 import patch from './patch'
 
-import { 
-  merge, 
-  isTextNode, 
-  doc, 
-  EMPTY_OBJ, 
-  clone, 
-  removeElement, 
+import {
+  merge,
+  isTextNode,
+  doc,
+  EMPTY_OBJ,
+  clone,
+  removeElement,
   FUNCTION,
   ONUPDATE,
   ONCREATE,
@@ -69,7 +69,9 @@ function createComponent(component, hooks) {
       (component._vnode = component[RENDER](component[STATE], component[PROPS]))
     )
 
-    fromSetState && component[ONUPDATE] && component[ONUPDATE](prevState, prevProps)
+    fromSetState &&
+      component[ONUPDATE] &&
+      component[ONUPDATE](prevState, prevProps)
   }
 
   return component.$el

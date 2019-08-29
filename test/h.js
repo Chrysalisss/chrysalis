@@ -2,7 +2,9 @@ const jsdom = require('jsdom')
 const assert = require('assert')
 
 const { JSDOM } = jsdom
-const { window } = new JSDOM('<!doctype html><html><body><div id="app"></div></body></html>')
+const { window } = new JSDOM(
+  '<!doctype html><html><body><div id="app"></div></body></html>'
+)
 
 global.document = window.document
 global.window = window
@@ -21,7 +23,7 @@ describe('h()', () => {
   })
 
   it('#2', () => {
-    const element = <div id="main"/>
+    const element = <div id="main" />
     const result = {
       name: 'div',
       props: { id: 'main' },
@@ -91,10 +93,12 @@ describe('h()', () => {
   })
 
   it('#9', () => {
-    const element = <span style={{ color: 'red', fontSize: '24px'}}>Hello, world!</span>
+    const element = (
+      <span style={{ color: 'red', fontSize: '24px' }}>Hello, world!</span>
+    )
     const result = {
       name: 'span',
-      props: { style: { color: 'red', fontSize: '24px'} },
+      props: { style: { color: 'red', fontSize: '24px' } },
       childNodes: ['Hello, world!']
     }
     assert.deepEqual(element, result)
@@ -112,7 +116,11 @@ describe('h()', () => {
 
   it('#11', () => {
     const styles = { color: 'red' }
-    const element = <div style={styles}><span style={styles}>Hello, wold!</span></div>
+    const element = (
+      <div style={styles}>
+        <span style={styles}>Hello, wold!</span>
+      </div>
+    )
     const result = {
       name: 'div',
       props: { style: { color: 'red' } },
@@ -128,7 +136,11 @@ describe('h()', () => {
   })
 
   it('#12', () => {
-    const element = <div style={{ color: 'red' }}><span>Hello, wold!</span></div>
+    const element = (
+      <div style={{ color: 'red' }}>
+        <span>Hello, wold!</span>
+      </div>
+    )
     const result = {
       name: 'div',
       props: { style: { color: 'red' } },

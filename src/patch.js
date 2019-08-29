@@ -22,13 +22,13 @@ import createElement from './create-element'
 import updateProps from './update-props'
 
 import {
-  NULL, 
-  removeElement, 
-  getKey, 
-  isTextNode, 
-  isNew, 
-  clone, 
-  EMPTY_OBJ, 
+  NULL,
+  removeElement,
+  getKey,
+  isTextNode,
+  isNew,
+  clone,
+  EMPTY_OBJ,
   ONUPDATE,
   RENDER,
   PROPS,
@@ -40,13 +40,17 @@ function patch(parent, element, oldNode, node, isSVG) {
   const hooks = []
 
   if (node === oldNode) {
-  } else if (oldNode != NULL && isTextNode(oldNode) && isTextNode(node) && oldNode != node) {
+  } else if (
+    oldNode != NULL &&
+    isTextNode(oldNode) &&
+    isTextNode(node) &&
+    oldNode != node
+  ) {
     element.data = node
   } else if (oldNode == NULL) {
     element = parent[INSERT_BEFORE](createElement(node, hooks, isSVG), element)
   } else if (oldNode.id && oldNode.id == node.id) {
     if (isNew(oldNode[PROPS], node[PROPS])) {
-
       let newProps
       if (oldNode[ONUPDATE]) {
         newProps = clone(oldNode[PROPS], node[PROPS])

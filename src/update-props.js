@@ -1,4 +1,12 @@
-import { merge, clone, NULL, EMPTY_OBJ, FUNCTION, STRING, CHILDREN } from './helpers/index'
+import {
+  merge,
+  clone,
+  NULL,
+  EMPTY_OBJ,
+  FUNCTION,
+  STRING,
+  CHILDREN
+} from './helpers/index'
 
 function eventProxy(event) {
   this.events[event.type](event)
@@ -30,8 +38,8 @@ function updateProps(element, newProps, oldProps, isSVG) {
             )
           }
         }
-      } 
-    // see jsperf.com/charat-vs-substr-vs-substring-xii/2
+      }
+      // see jsperf.com/charat-vs-substr-vs-substring-xii/2
     } else if (name[0] == 'o' && name[1] == 'n') {
       if (
         !((element.events || (element.events = {}))[

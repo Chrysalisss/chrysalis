@@ -7,12 +7,24 @@
  * css-tricks.com/what-does-the-h-stand-for-in-vues-render-method/
  */
 
-import { NULL, FUNCTION, LENGTH, CHILDREN, isArray, merge, PUSH } from './helpers/index'
+import {
+  NULL,
+  FUNCTION,
+  LENGTH,
+  CHILDREN,
+  isArray,
+  merge,
+  PUSH
+} from './helpers/index'
 
 let id = 0
 
 function h(name, props) {
-  for (var node, rest = [], childNodes = [], args = arguments, i = args[LENGTH]; i-- > 2; ) {
+  for (
+    var node, rest = [], childNodes = [], args = arguments, i = args[LENGTH];
+    i-- > 2;
+
+  ) {
     rest[PUSH](args[i])
   }
 

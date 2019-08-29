@@ -2,7 +2,9 @@ const jsdom = require('jsdom')
 const assert = require('assert')
 
 const { JSDOM } = jsdom
-const { window } = new JSDOM('<!doctype html><html><body><div id="app"></div></body></html>')
+const { window } = new JSDOM(
+  '<!doctype html><html><body><div id="app"></div></body></html>'
+)
 
 global.document = window.document
 global.window = window
@@ -53,7 +55,7 @@ describe('start()', () => {
 
     render(<App />, container)
 
-    const result = 
+    const result =
       '<div class="greeting" style="line-height: 19px;"><h1 style="font-size: 24px;">みなさん、こんにちは</h1></div>'
 
     assert.equal(container.innerHTML, result)
@@ -74,7 +76,7 @@ describe('start()', () => {
 
     render(<App />, container)
 
-    const result = 
+    const result =
       '<div class="greeting" style="line-height: 19px;"><h1 style="font-size: 24px;">みなさん、こんにちは</h1></div>'
 
     assert.equal(container.innerHTML, result)

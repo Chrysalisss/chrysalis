@@ -20,7 +20,13 @@ const config = {
     { name: 'Chrysalis', file: 'dist/chrysalis.esm.js', format: 'es' }
   ],
   moduleName: 'Chrysalis',
-  plugins: [resolve(), babel(), terser(), replace(toReplace), license({ banner: header })]
+  plugins: [
+    resolve(),
+    babel(),
+    terser(),
+    replace(toReplace),
+    license({ banner: header })
+  ]
 }
 
 export default config

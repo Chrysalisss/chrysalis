@@ -14,18 +14,18 @@ const PUSH = 'push'
 const INSERT_BEFORE = 'insertBefore'
 
 export {
-	doc,
-	NULL,
-	EMPTY_OBJ,
-	FUNCTION,
-	RENDER,
-	STRING,
-	PROPS,
-	STATE,
-	PARENT_NODE,
-	LENGTH,
-	CHILDREN,
-	isArray,
-	PUSH,
-	INSERT_BEFORE
+  doc,
+  NULL,
+  EMPTY_OBJ,
+  FUNCTION,
+  RENDER,
+  STRING,
+  PROPS,
+  STATE,
+  PARENT_NODE,
+  LENGTH,
+  CHILDREN,
+  isArray,
+  PUSH,
+  INSERT_BEFORE
 }

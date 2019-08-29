@@ -44,11 +44,4 @@ function clone(a, b) {
   return out
 }
 
-export { 
-  merge, 
-  getKey, 
-  removeElement, 
-  isTextNode, 
-  isNew, 
-  clone 
-}
+export { merge, getKey, removeElement, isTextNode, isNew, clone }
