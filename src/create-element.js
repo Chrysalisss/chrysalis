@@ -1,4 +1,4 @@
-import updateProps from './updateProps'
+import updateProps from './update-props'
 import patch from './patch'
 
 import { 

@@ -18,8 +18,8 @@
  * This algo supports keys
  */
 
-import createElement from './createElement'
-import updateProps from './updateProps'
+import createElement from './create-element'
+import updateProps from './update-props'
 
 import {
   NULL, 
