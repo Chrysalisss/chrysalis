@@ -50,8 +50,6 @@ function updateProps(element, newProps, oldProps, isSVG) {
       } else {
         newValue.current = element
       }
-    } else if (name == 'dangerouslySetInnerHTML') {
-      element.innerHTML = newValue.__html
     } else if (!isSVG && name != 'list' && name in element) {
       element[name] = newValue == NULL ? '' : newValue
     } else if (newValue == NULL || newValue === false) {
