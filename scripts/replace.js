@@ -5,7 +5,8 @@ const toReplace = {
   name: 'n',
   'props.children': 'props.children',
   '[PROPS].children': '[PROPS].children',
-  childNodes: 't' 
+  childNodes: 't',
+  events: 'd'
 }
 
 export default toReplace
