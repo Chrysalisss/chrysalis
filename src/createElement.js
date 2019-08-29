@@ -53,22 +53,23 @@ function createComponent(component, hooks) {
         component[FORCEUPDATE](currentState, currentProps, true)
       }
     },
-    forceUpdate(prevState, prevProps, fromSetState) {
-      patch(
-        component.$el[PARENT_NODE],
-        component.$el,
-        component._vnode,
-        (component._vnode = component[RENDER](component[STATE], component[PROPS]))
-      )
-
-      fromSetState && component[ONUPDATE] && component[ONUPDATE](prevState, prevProps)
-    },
     destroy() {
       removeElement(component.$el[PARENT_NODE], component.$el, component)
     },
     _vnode: vnode,
     $el: createElement(vnode, hooks)
   })
+
+  component[FORCEUPDATE] = function(prevState, prevProps, fromSetState) {
+    patch(
+      component.$el[PARENT_NODE],
+      component.$el,
+      component._vnode,
+      (component._vnode = component[RENDER](component[STATE], component[PROPS]))
+    )
+
+    fromSetState && component[ONUPDATE] && component[ONUPDATE](prevState, prevProps)
+  }
 
   return component.$el
 }
