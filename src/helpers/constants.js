@@ -1,5 +1,3 @@
-const className = 'className'
-const CLASS = 'class'
 const doc = document
 const NULL = null
 const EMPTY_OBJ = {}
@@ -13,10 +11,9 @@ const LENGTH = 'length'
 const CHILDREN = 'children'
 const isArray = Array.isArray
 const PUSH = 'push'
+const INSERT_BEFORE = 'insertBefore'
 
 export {
-	className,
-	CLASS,
 	doc,
 	NULL,
 	EMPTY_OBJ,
@@ -29,5 +26,6 @@ export {
 	LENGTH,
 	CHILDREN,
 	isArray,
-	PUSH
+	PUSH,
+	INSERT_BEFORE
 }

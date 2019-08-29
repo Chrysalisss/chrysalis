@@ -32,7 +32,8 @@ import {
   ONUPDATE,
   RENDER,
   PROPS,
-  LENGTH
+  LENGTH,
+  INSERT_BEFORE
 } from './helpers/index'
 
 function patch(parent, element, oldNode, node, isSVG) {
@@ -42,7 +43,7 @@ function patch(parent, element, oldNode, node, isSVG) {
   } else if (oldNode != NULL && isTextNode(oldNode) && isTextNode(node) && oldNode != node) {
     element.data = node
   } else if (oldNode == NULL) {
-    element = parent.insertBefore(createElement(node, hooks, isSVG), element)
+    element = parent[INSERT_BEFORE](createElement(node, hooks, isSVG), element)
   } else if (oldNode.id && oldNode.id == node.id) {
     if (isNew(oldNode[PROPS], node[PROPS])) {
 
@@ -106,7 +107,7 @@ function patch(parent, element, oldNode, node, isSVG) {
           patch(element, cachedNode[0], cachedNode[1], newChild, isSVG)
           i++
         } else if (cachedNode[0]) {
-          element.insertBefore(cachedNode[0], oldElement)
+          element[INSERT_BEFORE](cachedNode[0], oldElement)
           patch(element, cachedNode[0], cachedNode[1], newChild, isSVG)
         } else {
           patch(element, oldElement, NULL, newChild, isSVG)
