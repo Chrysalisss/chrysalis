@@ -106,8 +106,8 @@ function createElement(node, hooks, isSVG) {
   }
 
   const element = (isSVG = isSVG || node.name == 'svg')
-    ? doc.createElementNS('http://www.w3.org/2000/svg', node.name)
-    : doc.createElement(node.name)
+    ? doc.createElementNS('http://www.w3.org/2000/svg', node.name, { is: node[PROPS].is })
+    : doc.createElement(node.name, { is: node[PROPS].is })
 
   updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
