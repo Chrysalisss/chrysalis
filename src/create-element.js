@@ -19,7 +19,6 @@ import {
   PROPS,
   PARENT_NODE,
   LENGTH,
-  CHILDREN,
   isArray,
   PUSH
 } from './helpers/index'
