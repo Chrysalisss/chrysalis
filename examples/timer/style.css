@@ -1,0 +1,22 @@
+body {
+	align-items: center;
+	display: flex;
+
+	font-family: Helvetica Neue, sans-serif;
+
+	height: 100vh;
+	justify-content: center;
+
+	margin: 0;
+	padding: 0;
+
+	text-align: center;
+}
+  
+div {
+	font-weight: 100;
+	font-size: 32px;
+	
+	margin: 0;
+	padding-bottom: 15px;
+}
