@@ -1,12 +1,9 @@
 const toReplace = {
-  removeElement: 'f',
-  merge: 'i',
-  _vnode: 'u',
+  _vnode: 'v',
   name: 'n',
+  events: 'd',
   'props.children': 'props.children',
   '[PROPS].children': '[PROPS].children',
-  childNodes: 't',
-  events: 'd'
 }
 
 export default toReplace
