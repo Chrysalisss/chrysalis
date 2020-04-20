@@ -30,7 +30,7 @@ import {
   clone,
   EMPTY_OBJ,
   ONUPDATE,
-  RENDER,
+  CHILD_NODES,
   PROPS,
   LENGTH,
   INSERT_BEFORE
@@ -63,17 +63,17 @@ function patch(parent, element, oldNode, node, isSVG) {
 
     updateProps(element, oldNode[PROPS], node[PROPS], isSVG)
 
-    const len = node.childNodes[LENGTH]
-    const oldLen = oldNode.childNodes[LENGTH]
+    const len = node[CHILD_NODES][LENGTH]
+    const oldLen = oldNode[CHILD_NODES][LENGTH]
     const cachedNodes = {}
     const oldElements = []
     const newKeys = {}
 
     for (let i = 0; i < oldLen; i++) {
-      const oldElement = element.childNodes[i]
+      const oldElement = element[CHILD_NODES][i]
       oldElements[i] = oldElement
 
-      const oldChild = oldNode.childNodes[i]
+      const oldChild = oldNode[CHILD_NODES][i]
       const oldKey = getKey(oldChild)
 
       if (NULL != oldKey) {
@@ -86,8 +86,8 @@ function patch(parent, element, oldNode, node, isSVG) {
 
     while (j < len) {
       const oldElement = oldElements[i]
-      const oldChild = oldNode.childNodes[i]
-      const newChild = node.childNodes[j]
+      const oldChild = oldNode[CHILD_NODES][i]
+      const newChild = node[CHILD_NODES][j]
 
       let oldKey = getKey(oldChild)
 
@@ -123,7 +123,7 @@ function patch(parent, element, oldNode, node, isSVG) {
     }
 
     while (i < oldLen) {
-      const oldChild = oldNode.childNodes[i]
+      const oldChild = oldNode[CHILD_NODES][i]
       const oldKey = getKey(oldChild)
 
       if (NULL == oldKey) {

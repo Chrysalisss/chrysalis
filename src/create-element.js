@@ -20,7 +20,8 @@ import {
   PARENT_NODE,
   LENGTH,
   isArray,
-  PUSH
+  PUSH,
+  CHILD_NODES
 } from './helpers/index'
 
 function createComponent(component, hooks) {
@@ -110,7 +111,7 @@ function createElement(node, hooks, isSVG) {
 
   updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
-  appendChild(element, node.childNodes, 0)
+  appendChild(element, node[CHILD_NODES], 0)
 
   return element
 }

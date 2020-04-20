@@ -9,12 +9,14 @@ const PROPS = 'props'
 const PARENT_NODE = 'parentNode'
 const LENGTH = 'length'
 const CHILDREN = 'children'
+const CHILD_NODES = 'childNodes'
 const isArray = Array.isArray
 const PUSH = 'push'
 const INSERT_BEFORE = 'insertBefore'
 
 export {
   doc,
+  CHILD_NODES,
   NULL,
   EMPTY_OBJ,
   FUNCTION,
