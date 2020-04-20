@@ -19,6 +19,10 @@ const Counter = {
     this.setState({ count: 0 })
   },
 
+  destroy() {
+    this.destroy()
+  },
+
   render({ count }) {
     return h(
       'div',
@@ -26,7 +30,8 @@ const Counter = {
       h('h1', null, count),
       h('button', { onclick: () => this.up() }, 'up'),
       h('button', { onclick: () => this.down() }, 'down'),
-      h('button', { onclick: () => this.reset() }, 'reset')
+      h('button', { onclick: () => this.reset() }, 'reset'),
+      h('button', { onclick: () => this.destroy() }, 'destroy')
     )
   }
 }
