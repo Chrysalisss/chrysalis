@@ -48,7 +48,10 @@ function patch(parent, element, oldNode, node, isSVG) {
   ) {
     element.data = node
   } else if (oldNode == NULL) {
-    element = parent[INSERT_BEFORE](createElement(node, hooks, isSVG), element)
+    element = parent[INSERT_BEFORE](
+      createElement(node, hooks, parent, isSVG),
+      element
+    )
   } else if (oldNode.id && oldNode.id == node.id) {
     if (isNew(oldNode[PROPS], node[PROPS])) {
       let newProps
@@ -143,7 +146,10 @@ function patch(parent, element, oldNode, node, isSVG) {
     }
   } else if (node !== oldNode) {
     const i = element
-    parent.replaceChild((element = createElement(node, hooks, isSVG)), i)
+    parent.replaceChild(
+      (element = createElement(node, hooks, parent, isSVG)),
+      i
+    )
   }
 
   while (hooks[LENGTH]) hooks.pop()()

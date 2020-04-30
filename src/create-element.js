@@ -24,7 +24,7 @@ import {
   CHILD_NODES
 } from './helpers/index'
 
-function createComponent(component, hooks) {
+function createComponent(component, hooks, parent) {
   component[ONINIT] && component[ONINIT](component[PROPS])
 
   const vnode = component[RENDER](component[STATE], component[PROPS])
@@ -58,7 +58,7 @@ function createComponent(component, hooks) {
       removeElement(component.$el[PARENT_NODE], component.$el, component)
     },
     _vnode: vnode,
-    $el: createElement(vnode, hooks)
+    $el: createElement(vnode, hooks, parent)
   })
 
   component[FORCEUPDATE] = function(prevState, prevProps, fromSetState) {
@@ -77,20 +77,18 @@ function createComponent(component, hooks) {
   return component.$el
 }
 
-function createElement(node, hooks, isSVG) {
-  function appendChild(element, children, index) {
+function createElement(node, hooks, parent, isSVG) {
+  function appendChild(element, children) {
     // check the benchmark jsben.ch/y3SpC
-    for (var i = index, len = children[LENGTH]; i < len; i++) {
-      element.appendChild(createElement(children[i], hooks, isSVG))
+    for (var i = 0, len = children[LENGTH]; i < len; i++) {
+      element.appendChild(createElement(children[i], hooks, element, isSVG))
     }
   }
 
   if (isArray(node)) {
-    const element = createElement(node[0])
+    appendChild(parent, node)
 
-    appendChild(element, node, 1)
-
-    return element
+    return parent[CHILD_NODES][0]
   }
 
   if (isTextNode(node)) {
@@ -102,16 +100,16 @@ function createElement(node, hooks, isSVG) {
       hooks[PUSH](node[ONCREATE].bind(node))
     }
 
-    return createComponent(node, hooks)
+    return createComponent(node, hooks, parent)
   }
 
   const element = (isSVG = isSVG || node.name == 'svg')
-    ? doc.createElementNS('http://www.w3.org/2000/svg', node.name, { is: node[PROPS].is })
-    : doc.createElement(node.name, { is: node[PROPS].is })
+    ? doc.createElementNS('http://www.w3.org/2000/svg', node.name)
+    : doc.createElement(node.name)
 
   updateProps(element, node[PROPS], EMPTY_OBJ, isSVG)
 
-  appendChild(element, node[CHILD_NODES], 0)
+  appendChild(element, node[CHILD_NODES])
 
   return element
 }
