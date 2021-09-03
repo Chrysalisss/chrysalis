@@ -169,6 +169,6 @@ PRs are welcome!
 - and submit PR
 
 ## License
-**Chrysalis** created with :heart: by [heavy](https://github.com/j-heavy) · Released under the [MIT](https://github.com/Chrysalisss/chrysalis/blob/master/LICENSE) License.
+**Chrysalis** created with :heart: by [heavy](https://github.com/j-heavy) · Released under the [MIT License](https://github.com/Chrysalisss/chrysalis/blob/master/LICENSE).
 
-> [j-heavy.github.io](https://j-heavy.github.io) · GitHub [@j-heavy](https://github.com/j-heavy) · Twitter [@_heavykj](https://twitter.com/_heavykj)
+> [j-heavy.github.io](https://j-heavy.github.io) · GitHub [@j-heavy](https://github.com/j-heavy)
