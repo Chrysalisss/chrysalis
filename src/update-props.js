@@ -20,7 +20,7 @@ function updateProps(element, newProps, oldProps, isSVG) {
     if (name == 'key' || name == CHILDREN) {
     } else if (name == 'style') {
       // see jsperf.com/style-vs-csstext-vs-setattribute
-      if (typeof value == STRING) {
+      if (typeof newValue == STRING) {
         element[name].cssText = newValue
       } else {
         if (typeof oldValue == STRING) oldValue = element[name].cssText = ''
