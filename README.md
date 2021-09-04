@@ -20,19 +20,23 @@
 
 ## Installation 
 
-Get [Chrysalis Starter Kit](https://github.com/Chrysalisss/Chrysalis-starter-kit), if you do not want to setup the environment (Webpack inside)
+### Starter kit
+
+Get [Chrysalis Starter Kit](https://github.com/Chrysalisss/Chrysalis-starter-kit) (with webpack, babel, prettier and other helpful tools inside), if you don`t want to setup the development environment
 
 Install the Chrysalis and then import what you need
 
-### For dev environment
-via [NPM](https://www.npmjs.com/package/chrysalis.js)
+### Dev environment
+You can easily set up the development environment with [NPM](https://www.npmjs.com/package/chrysalis.js) (or with [Yarn](https://yarnpkg.com/package/chrysalis.js))
 ```bash
 npm install chrysalis.js
 ```
+
 ```js
 import { h, render } from 'chrysalis.js'  
 ```
-Optionally you can install the babel plugin for transform [JSX](https://www.npmjs.com/package/babel-plugin-transform-react-jsx), that provide more readable syntax for VDOM elements.
+You need install the [babel plugin](https://www.npmjs.com/package/babel-plugin-transform-react-jsx) for transform JSX, that provide more readable syntax for VDOM elements.
+
 ```js
 // setup the .babelrc
 {
@@ -40,20 +44,23 @@ Optionally you can install the babel plugin for transform [JSX](https://www.npmj
     [
       "transform-react-jsx",
       {
-        "pragma": "h"
+        "pragma": "h",
+        "pragmaFrag": "Fragment"
       }
     ]
   ]
 }
 ```
 
-### For browser
-via [CDN](https://unpkg.com/chrysalis.js)  
-```HTML
-<script src="https://unpkg.com/chrysalis.js">
-```
+### Browser
+You can use Chrysalis directly in the browser via [CDN](https://unpkg.com/chrysalis.js)  
+
 ```js
-const { h, render } = Chrysalis
+<script type="module">
+  import { h, Component, render } from 'https://unpkg.com/chrysalis.js'
+
+  // ...
+</script>
 ```
 ## Timer example
 ### Chrysalis (20 SLOC)
@@ -162,11 +169,16 @@ ReactDOM.render(<Timer />, document.getElementById('app'))
 
 </details>
 
+Other examples you can find [here](https://github.com/Chrysalisss/chrysalis/tree/master/examples)
+
 ## Get Involved
 PRs are welcome!
 
-- just fork it
-- and submit PR
+- just fork it;
+- create branch for feature/bug fixing;
+- commit changes;
+- push to the branch;
+- create a pull request!
 
 ## License
 **Chrysalis** created with :heart: by [heavy](https://github.com/j-heavy) · Released under the [MIT License](https://github.com/Chrysalisss/chrysalis/blob/master/LICENSE).
