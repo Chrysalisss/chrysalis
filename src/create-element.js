@@ -54,10 +54,10 @@ function createComponent(component, hooks, parent) {
         component[FORCEUPDATE](currentState, currentProps, true)
       }
     },
-    destroy() {
+    $destroy() {
       removeElement(component.$el[PARENT_NODE], component.$el, component)
     },
-    _vnode: vnode,
+    $vnode: vnode,
     $el: createElement(vnode, hooks, parent)
   })
 
